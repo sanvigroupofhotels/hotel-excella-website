@@ -21,7 +21,7 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
             className="flex flex-col items-center justify-center py-3 text-[#d8af5a] transition-colors hover:bg-[#141414]"
           >
             {guestMode ? <Star className="h-5 w-5" /> : <Calendar className="h-5 w-5" />}
-            <span className="mt-1 text-xs font-medium">{guestMode ? "Review" : "Book"}</span>
+            <span className="mt-1 text-xs font-medium">{guestMode ? "Review" : "Availability"}</span>
           </a>
           {guestMode ? (
             <Link

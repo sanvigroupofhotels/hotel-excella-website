@@ -1,12 +1,9 @@
 "use client"
 
-import { useMemo, useRef, useState } from "react"
-import { DateRange } from "react-day-picker"
+import { useMemo, useState } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
-import { Calendar as DatePickerCalendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import {
   Calendar,
   User,
@@ -27,10 +24,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { useIsMobile } from "@/components/ui/use-mobile"
 
 export default function PrebookPage() {
-  const today = new Date()
   const [formData, setFormData] = useState({
     guestName: "",
     mobile: "",
@@ -45,25 +40,15 @@ export default function PrebookPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
-  const [stayRange, setStayRange] = useState<DateRange | undefined>()
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
-  const adultsInputRef = useRef<HTMLInputElement | null>(null)
-  const checkOutButtonRef = useRef<HTMLButtonElement | null>(null)
-  const isMobile = useIsMobile()
+  const today = new Date().toISOString().split("T")[0]
 
   const stayNights = useMemo(() => {
-    if (!stayRange?.from || !stayRange?.to) return 0
-    const ms = stayRange.to.getTime() - stayRange.from.getTime()
-    return Math.max(0, Math.ceil(ms / (1000 * 60 * 60 * 24)))
-  }, [stayRange])
-
-  const formatDate = (date?: Date) => {
-    if (!date) return ""
-    const year = date.getFullYear()
-    const month = String(date.getMonth() + 1).padStart(2, "0")
-    const day = String(date.getDate()).padStart(2, "0")
-    return `${year}-${month}-${day}`
-  }
+    if (!formData.checkIn || !formData.checkOut) return 0
+    const checkInDate = new Date(`${formData.checkIn}T00:00:00`)
+    const checkOutDate = new Date(`${formData.checkOut}T00:00:00`)
+    const ms = checkOutDate.getTime() - checkInDate.getTime()
+    return ms > 0 ? Math.ceil(ms / (1000 * 60 * 60 * 24)) : 0
+  }, [formData.checkIn, formData.checkOut])
 
   const handleCloseSuccessModal = () => {
     setIsSuccessModalOpen(false)
@@ -203,65 +188,40 @@ export default function PrebookPage() {
                         Check-in & Check-out <span className="text-destructive">*</span>
                       </label>
                       <div className="mb-3 grid gap-3 sm:grid-cols-3">
-                        <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
-                          <PopoverTrigger asChild>
-                            <button
-                              type="button"
-                              className="rounded-md border border-border bg-background p-3 text-left transition hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                              aria-label="Select check-in and check-out dates"
-                            >
-                              <p className="text-xs uppercase tracking-wide text-muted-foreground">Check-in</p>
-                              <p className="mt-1 text-sm font-semibold text-foreground">
-                                {formData.checkIn || "Select date"}
-                              </p>
-                            </button>
-                          </PopoverTrigger>
-                          <PopoverContent className="w-auto max-w-[calc(100vw-2rem)] overflow-auto rounded-lg border border-border bg-secondary p-3" align="start" side="bottom">
-                            <DatePickerCalendar
-                              mode="range"
-                              numberOfMonths={isMobile ? 1 : 2}
-                              selected={stayRange}
-                              onSelect={(range) => {
-                                const hasFullRange = Boolean(range?.from && range?.to)
-                                const normalizedFrom = hasFullRange
-                                  ? new Date(Math.min(range!.from!.getTime(), range!.to!.getTime()))
-                                  : range?.from
-                                const normalizedTo = hasFullRange
-                                  ? new Date(Math.max(range!.from!.getTime(), range!.to!.getTime()))
-                                  : range?.to
-
-                                setStayRange({ from: normalizedFrom, to: normalizedTo })
-                                setFormData((prev) => ({
-                                  ...prev,
-                                  checkIn: formatDate(normalizedFrom),
-                                  checkOut: formatDate(normalizedTo),
-                                }))
-
-                                if (normalizedFrom && !normalizedTo) {
-                                  setTimeout(() => checkOutButtonRef.current?.focus(), 0)
-                                }
-
-                                if (normalizedFrom && normalizedTo) {
-                                  setIsCalendarOpen(false)
-                                  setTimeout(() => adultsInputRef.current?.focus(), 0)
-                                }
-                              }}
-                              disabled={{ before: today }}
-                            />
-                          </PopoverContent>
-                        </Popover>
-                        <button
-                          type="button"
-                          ref={checkOutButtonRef}
-                          onClick={() => setIsCalendarOpen(true)}
-                          className="rounded-md border border-border bg-background p-3 text-left transition hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                          aria-label="Open calendar to select stay dates"
-                        >
-                          <p className="text-xs uppercase tracking-wide text-muted-foreground">Check-out</p>
-                          <p className="mt-1 text-sm font-semibold text-foreground">
-                            {formData.checkOut || "Select date"}
-                          </p>
-                        </button>
+                        <div>
+                          <label htmlFor="checkIn" className="text-xs uppercase tracking-wide text-muted-foreground">Check-in</label>
+                          <input
+                            type="date"
+                            id="checkIn"
+                            min={today}
+                            required
+                            value={formData.checkIn}
+                            onChange={(e) => {
+                              const nextCheckIn = e.target.value
+                              setFormData((prev) => ({
+                                ...prev,
+                                checkIn: nextCheckIn,
+                                checkOut:
+                                  prev.checkOut && prev.checkOut <= nextCheckIn ? "" : prev.checkOut,
+                              }))
+                            }}
+                            className="mt-1 w-full rounded-md border border-border bg-background p-3 text-sm text-foreground transition hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="checkOut" className="text-xs uppercase tracking-wide text-muted-foreground">Check-out</label>
+                          <input
+                            type="date"
+                            id="checkOut"
+                            min={formData.checkIn || today}
+                            required
+                            value={formData.checkOut}
+                            onChange={(e) =>
+                              setFormData((prev) => ({ ...prev, checkOut: e.target.value }))
+                            }
+                            className="mt-1 w-full rounded-md border border-border bg-background p-3 text-sm text-foreground transition hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                          />
+                        </div>
                         <div className="rounded-md border border-border bg-background p-3">
                           <p className="text-xs uppercase tracking-wide text-muted-foreground">Nights</p>
                           <p className="mt-1 text-sm font-semibold text-foreground">
@@ -272,7 +232,7 @@ export default function PrebookPage() {
                       <p className="mt-2 text-sm text-muted-foreground">
                         {formData.checkIn && formData.checkOut
                           ? `${formData.checkIn} to ${formData.checkOut}`
-                          : "Select your check-in and check-out dates from the same calendar view."}
+                          : "Please select check-in and check-out dates individually."}
                       </p>
                     </div>
 
@@ -287,7 +247,7 @@ export default function PrebookPage() {
                       <input
                         type="number"
                         id="adults"
-                        ref={adultsInputRef}
+                       
                         required
                         min={0}
                         value={formData.adults}
