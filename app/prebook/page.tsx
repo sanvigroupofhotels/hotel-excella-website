@@ -1,9 +1,11 @@
 "use client"
 
 import { useState } from "react"
+import { DateRange } from "react-day-picker"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
+import { Calendar as DatePickerCalendar } from "@/components/ui/calendar"
 import {
   Calendar,
   User,
@@ -26,6 +28,7 @@ import {
 } from "@/components/ui/dialog"
 
 export default function PrebookPage() {
+  const today = new Date()
   const [formData, setFormData] = useState({
     guestName: "",
     mobile: "",
@@ -40,10 +43,20 @@ export default function PrebookPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
+  const [stayRange, setStayRange] = useState<DateRange | undefined>()
+
+  const formatDate = (date?: Date) => {
+    if (!date) return ""
+    const year = date.getFullYear()
+    const month = String(date.getMonth() + 1).padStart(2, "0")
+    const day = String(date.getDate()).padStart(2, "0")
+    return `${year}-${month}-${day}`
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (isSubmitting) return
+    if (!formData.checkIn || !formData.checkOut) return
     setIsSubmitting(true)
 
     try {
@@ -68,9 +81,6 @@ Special Requests: ${formData.specialRequests || "N/A"}`
       setIsSubmitting(false)
     }
   }
-
-  // Get today's date for min date on inputs
-  const today = new Date().toISOString().split("T")[0]
 
   return (
     <div className="min-h-screen bg-background">
@@ -173,44 +183,31 @@ Special Requests: ${formData.specialRequests || "N/A"}`
                   </h2>
 
                   <div className="grid gap-6 sm:grid-cols-2">
-                    <div>
-                      <label
-                        htmlFor="checkIn"
-                        className="block text-sm font-medium text-foreground mb-2"
-                      >
-                        Check-in Date <span className="text-destructive">*</span>
+                    <div className="sm:col-span-2">
+                      <label className="block text-sm font-medium text-foreground mb-2">
+                        Check-in & Check-out <span className="text-destructive">*</span>
                       </label>
-                      <input
-                        type="date"
-                        id="checkIn"
-                        required
-                        min={today}
-                        value={formData.checkIn}
-                        onChange={(e) =>
-                          setFormData({ ...formData, checkIn: e.target.value })
-                        }
-                        className="w-full rounded-lg border border-border bg-secondary px-4 py-3 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                      />
-                    </div>
-
-                    <div>
-                      <label
-                        htmlFor="checkOut"
-                        className="block text-sm font-medium text-foreground mb-2"
-                      >
-                        Check-out Date <span className="text-destructive">*</span>
-                      </label>
-                      <input
-                        type="date"
-                        id="checkOut"
-                        required
-                        min={formData.checkIn || today}
-                        value={formData.checkOut}
-                        onChange={(e) =>
-                          setFormData({ ...formData, checkOut: e.target.value })
-                        }
-                        className="w-full rounded-lg border border-border bg-secondary px-4 py-3 text-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                      />
+                      <div className="rounded-lg border border-border bg-secondary p-3">
+                        <DatePickerCalendar
+                          mode="range"
+                          numberOfMonths={2}
+                          selected={stayRange}
+                          onSelect={(range) => {
+                            setStayRange(range)
+                            setFormData((prev) => ({
+                              ...prev,
+                              checkIn: formatDate(range?.from),
+                              checkOut: formatDate(range?.to),
+                            }))
+                          }}
+                          disabled={{ before: today }}
+                        />
+                      </div>
+                      <p className="mt-2 text-sm text-muted-foreground">
+                        {formData.checkIn && formData.checkOut
+                          ? `${formData.checkIn} to ${formData.checkOut}`
+                          : "Select your check-in and check-out dates from the same calendar view."}
+                      </p>
                     </div>
 
                     <div>
