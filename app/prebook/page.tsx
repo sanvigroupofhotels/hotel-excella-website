@@ -28,6 +28,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { useIsMobile } from "@/components/ui/use-mobile"
 
 export default function PrebookPage() {
   const today = new Date()
@@ -48,6 +49,7 @@ export default function PrebookPage() {
   const [stayRange, setStayRange] = useState<DateRange | undefined>()
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const adultsInputRef = useRef<HTMLInputElement | null>(null)
+  const isMobile = useIsMobile()
 
   const stayNights = useMemo(() => {
     if (!stayRange?.from || !stayRange?.to) return 0
@@ -216,6 +218,20 @@ Special Requests: ${formData.specialRequests || "N/A"}`
                               </p>
                             </button>
                           </PopoverTrigger>
+                          <PopoverContent className="w-auto max-w-[calc(100vw-2rem)] overflow-auto rounded-lg border border-border bg-secondary p-3" align="start" side="bottom">
+                            <DatePickerCalendar
+                              mode="range"
+                              numberOfMonths={isMobile ? 1 : 2}
+                              selected={stayRange}
+                              onSelect={(range) => {
+                                setStayRange(range)
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  checkIn: formatDate(range?.from),
+                                  checkOut: formatDate(range?.to),
+                                }))
+
+                                if (range?.from && range?.to) {
                           <PopoverContent className="w-auto rounded-lg border border-border bg-secondary p-3" align="start">
                             <DatePickerCalendar
                               mode="range"
