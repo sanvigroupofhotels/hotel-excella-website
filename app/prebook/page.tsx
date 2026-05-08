@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import { DateRange } from "react-day-picker"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -26,6 +26,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 
 export default function PrebookPage() {
   const today = new Date()
@@ -44,6 +45,8 @@ export default function PrebookPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
   const [stayRange, setStayRange] = useState<DateRange | undefined>()
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+  const adultsInputRef = useRef<HTMLInputElement | null>(null)
 
   const stayNights = useMemo(() => {
     if (!stayRange?.from || !stayRange?.to) return 0
@@ -199,45 +202,58 @@ Special Requests: ${formData.specialRequests || "N/A"}`
                         Check-in & Check-out <span className="text-destructive">*</span>
                       </label>
                       <div className="mb-3 grid gap-3 sm:grid-cols-3">
-                        <div className="rounded-md border border-border bg-background p-3">
-                          <p className="text-xs uppercase tracking-wide text-muted-foreground">Check-in</p>
-                          <p className="mt-1 text-sm font-semibold text-foreground">
-                            {formData.checkIn || "Select date"}
-                          </p>
-                        </div>
-                        <div className="rounded-md border border-border bg-background p-3">
+                        <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                          <PopoverTrigger asChild>
+                            <button
+                              type="button"
+                              className="rounded-md border border-border bg-background p-3 text-left transition hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                              aria-label="Select check-in and check-out dates"
+                            >
+                              <p className="text-xs uppercase tracking-wide text-muted-foreground">Check-in</p>
+                              <p className="mt-1 text-sm font-semibold text-foreground">
+                                {formData.checkIn || "Select date"}
+                              </p>
+                            </button>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto rounded-lg border border-border bg-secondary p-3" align="start">
+                            <DatePickerCalendar
+                              mode="range"
+                              numberOfMonths={2}
+                              selected={stayRange}
+                              onSelect={(range) => {
+                                setStayRange(range)
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  checkIn: formatDate(range?.from),
+                                  checkOut: formatDate(range?.to),
+                                }))
+
+                                if (range?.from && range?.to) {
+                                  setIsCalendarOpen(false)
+                                  setTimeout(() => adultsInputRef.current?.focus(), 0)
+                                }
+                              }}
+                              disabled={{ before: today }}
+                            />
+                          </PopoverContent>
+                        </Popover>
+                        <button
+                          type="button"
+                          onClick={() => setIsCalendarOpen(true)}
+                          className="rounded-md border border-border bg-background p-3 text-left transition hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                          aria-label="Open calendar to select stay dates"
+                        >
                           <p className="text-xs uppercase tracking-wide text-muted-foreground">Check-out</p>
                           <p className="mt-1 text-sm font-semibold text-foreground">
                             {formData.checkOut || "Select date"}
                           </p>
-                        </div>
+                        </button>
                         <div className="rounded-md border border-border bg-background p-3">
                           <p className="text-xs uppercase tracking-wide text-muted-foreground">Nights</p>
                           <p className="mt-1 text-sm font-semibold text-foreground">
                             {stayNights > 0 ? `${stayNights} night${stayNights > 1 ? "s" : ""}` : "-"}
                           </p>
                         </div>
-                      </div>
-                      <div className="rounded-lg border border-border bg-secondary p-3">
-                        <DatePickerCalendar
-                          mode="range"
-                          numberOfMonths={2}
-                          selected={stayRange}
-                          onSelect={(range, selectedDay) => {
-                            const nextRange =
-                              range?.from && range?.to && selectedDay
-                                ? { from: selectedDay, to: undefined }
-                                : range
-
-                            setStayRange(nextRange)
-                            setFormData((prev) => ({
-                              ...prev,
-                              checkIn: formatDate(nextRange?.from),
-                              checkOut: formatDate(nextRange?.to),
-                            }))
-                          }}
-                          disabled={{ before: today }}
-                        />
                       </div>
                       <p className="mt-2 text-sm text-muted-foreground">
                         {formData.checkIn && formData.checkOut
@@ -257,6 +273,7 @@ Special Requests: ${formData.specialRequests || "N/A"}`
                       <input
                         type="number"
                         id="adults"
+                        ref={adultsInputRef}
                         required
                         min={0}
                         value={formData.adults}
