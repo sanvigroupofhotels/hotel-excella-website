@@ -208,11 +208,11 @@ export default function PrebookPage() {
                             <button
                               type="button"
                               className="rounded-md border border-border bg-background p-3 text-left transition hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                              aria-label="Select check-in and check-out dates"
+                              aria-label="Select stay dates"
                             >
                               <p className="text-xs uppercase tracking-wide text-muted-foreground">Check-in</p>
                               <p className="mt-1 text-sm font-semibold text-foreground">
-                                {formData.checkIn || "Select date"}
+                                {formData.checkIn || "Choose date"}
                               </p>
                             </button>
                           </PopoverTrigger>
@@ -237,10 +237,6 @@ export default function PrebookPage() {
                                   checkOut: formatDate(normalizedTo),
                                 }))
 
-                                if (normalizedFrom && !normalizedTo) {
-                                  setTimeout(() => checkOutButtonRef.current?.focus(), 0)
-                                }
-
                                 if (normalizedFrom && normalizedTo) {
                                   setIsCalendarOpen(false)
                                   setTimeout(() => adultsInputRef.current?.focus(), 0)
@@ -255,11 +251,11 @@ export default function PrebookPage() {
                           ref={checkOutButtonRef}
                           onClick={() => setIsCalendarOpen(true)}
                           className="rounded-md border border-border bg-background p-3 text-left transition hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                          aria-label="Open calendar to select stay dates"
+                          aria-label="Select stay dates"
                         >
                           <p className="text-xs uppercase tracking-wide text-muted-foreground">Check-out</p>
                           <p className="mt-1 text-sm font-semibold text-foreground">
-                            {formData.checkOut || "Select date"}
+                            {formData.checkOut || "Choose date"}
                           </p>
                         </button>
                         <div className="rounded-md border border-border bg-background p-3">
