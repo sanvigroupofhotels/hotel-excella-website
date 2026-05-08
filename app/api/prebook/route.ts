@@ -80,6 +80,7 @@ Visakhapatnam
     // Send emails using Resend or fallback to logging
     const resendApiKey = process.env.RESEND_API_KEY
     const recipientEmail = process.env.HOTEL_INBOX_EMAIL || "sanvigroupofhotels@gmail.com"
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "Hotel Excella <onboarding@resend.dev>"
 
     if (resendApiKey) {
       // Send to hotel
@@ -90,7 +91,7 @@ Visakhapatnam
           Authorization: `Bearer ${resendApiKey}`,
         },
         body: JSON.stringify({
-          from: "Hotel Excella <noreply@resend.dev>",
+          from: fromEmail,
           to: [recipientEmail],
           subject: hotelEmailSubject,
           text: hotelEmailBody,
@@ -100,6 +101,10 @@ Visakhapatnam
       if (!hotelEmailResponse.ok) {
         const errorText = await hotelEmailResponse.text()
         console.error("Failed to send booking request email via Resend:", errorText)
+        return NextResponse.json(
+          { success: false, message: "Failed to send booking request email" },
+          { status: 502 }
+        )
       }
 
       // Send confirmation to guest
@@ -111,7 +116,7 @@ Visakhapatnam
             Authorization: `Bearer ${resendApiKey}`,
           },
           body: JSON.stringify({
-            from: "Hotel Excella <noreply@resend.dev>",
+            from: fromEmail,
             to: [email],
             subject: guestEmailSubject,
             text: guestEmailBody,
@@ -121,6 +126,10 @@ Visakhapatnam
         if (!guestEmailResponse.ok) {
           const errorText = await guestEmailResponse.text()
           console.error("Failed to send guest confirmation email via Resend:", errorText)
+          return NextResponse.json(
+            { success: false, message: "Booking request saved but guest confirmation email failed" },
+            { status: 502 }
+          )
         }
       }
     } else {
