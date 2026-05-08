@@ -115,10 +115,6 @@ Visakhapatnam
       if (!hotelEmailResponse.ok) {
         const errorText = await hotelEmailResponse.text()
         console.error("Failed to send booking request email via Resend:", errorText)
-        return NextResponse.json(
-          { success: false, message: "Failed to send booking request email" },
-          { status: 502 }
-        )
       }
 
       // Send confirmation to guest
@@ -140,10 +136,6 @@ Visakhapatnam
         if (!guestEmailResponse.ok) {
           const errorText = await guestEmailResponse.text()
           console.error("Failed to send guest confirmation email via Resend:", errorText)
-          return NextResponse.json(
-            { success: false, message: "Booking request saved but guest confirmation email failed" },
-            { status: 502 }
-          )
         }
       }
     } else {

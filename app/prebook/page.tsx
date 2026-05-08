@@ -40,9 +40,8 @@ export default function PrebookPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
+  const [submitError, setSubmitError] = useState("")
   const today = new Date().toISOString().split("T")[0]
-
-
   const checkInRef = useRef<HTMLInputElement>(null)
   const checkOutRef = useRef<HTMLInputElement>(null)
 
@@ -70,6 +69,7 @@ export default function PrebookPage() {
     e.preventDefault()
     if (isSubmitting) return
     if (!formData.checkIn || !formData.checkOut) return
+    setSubmitError("")
     setIsSubmitting(true)
 
     try {
@@ -82,17 +82,19 @@ export default function PrebookPage() {
       })
 
       if (!response.ok) {
-        throw new Error("Failed to submit booking request")
+        const errorPayload = await response.json().catch(() => null)
+        throw new Error(errorPayload?.message || "Failed to submit booking request")
       }
 
-      const result = await response.json()
+      await response.json()
       setIsSuccessModalOpen(true)
-
-      if (result?.redirectUrl) {
-        window.open(result.redirectUrl, "_blank", "noopener,noreferrer")
-      }
     } catch (error) {
       console.error("Error submitting booking request:", error)
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Unable to submit right now. Please try again or call us directly."
+      )
     } finally {
       setIsSubmitting(false)
     }
@@ -430,6 +432,9 @@ export default function PrebookPage() {
                 <p className="text-center text-sm text-muted-foreground">
                   We&apos;ll confirm your inquiry first, then you can choose whether to proceed to booking.
                 </p>
+                {submitError ? (
+                  <p className="text-center text-sm font-medium text-destructive">{submitError}</p>
+                ) : null}
             </form>
           </div>
         </section>
@@ -511,7 +516,7 @@ export default function PrebookPage() {
               }}
               className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-3 font-semibold text-primary-foreground transition-all hover:bg-primary/90"
             >
-              Proceed to Booking
+              Instant Booking
             </button>
             <button
               type="button"
