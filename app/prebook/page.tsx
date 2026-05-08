@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useRef, useState } from "react"
+import { useMemo, useState } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
@@ -40,18 +40,8 @@ export default function PrebookPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
+  const [submitError, setSubmitError] = useState("")
   const today = new Date().toISOString().split("T")[0]
-
-
-  const checkInRef = useRef<HTMLInputElement>(null)
-  const checkOutRef = useRef<HTMLInputElement>(null)
-
-  const openNativeDatePicker = (input: HTMLInputElement | null) => {
-    if (!input) return
-    if (typeof input.showPicker === "function") {
-      input.showPicker()
-    }
-  }
 
   const stayNights = useMemo(() => {
     if (!formData.checkIn || !formData.checkOut) return 0
@@ -70,6 +60,7 @@ export default function PrebookPage() {
     e.preventDefault()
     if (isSubmitting) return
     if (!formData.checkIn || !formData.checkOut) return
+    setSubmitError("")
     setIsSubmitting(true)
 
     try {
@@ -82,7 +73,8 @@ export default function PrebookPage() {
       })
 
       if (!response.ok) {
-        throw new Error("Failed to submit booking request")
+        const errorPayload = await response.json().catch(() => null)
+        throw new Error(errorPayload?.message || "Failed to submit booking request")
       }
 
       const result = await response.json()
@@ -93,6 +85,11 @@ export default function PrebookPage() {
       }
     } catch (error) {
       console.error("Error submitting booking request:", error)
+      setSubmitError(
+        error instanceof Error
+          ? error.message
+          : "Unable to submit right now. Please try again or call us directly."
+      )
     } finally {
       setIsSubmitting(false)
     }
@@ -209,12 +206,9 @@ export default function PrebookPage() {
                           <input
                             type="date"
                             id="checkIn"
-                            ref={checkInRef}
                             min={today}
                             required
                             value={formData.checkIn}
-                            onClick={() => openNativeDatePicker(checkInRef.current)}
-                            onFocus={() => openNativeDatePicker(checkInRef.current)}
                             onChange={(e) => {
                               const nextCheckIn = e.target.value
                               setFormData((prev) => ({
@@ -232,12 +226,9 @@ export default function PrebookPage() {
                           <input
                             type="date"
                             id="checkOut"
-                            ref={checkOutRef}
                             min={formData.checkIn || today}
                             required
                             value={formData.checkOut}
-                            onClick={() => openNativeDatePicker(checkOutRef.current)}
-                            onFocus={() => openNativeDatePicker(checkOutRef.current)}
                             onChange={(e) =>
                               setFormData((prev) => ({ ...prev, checkOut: e.target.value }))
                             }
@@ -430,6 +421,9 @@ export default function PrebookPage() {
                 <p className="text-center text-sm text-muted-foreground">
                   We&apos;ll confirm your inquiry first, then you can choose whether to proceed to booking.
                 </p>
+                {submitError ? (
+                  <p className="text-center text-sm font-medium text-destructive">{submitError}</p>
+                ) : null}
             </form>
           </div>
         </section>
