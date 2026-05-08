@@ -27,6 +27,7 @@ This feedback was submitted via the Hotel Excella website review page.
     // Send email using Resend or fallback to logging
     // For production, configure Resend API key
     const resendApiKey = process.env.RESEND_API_KEY
+    const recipientEmail = process.env.HOTEL_INBOX_EMAIL || "sanvigroupofhotels@gmail.com"
 
     if (resendApiKey) {
       const response = await fetch("https://api.resend.com/emails", {
@@ -37,14 +38,15 @@ This feedback was submitted via the Hotel Excella website review page.
         },
         body: JSON.stringify({
           from: "Hotel Excella <noreply@resend.dev>",
-          to: ["hotelexcellavizag@gmail.com"],
+          to: [recipientEmail],
           subject: emailSubject,
           text: emailBody,
         }),
       })
 
       if (!response.ok) {
-        console.error("Failed to send email via Resend")
+        const errorText = await response.text()
+        console.error("Failed to send email via Resend:", errorText)
       }
     } else {
       // Log the feedback for development

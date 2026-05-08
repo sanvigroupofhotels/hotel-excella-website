@@ -68,7 +68,7 @@ Our team will contact you shortly to confirm availability and complete your book
 For immediate assistance, please contact us:
 Phone: +91 99859 08131 / +91 89594 44555
 WhatsApp: +91 99859 08131
-Email: hotelexcellavizag@gmail.com
+Email: sanvigroupofhotels@gmail.com
 
 We look forward to hosting you!
 
@@ -79,10 +79,11 @@ Visakhapatnam
 
     // Send emails using Resend or fallback to logging
     const resendApiKey = process.env.RESEND_API_KEY
+    const recipientEmail = process.env.HOTEL_INBOX_EMAIL || "sanvigroupofhotels@gmail.com"
 
     if (resendApiKey) {
       // Send to hotel
-      await fetch("https://api.resend.com/emails", {
+      const hotelEmailResponse = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -90,15 +91,20 @@ Visakhapatnam
         },
         body: JSON.stringify({
           from: "Hotel Excella <noreply@resend.dev>",
-          to: ["hotelexcellavizag@gmail.com"],
+          to: [recipientEmail],
           subject: hotelEmailSubject,
           text: hotelEmailBody,
         }),
       })
 
+      if (!hotelEmailResponse.ok) {
+        const errorText = await hotelEmailResponse.text()
+        console.error("Failed to send booking request email via Resend:", errorText)
+      }
+
       // Send confirmation to guest
       if (email) {
-        await fetch("https://api.resend.com/emails", {
+        const guestEmailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -111,6 +117,11 @@ Visakhapatnam
             text: guestEmailBody,
           }),
         })
+
+        if (!guestEmailResponse.ok) {
+          const errorText = await guestEmailResponse.text()
+          console.error("Failed to send guest confirmation email via Resend:", errorText)
+        }
       }
     } else {
       // Log for development
