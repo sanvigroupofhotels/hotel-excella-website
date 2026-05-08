@@ -41,25 +41,29 @@ export default function PrebookPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (isSubmitting) return
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("/api/prebook", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
+      const message = `New inquiry from Hotel Excella website:
+Guest Name: ${formData.guestName}
+Mobile: ${formData.mobile}
+Email: ${formData.email}
+Check-in: ${formData.checkIn}
+Check-out: ${formData.checkOut}
+Adults/Guests: ${formData.adults}
+Children: ${formData.children}
+Rooms: ${formData.rooms}
+Room Preference: ${formData.roomPreference}
+Special Requests: ${formData.specialRequests || "N/A"}`
 
-      const data = await response.json()
-
-      if (response.ok && data.success) {
-        setIsSuccessModalOpen(true)
-      }
+      const whatsappUrl = `https://wa.me/919985908131?text=${encodeURIComponent(message)}`
+      window.location.href = whatsappUrl
+      setIsSuccessModalOpen(true)
     } catch (error) {
-      console.error("Error submitting booking request:", error)
+      console.error("Error opening WhatsApp for booking request:", error)
     } finally {
       setIsSubmitting(false)
     }
