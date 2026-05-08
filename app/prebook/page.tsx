@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState } from "react"
+import { useMemo, useRef, useState } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
@@ -41,6 +41,17 @@ export default function PrebookPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
   const today = new Date().toISOString().split("T")[0]
+
+
+  const checkInRef = useRef<HTMLInputElement>(null)
+  const checkOutRef = useRef<HTMLInputElement>(null)
+
+  const openNativeDatePicker = (input: HTMLInputElement | null) => {
+    if (!input) return
+    if (typeof input.showPicker === "function") {
+      input.showPicker()
+    }
+  }
 
   const stayNights = useMemo(() => {
     if (!formData.checkIn || !formData.checkOut) return 0
@@ -193,9 +204,12 @@ export default function PrebookPage() {
                           <input
                             type="date"
                             id="checkIn"
+                            ref={checkInRef}
                             min={today}
                             required
                             value={formData.checkIn}
+                            onClick={() => openNativeDatePicker(checkInRef.current)}
+                            onFocus={() => openNativeDatePicker(checkInRef.current)}
                             onChange={(e) => {
                               const nextCheckIn = e.target.value
                               setFormData((prev) => ({
@@ -213,9 +227,12 @@ export default function PrebookPage() {
                           <input
                             type="date"
                             id="checkOut"
+                            ref={checkOutRef}
                             min={formData.checkIn || today}
                             required
                             value={formData.checkOut}
+                            onClick={() => openNativeDatePicker(checkOutRef.current)}
+                            onFocus={() => openNativeDatePicker(checkOutRef.current)}
                             onChange={(e) =>
                               setFormData((prev) => ({ ...prev, checkOut: e.target.value }))
                             }
