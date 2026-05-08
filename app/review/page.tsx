@@ -54,24 +54,25 @@ export default function ReviewPage() {
     setIsSubmitting(true)
 
     try {
-      const response = await fetch("/api/review", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      })
+      const message = `Guest feedback from Hotel Excella website:
+Name: ${formData.name}
+Phone: ${formData.phone}
+Room Number: ${formData.roomNumber || "N/A"}
+Issue Faced: ${formData.issue || "N/A"}
+What We Can Improve: ${formData.improvement || "N/A"}`
 
-      if (response.ok) {
-        setIsFeedbackSuccessModalOpen(true)
-        setFormData({
-          name: "",
-          phone: "",
-          roomNumber: "",
-          issue: "",
-          improvement: "",
-        })
-      }
+      const whatsappUrl = `https://wa.me/919985908131?text=${encodeURIComponent(message)}`
+      window.open(whatsappUrl, "_blank", "noopener,noreferrer")
+      setIsFeedbackSuccessModalOpen(true)
+      setFormData({
+        name: "",
+        phone: "",
+        roomNumber: "",
+        issue: "",
+        improvement: "",
+      })
     } catch (error) {
-      console.error("Error submitting feedback:", error)
+      console.error("Error opening WhatsApp for feedback:", error)
     } finally {
       setIsSubmitting(false)
     }
