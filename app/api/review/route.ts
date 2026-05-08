@@ -3,9 +3,14 @@ import { NextRequest, NextResponse } from "next/server"
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
-    const { name, phone, roomNumber, issue, improvement } = body
+    const { name, phone, roomNumber, issue, improvement, rating } = body
 
     // Format the email content
+    const numericRating = typeof rating === "number" ? Math.min(5, Math.max(1, rating)) : null
+    const starRatingLine = numericRating
+      ? `${"★".repeat(numericRating)}${"☆".repeat(5 - numericRating)} (${numericRating}/5)`
+      : "Not provided"
+
     const emailSubject = "Guest Feedback - Hotel Excella"
     const emailBody = `
 New Guest Feedback Received
@@ -13,6 +18,7 @@ New Guest Feedback Received
 Name: ${name}
 Phone: ${phone}
 Room Number: ${roomNumber || "Not provided"}
+Rating: ${starRatingLine}
 
 What went wrong:
 ${issue}
