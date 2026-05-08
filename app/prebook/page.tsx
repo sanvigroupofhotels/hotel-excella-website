@@ -27,7 +27,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import { useIsMobile } from "@/components/ui/use-mobile"
 
 export default function PrebookPage() {
@@ -71,30 +70,28 @@ export default function PrebookPage() {
     window.location.href = "/"
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (isSubmitting) return
     if (!formData.checkIn || !formData.checkOut) return
     setIsSubmitting(true)
 
     try {
-      const message = `New inquiry from Hotel Excella website:
-Guest Name: ${formData.guestName}
-Mobile: ${formData.mobile}
-Email: ${formData.email}
-Check-in: ${formData.checkIn}
-Check-out: ${formData.checkOut}
-Adults/Guests: ${formData.adults}
-Children: ${formData.children}
-Rooms: ${formData.rooms}
-Room Preference: ${formData.roomPreference}
-Special Requests: ${formData.specialRequests || "N/A"}`
+      const response = await fetch("/api/prebook", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-      const whatsappUrl = `https://wa.me/919985908131?text=${encodeURIComponent(message)}`
-      window.location.href = whatsappUrl
+      if (!response.ok) {
+        throw new Error("Failed to submit booking request")
+      }
+
       setIsSuccessModalOpen(true)
     } catch (error) {
-      console.error("Error opening WhatsApp for booking request:", error)
+      console.error("Error submitting booking request:", error)
     } finally {
       setIsSubmitting(false)
     }
