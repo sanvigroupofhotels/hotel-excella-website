@@ -28,6 +28,7 @@ This feedback was submitted via the Hotel Excella website review page.
     // For production, configure Resend API key
     const resendApiKey = process.env.RESEND_API_KEY
     const recipientEmail = process.env.HOTEL_INBOX_EMAIL || "sanvigroupofhotels@gmail.com"
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "Hotel Excella <onboarding@resend.dev>"
 
     if (resendApiKey) {
       const response = await fetch("https://api.resend.com/emails", {
@@ -37,7 +38,7 @@ This feedback was submitted via the Hotel Excella website review page.
           Authorization: `Bearer ${resendApiKey}`,
         },
         body: JSON.stringify({
-          from: "Hotel Excella <noreply@resend.dev>",
+          from: fromEmail,
           to: [recipientEmail],
           subject: emailSubject,
           text: emailBody,
@@ -47,6 +48,10 @@ This feedback was submitted via the Hotel Excella website review page.
       if (!response.ok) {
         const errorText = await response.text()
         console.error("Failed to send email via Resend:", errorText)
+        return NextResponse.json(
+          { success: false, message: "Failed to send feedback email" },
+          { status: 502 }
+        )
       }
     } else {
       // Log the feedback for development
