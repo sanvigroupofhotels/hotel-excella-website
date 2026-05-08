@@ -49,6 +49,7 @@ export default function PrebookPage() {
   const [stayRange, setStayRange] = useState<DateRange | undefined>()
   const [isCalendarOpen, setIsCalendarOpen] = useState(false)
   const adultsInputRef = useRef<HTMLInputElement | null>(null)
+  const checkOutButtonRef = useRef<HTMLButtonElement | null>(null)
   const isMobile = useIsMobile()
 
   const stayNights = useMemo(() => {
@@ -224,33 +225,26 @@ Special Requests: ${formData.specialRequests || "N/A"}`
                               numberOfMonths={isMobile ? 1 : 2}
                               selected={stayRange}
                               onSelect={(range) => {
-                                setStayRange(range)
+                                const hasFullRange = Boolean(range?.from && range?.to)
+                                const normalizedFrom = hasFullRange
+                                  ? new Date(Math.min(range!.from!.getTime(), range!.to!.getTime()))
+                                  : range?.from
+                                const normalizedTo = hasFullRange
+                                  ? new Date(Math.max(range!.from!.getTime(), range!.to!.getTime()))
+                                  : range?.to
+
+                                setStayRange({ from: normalizedFrom, to: normalizedTo })
                                 setFormData((prev) => ({
                                   ...prev,
-                                  checkIn: formatDate(range?.from),
-                                  checkOut: formatDate(range?.to),
+                                  checkIn: formatDate(normalizedFrom),
+                                  checkOut: formatDate(normalizedTo),
                                 }))
 
-                                if (range?.from && range?.to) {
-                          <PopoverContent className="w-auto rounded-lg border border-border bg-secondary p-3" align="start">
-                            <DatePickerCalendar
-                              mode="range"
-                              numberOfMonths={2}
-                              selected={stayRange}
-                              onSelect={(range, selectedDay) => {
-                                const nextRange =
-                                  range?.from && range?.to && selectedDay
-                                    ? { from: selectedDay, to: undefined }
-                                    : range
+                                if (normalizedFrom && !normalizedTo) {
+                                  setTimeout(() => checkOutButtonRef.current?.focus(), 0)
+                                }
 
-                                setStayRange(nextRange)
-                                setFormData((prev) => ({
-                                  ...prev,
-                                  checkIn: formatDate(nextRange?.from),
-                                  checkOut: formatDate(nextRange?.to),
-                                }))
-
-                                if (nextRange?.from && nextRange?.to) {
+                                if (normalizedFrom && normalizedTo) {
                                   setIsCalendarOpen(false)
                                   setTimeout(() => adultsInputRef.current?.focus(), 0)
                                 }
@@ -261,6 +255,7 @@ Special Requests: ${formData.specialRequests || "N/A"}`
                         </Popover>
                         <button
                           type="button"
+                          ref={checkOutButtonRef}
                           onClick={() => setIsCalendarOpen(true)}
                           className="rounded-md border border-border bg-background p-3 text-left transition hover:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                           aria-label="Open calendar to select stay dates"
