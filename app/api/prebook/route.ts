@@ -17,6 +17,18 @@ export async function POST(request: NextRequest) {
     } = body
     const submissionTimestamp = new Date().toISOString()
 
+
+    const calculateStayNights = (startDate: string, endDate: string) => {
+      if (!startDate || !endDate) return 0
+      const start = new Date(`${startDate}T00:00:00`)
+      const end = new Date(`${endDate}T00:00:00`)
+      const diff = end.getTime() - start.getTime()
+      if (Number.isNaN(diff) || diff <= 0) return 0
+      return Math.ceil(diff / (1000 * 60 * 60 * 24))
+    }
+
+    const stayNights = calculateStayNights(checkIn, checkOut)
+
     // Format the email content for hotel
     const hotelEmailSubject = "New Booking Request - Hotel Excella"
     const hotelEmailBody = `
@@ -32,6 +44,7 @@ Booking Details:
 ----------------
 Check-in Date: ${checkIn}
 Check-out Date: ${checkOut}
+Number of Nights: ${stayNights}
 Adults: ${adults}
 Children: ${children}
 Number of Rooms: ${rooms}
@@ -58,6 +71,7 @@ Your Request Details:
 --------------------
 Check-in: ${checkIn}
 Check-out: ${checkOut}
+Nights: ${stayNights}
 Room: ${roomPreference}
 Guests: ${adults} Adults, ${children} Children
 Rooms: ${rooms}
