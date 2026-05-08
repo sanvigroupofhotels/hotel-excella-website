@@ -1,11 +1,12 @@
 "use client"
 
-import { useState } from "react"
+import { useMemo, useState } from "react"
 import { DateRange } from "react-day-picker"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
 import { Calendar as DatePickerCalendar } from "@/components/ui/calendar"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import {
   Calendar,
   User,
@@ -44,6 +45,13 @@ export default function PrebookPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
   const [stayRange, setStayRange] = useState<DateRange | undefined>()
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false)
+
+  const stayNights = useMemo(() => {
+    if (!stayRange?.from || !stayRange?.to) return 0
+    const ms = stayRange.to.getTime() - stayRange.from.getTime()
+    return Math.max(0, Math.ceil(ms / (1000 * 60 * 60 * 24)))
+  }, [stayRange])
 
   const formatDate = (date?: Date) => {
     if (!date) return ""
@@ -192,22 +200,61 @@ Special Requests: ${formData.specialRequests || "N/A"}`
                       <label className="block text-sm font-medium text-foreground mb-2">
                         Check-in & Check-out <span className="text-destructive">*</span>
                       </label>
-                      <div className="rounded-lg border border-border bg-secondary p-3">
-                        <DatePickerCalendar
-                          mode="range"
-                          numberOfMonths={2}
-                          selected={stayRange}
-                          onSelect={(range) => {
-                            setStayRange(range)
-                            setFormData((prev) => ({
-                              ...prev,
-                              checkIn: formatDate(range?.from),
-                              checkOut: formatDate(range?.to),
-                            }))
-                          }}
-                          disabled={{ before: today }}
-                        />
-                      </div>
+                      <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
+                        <PopoverTrigger asChild>
+                          <button
+                            type="button"
+                            className="w-full rounded-lg border border-border bg-secondary p-0 text-left"
+                            aria-label="Select check-in and check-out dates"
+                          >
+                            <div className="grid sm:grid-cols-3">
+                              <div className="p-4 sm:border-r sm:border-border">
+                                <p className="text-xs uppercase tracking-wide text-muted-foreground">Check-in</p>
+                                <p className="mt-1 text-sm font-semibold text-foreground">
+                                  {formData.checkIn || "Select date"}
+                                </p>
+                              </div>
+                              <div className="p-4 sm:border-r sm:border-border">
+                                <p className="text-xs uppercase tracking-wide text-muted-foreground">Check-out</p>
+                                <p className="mt-1 text-sm font-semibold text-foreground">
+                                  {formData.checkOut || "Select date"}
+                                </p>
+                              </div>
+                              <div className="p-4">
+                                <p className="text-xs uppercase tracking-wide text-muted-foreground">Nights</p>
+                                <p className="mt-1 text-sm font-semibold text-foreground">
+                                  {stayNights > 0 ? `${stayNights} night${stayNights > 1 ? "s" : ""}` : "-"}
+                                </p>
+                              </div>
+                            </div>
+                          </button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-auto p-2" align="start">
+                          <DatePickerCalendar
+                            mode="range"
+                            numberOfMonths={2}
+                            selected={stayRange}
+                            onSelect={(range, selectedDay) => {
+                              const nextRange =
+                                range?.from && range?.to && selectedDay
+                                  ? { from: selectedDay, to: undefined }
+                                  : range
+
+                              setStayRange(nextRange)
+                              setFormData((prev) => ({
+                                ...prev,
+                                checkIn: formatDate(nextRange?.from),
+                                checkOut: formatDate(nextRange?.to),
+                              }))
+
+                              if (nextRange?.from && nextRange?.to) {
+                                setIsCalendarOpen(false)
+                              }
+                            }}
+                            disabled={{ before: today }}
+                          />
+                        </PopoverContent>
+                      </Popover>
                       <p className="mt-2 text-sm text-muted-foreground">
                         {formData.checkIn && formData.checkOut
                           ? `${formData.checkIn} to ${formData.checkOut}`
