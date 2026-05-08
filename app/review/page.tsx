@@ -29,6 +29,11 @@ export default function ReviewPage() {
   const [isHighRatingModalOpen, setIsHighRatingModalOpen] = useState(false)
   const [showReminderCard, setShowReminderCard] = useState(false)
 
+  const handleCloseFeedbackSuccessModal = () => {
+    setIsFeedbackSuccessModalOpen(false)
+    window.location.href = "/guest"
+  }
+
   useEffect(() => {
     const firstVisitKey = "review-page-first-visit"
     const now = Date.now()
@@ -332,12 +337,16 @@ What We Can Improve: ${formData.improvement || "N/A"}`
 
       <Dialog
         open={isFeedbackSuccessModalOpen}
-        onOpenChange={setIsFeedbackSuccessModalOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            handleCloseFeedbackSuccessModal()
+          }
+        }}
       >
         <DialogContent className="border-primary/40 bg-black text-white sm:max-w-lg">
           <button
             type="button"
-            onClick={() => setIsFeedbackSuccessModalOpen(false)}
+            onClick={handleCloseFeedbackSuccessModal}
             className="absolute right-4 top-4 rounded-full border border-primary/40 p-1 text-primary transition-colors hover:bg-primary/10"
             aria-label="Close"
           >
@@ -353,7 +362,7 @@ What We Can Improve: ${formData.improvement || "N/A"}`
           </DialogHeader>
           <button
             type="button"
-            onClick={() => setIsFeedbackSuccessModalOpen(false)}
+            onClick={handleCloseFeedbackSuccessModal}
             className="mt-2 inline-flex w-full items-center justify-center rounded-lg border border-primary/40 px-4 py-3 font-medium text-primary transition-colors hover:bg-primary/10"
           >
             Close
