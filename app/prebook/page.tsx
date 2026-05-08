@@ -58,7 +58,7 @@ export default function PrebookPage() {
     window.location.href = "/"
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (isSubmitting) return
     if (!formData.checkIn || !formData.checkOut) return
@@ -78,7 +78,7 @@ Room Preference: ${formData.roomPreference}
 Special Requests: ${formData.specialRequests || "N/A"}`
 
       const whatsappUrl = `https://wa.me/919985908131?text=${encodeURIComponent(message)}`
-      window.open(whatsappUrl, "_blank", "noopener,noreferrer")
+      window.location.href = whatsappUrl
       setIsSuccessModalOpen(true)
     } catch (error) {
       console.error("Error opening WhatsApp for booking request:", error)
