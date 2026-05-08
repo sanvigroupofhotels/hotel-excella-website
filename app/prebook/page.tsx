@@ -6,6 +6,7 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
 import { Calendar as DatePickerCalendar } from "@/components/ui/calendar"
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import {
   Calendar,
   User,
@@ -231,6 +232,25 @@ Special Requests: ${formData.specialRequests || "N/A"}`
                                 }))
 
                                 if (range?.from && range?.to) {
+                          <PopoverContent className="w-auto rounded-lg border border-border bg-secondary p-3" align="start">
+                            <DatePickerCalendar
+                              mode="range"
+                              numberOfMonths={2}
+                              selected={stayRange}
+                              onSelect={(range, selectedDay) => {
+                                const nextRange =
+                                  range?.from && range?.to && selectedDay
+                                    ? { from: selectedDay, to: undefined }
+                                    : range
+
+                                setStayRange(nextRange)
+                                setFormData((prev) => ({
+                                  ...prev,
+                                  checkIn: formatDate(nextRange?.from),
+                                  checkOut: formatDate(nextRange?.to),
+                                }))
+
+                                if (nextRange?.from && nextRange?.to) {
                                   setIsCalendarOpen(false)
                                   setTimeout(() => adultsInputRef.current?.focus(), 0)
                                 }
