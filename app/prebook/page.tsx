@@ -41,6 +41,11 @@ export default function PrebookPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false)
 
+  const handleCloseSuccessModal = () => {
+    setIsSuccessModalOpen(false)
+    window.location.href = "/"
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (isSubmitting) return
@@ -423,11 +428,18 @@ Special Requests: ${formData.specialRequests || "N/A"}`
       <Footer />
       <StickyCTA />
 
-      <Dialog open={isSuccessModalOpen} onOpenChange={setIsSuccessModalOpen}>
+      <Dialog
+        open={isSuccessModalOpen}
+        onOpenChange={(open) => {
+          if (!open) {
+            handleCloseSuccessModal()
+          }
+        }}
+      >
         <DialogContent className="border-primary/40 bg-black text-white sm:max-w-xl">
           <button
             type="button"
-            onClick={() => setIsSuccessModalOpen(false)}
+            onClick={handleCloseSuccessModal}
             className="absolute right-4 top-4 rounded-full border border-primary/40 p-1 text-primary transition-colors hover:bg-primary/10"
             aria-label="Close"
           >
@@ -462,7 +474,7 @@ Special Requests: ${formData.specialRequests || "N/A"}`
             </button>
             <button
               type="button"
-              onClick={() => setIsSuccessModalOpen(false)}
+              onClick={handleCloseSuccessModal}
               className="inline-flex items-center justify-center rounded-lg border border-primary/40 px-4 py-3 font-medium text-primary transition-colors hover:bg-primary/10"
             >
               Close
