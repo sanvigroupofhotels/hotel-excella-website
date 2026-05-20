@@ -1,0 +1,4 @@
+"use client"
+import { useState } from "react"
+import { createClient } from "@/lib/supabase/client"
+export default function Login(){const[e,setE]=useState('');const[p,setP]=useState('');const on=async()=>{const s=createClient();const{error}=await s.auth.signInWithPassword({email:e,password:p});if(error) return alert(error.message);location.href='/dashboard'};return <main className='min-h-screen grid place-items-center bg-black text-white'><div className='w-full max-w-md space-y-4 border border-amber-200/30 p-8 rounded-2xl'><h1 className='text-3xl'>Hotel Excella Internal Login</h1><input className='w-full p-2 rounded text-black' placeholder='Email' value={e} onChange={x=>setE(x.target.value)}/><input className='w-full p-2 rounded text-black' type='password' placeholder='Password' value={p} onChange={x=>setP(x.target.value)}/><button className='w-full bg-amber-500 text-black p-2 rounded' onClick={on}>Sign In</button></div></main>}
