@@ -1,0 +1,1 @@
+import QuoteForm from "@/components/crm/quote-form";export default function P(){return <main className='min-h-screen p-6 bg-black text-white'><h1 className='text-3xl mb-6'>Create Quote</h1><QuoteForm/></main>}
