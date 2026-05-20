@@ -1,0 +1,1 @@
+export default async function QuoteDetail({params}:{params:Promise<{id:string}>}){const {id}=await params;return <main className="p-6"><h1 className="font-serif text-3xl">Quote #{id}</h1><p className="text-muted-foreground mt-2">Premium quote preview, timeline, WhatsApp image sharing, PDF actions and status workflow.</p></main>}

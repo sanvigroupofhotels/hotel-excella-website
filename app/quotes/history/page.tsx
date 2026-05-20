@@ -1,0 +1,1 @@
+export default function QuoteHistory(){return <main className="p-6"><h1 className="font-serif text-3xl">Quote History</h1><p className="text-muted-foreground mt-2">Realtime search, filters, sorting and pagination connected with Supabase.</p></main>}
