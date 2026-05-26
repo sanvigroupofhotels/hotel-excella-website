@@ -96,6 +96,51 @@ Visakhapatnam
     const recipientEmail = process.env.HOTEL_INBOX_EMAIL || "sanvigroupofhotels@gmail.com"
     const fromEmail = process.env.RESEND_FROM_EMAIL || "Hotel Excella <onboarding@resend.dev>"
 
+    const supabaseUrl = process.env.SUPABASE_URL
+    const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+    const supabaseCustomerTable = process.env.SUPABASE_CUSTOMER_TABLE || "customer"
+
+    if (supabaseUrl && supabaseServiceRoleKey) {
+      const customerPayload = {
+        name: guestName,
+        mobile,
+        email,
+        check_in: checkIn,
+        check_out: checkOut,
+        stay_nights: stayNights,
+        adults,
+        children,
+        rooms,
+        room_preference: roomPreference,
+        special_requests: specialRequests || null,
+        inquiry_source: "website_prebook",
+        submitted_at: submissionTimestamp,
+      }
+
+      const customerResponse = await fetch(
+        `${supabaseUrl}/rest/v1/${supabaseCustomerTable}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            apikey: supabaseServiceRoleKey,
+            Authorization: `Bearer ${supabaseServiceRoleKey}`,
+            Prefer: "return=minimal",
+          },
+          body: JSON.stringify(customerPayload),
+        }
+      )
+
+      if (!customerResponse.ok) {
+        const errorText = await customerResponse.text()
+        console.error("Failed to create customer record in Supabase:", errorText)
+      }
+    } else {
+      console.warn(
+        "Supabase env vars are missing (SUPABASE_URL/SUPABASE_SERVICE_ROLE_KEY); skipping customer record creation."
+      )
+    }
+
     if (resendApiKey) {
       // Send to hotel
       const hotelEmailResponse = await fetch("https://api.resend.com/emails", {
