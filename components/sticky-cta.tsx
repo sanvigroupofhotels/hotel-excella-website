@@ -60,7 +60,7 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
           )}
           {!guestMode && (
             <a
-              href="https://wa.me/919985908131?text=Hello%20Hotel%20Excella%2C%20I%20would%20like%20to%20check%20room%20availability%20and%20pricing."
+              href="https://wa.me/919985908131"
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center justify-center py-3 text-white transition-colors hover:bg-[#141414]"
@@ -75,7 +75,7 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
       {/* Desktop Floating WhatsApp Button */}
       {!guestMode && (
         <a
-          href="https://wa.me/919985908131?text=Hello%20Hotel%20Excella%2C%20I%20would%20like%20to%20check%20room%20availability%20and%20pricing."
+          href="https://wa.me/919985908131"
           target="_blank"
           rel="noopener noreferrer"
           className="hidden lg:flex fixed bottom-6 right-6 z-40 items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105"

@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { pageMetadata } from "@/lib/seo/site"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
@@ -17,7 +16,10 @@ import {
   ArrowRight
 } from "lucide-react"
 
-export const metadata: Metadata = pageMetadata({ title: "Amenities at Hotel Excella Vizag", description: "Explore Hotel Excella amenities including Free WiFi, breakfast availability, clean rooms, fast check-in and guest support near Vizag attractions.", path: "/amenities" })
+export const metadata: Metadata = {
+  title: "Amenities | Hotel Excella Vizag",
+  description: "Discover the premium amenities at Hotel Excella Vizag. Free Wi-Fi, AC rooms, 24/7 reception, daily housekeeping, and more.",
+}
 
 const amenities = [
   {

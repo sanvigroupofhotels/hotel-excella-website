@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { pageMetadata } from "@/lib/seo/site"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
@@ -15,7 +14,10 @@ import {
   ExternalLink
 } from "lucide-react"
 
-export const metadata: Metadata = pageMetadata({ title: "Contact Hotel Excella Vizag", description: "Call, WhatsApp or email Hotel Excella for direct bookings near Beach Road, Tenneti Park, Kailasagiri and Rushikonda Beach.", path: "/contact" })
+export const metadata: Metadata = {
+  title: "Contact | Hotel Excella Vizag",
+  description: "Get in touch with Hotel Excella Vizag. Call us, WhatsApp, or email for bookings and inquiries. 24/7 support available.",
+}
 
 const contactMethods = [
   {
