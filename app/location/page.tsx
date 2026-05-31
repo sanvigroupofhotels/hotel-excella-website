@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/seo/site"
 import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -13,10 +14,7 @@ import {
   ExternalLink
 } from "lucide-react"
 
-export const metadata: Metadata = {
-  title: "Location | Hotel Excella Vizag",
-  description: "Find Hotel Excella in Visalakshinagar, Visakhapatnam. Conveniently located near Beach Road, Tenneti Park, and Kailasagiri.",
-}
+export const metadata: Metadata = pageMetadata({ title: "Hotel Excella Location Near Beach Road Vizag", description: "Find Hotel Excella near Beach Road, Tenneti Park, Kailasagiri, Rushikonda Beach and Indira Gandhi Zoological Park in Visakhapatnam.", path: "/location" })
 
 const nearbyAttractions = [
   {

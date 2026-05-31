@@ -1,14 +1,12 @@
 import type { Metadata } from "next"
+import { pageMetadata } from "@/lib/seo/site"
 import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
 import { ArrowRight } from "lucide-react"
 
-export const metadata: Metadata = {
-  title: "Gallery | Hotel Excella Vizag",
-  description: "Browse through our gallery to see the beautiful interiors, rooms, and facilities at Hotel Excella Vizag.",
-}
+export const metadata: Metadata = pageMetadata({ title: "Gallery | Hotel Excella Vizag", description: "View Hotel Excella photos including exterior, rooms, dining and lobby spaces near Beach Road, Kailasagiri and Rushikonda Beach.", path: "/gallery" })
 
 const galleryImages = [
   {
