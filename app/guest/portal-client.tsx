@@ -66,8 +66,8 @@ export default function GuestPortalClient() {
       },
       {
         icon: UtensilsCrossed,
-        title: "Food Menu",
-        description: "Order food directly to your room",
+        title: "In-Room Food",
+        description: "Convenient food ordering through trusted restaurant partners",
         href: "/orderfood",
       },
       {
@@ -147,7 +147,7 @@ export default function GuestPortalClient() {
               Review Us
             </Link>
             <Link href="/orderfood" className="block rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-white/90">
-              Food Menu
+              In-Room Food
             </Link>
             <Link href="/prebook" className="block rounded-lg border border-white/10 px-3 py-2 text-sm font-medium text-white/90">
               Enquiry
@@ -331,7 +331,7 @@ export default function GuestPortalClient() {
                     <Link href="/review" className="hover:text-[#d7b35f]">Review Us</Link>
                   </li>
                   <li>
-                    <Link href="/orderfood" className="hover:text-[#d7b35f]">Food Menu</Link>
+                    <Link href="/orderfood" className="hover:text-[#d7b35f]">In-Room Food</Link>
                   </li>
                   <li>
                     <a href="https://hotelexcella.bookmystay.io/" target="_blank" rel="noopener noreferrer" className="hover:text-[#d7b35f]">

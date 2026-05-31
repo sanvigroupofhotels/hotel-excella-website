@@ -1,29 +1,67 @@
 export type Faq = { question: string; answer: string }
 
+export type Attraction = {
+  name: string
+  slug: string
+  distance: string
+  time: string
+  driveTime: string
+  description: string
+}
+
 export const coreFaqs: Faq[] = [
-  { question: "Is Hotel Excella near Beach Road?", answer: "Yes. Hotel Excella is positioned near Beach Road with convenient access to coastal drives, Tenneti Park, Kailasagiri, restaurants and key Vizag attractions. It is not promoted as beachfront or sea-view accommodation." },
-  { question: "How far is Rushikonda Beach?", answer: "Rushikonda Beach is a short drive from Hotel Excella, usually around 15–20 minutes depending on traffic and the route chosen." },
-  { question: "Is Hotel Excella family friendly?", answer: "Yes. The hotel is suitable for families looking for clean rooms, easy access to attractions, nearby dining and a comfortable base in Visakhapatnam." },
-  { question: "Is the hotel suitable for business travellers?", answer: "Yes. Business travellers choose Hotel Excella for WiFi, quick access to city corridors, comfortable rooms, responsive service and direct booking support." },
+  { question: "Is Hotel Excella near Beach Road?", answer: "Yes. Hotel Excella is near Beach Road with convenient access to Tenneti Park, Kailasagiri, Rushikonda Beach and key Vizag attractions. It is not positioned as a beachfront, sea-view or beach-view hotel." },
+  { question: "How far is Rushikonda Beach from Hotel Excella?", answer: "Rushikonda Beach is approximately 7 km from Hotel Excella, with an approximate drive time of 15–20 minutes depending on traffic." },
+  { question: "Is Hotel Excella family friendly?", answer: "Yes. Hotel Excella is suitable for families looking for clean rooms, practical comfort, guest assistance and easy access to Vizag attractions." },
+  { question: "Is Hotel Excella suitable for business travellers?", answer: "Yes. Business travellers choose Hotel Excella for WiFi, fast check-in, direct booking support, comfortable rooms and responsive assistance." },
   { question: "Which attractions are nearby?", answer: "Nearby attractions include Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park." },
-  { question: "Are restaurants available nearby?", answer: "Yes. Popular nearby dining options include Kamat, Pista House and Kailash Parbat, along with other restaurants around Beach Road and Rushikonda." },
+  { question: "Does Hotel Excella offer food ordering?", answer: "Yes. In-house guests can use the Guest Services Portal for convenient in-room food ordering. Meals are delivered to rooms through trusted restaurant partners; Hotel Excella is not positioned as a destination restaurant." },
   { question: "Does the hotel provide WiFi?", answer: "Yes. Free WiFi is available for guests, making the stay convenient for families, couples and business travellers." },
-  { question: "Is breakfast available?", answer: "Breakfast is available at Hotel Excella. Guests can confirm current breakfast options while booking or at reception." },
+  { question: "Is breakfast available?", answer: "Breakfast options may be available depending on the booking plan. Guests can confirm current breakfast options while booking or at reception." },
 ]
 
-export const attractions = [
-  { name: "Tenneti Park", slug: "/hotel-near-tenneti-park-vizag", distance: "Approx. 1.5 km", time: "5–8 minutes", description: "A scenic coastal park loved for sunrise, evening walks and relaxed views near Beach Road." },
-  { name: "Kailasagiri", slug: "/hotel-near-kailasagiri", distance: "Approx. 3 km", time: "8–12 minutes", description: "A landmark hilltop attraction with panoramic city views, ropeway access and family-friendly leisure." },
-  { name: "Rushikonda Beach", slug: "/hotel-near-rushikonda-beach", distance: "Approx. 7 km", time: "15–20 minutes", description: "One of Vizag’s best-known beaches for coastal drives, beach time and casual outings." },
-  { name: "TTD Temple Rushikonda", slug: "/hotel-near-ttd-temple-rushikonda", distance: "Approx. 7 km", time: "15–20 minutes", description: "A peaceful temple stop near Rushikonda, often combined with beach and viewpoint visits." },
-  { name: "YSR View Point", slug: "/stay-near-ysr-view-point", distance: "Approx. 5 km", time: "12–15 minutes", description: "A popular viewpoint for guests planning a relaxed coastal sightseeing route." },
-  { name: "Indira Gandhi Zoological Park", slug: "/hotel-near-zoo-park-vizag", distance: "Approx. 4 km", time: "10–15 minutes", description: "A major family attraction in Vizag with green surroundings and a half-day outing option." },
+export const attractions: Attraction[] = [
+  { name: "Tenneti Park", slug: "/hotel-near-tenneti-park-vizag", distance: "Approx. 1.5 km", time: "5–8 minutes", driveTime: "Approx. 5–8 min drive", description: "A scenic coastal park suited for sunrise visits, evening walks and relaxed family outings near Beach Road." },
+  { name: "Kailasagiri", slug: "/hotel-near-kailasagiri", distance: "Approx. 3 km", time: "8–12 minutes", driveTime: "Approx. 8–12 min drive", description: "A landmark hilltop attraction with panoramic city views, ropeway access and family-friendly leisure." },
+  { name: "Rushikonda Beach", slug: "/hotel-near-rushikonda-beach", distance: "Approx. 7 km", time: "15–20 minutes", driveTime: "Approx. 15–20 min drive", description: "One of Vizag’s best-known beaches for coastal drives, beach time and casual outings." },
+  { name: "TTD Temple Rushikonda", slug: "/hotel-near-ttd-temple-rushikonda", distance: "Approx. 7 km", time: "15–20 minutes", driveTime: "Approx. 15–20 min drive", description: "A peaceful temple stop near Rushikonda that guests often combine with beach and viewpoint visits." },
+  { name: "YSR View Point", slug: "/stay-near-ysr-view-point", distance: "Approx. 5 km", time: "12–15 minutes", driveTime: "Approx. 12–15 min drive", description: "A popular viewpoint for guests planning a relaxed coastal sightseeing route." },
+  { name: "Indira Gandhi Zoological Park", slug: "/hotel-near-zoo-park-vizag", distance: "Approx. 4 km", time: "10–15 minutes", driveTime: "Approx. 10–15 min drive", description: "A major family attraction in Vizag with green surroundings and a half-day outing option." },
 ]
 
-export const restaurants = [
-  { name: "Kamat", cuisine: "South Indian and vegetarian favourites", distance: "Short drive", reason: "Guests visit for reliable vegetarian meals, quick service and familiar comfort food." },
-  { name: "Pista House", cuisine: "Biryani, Indian and bakery selections", distance: "Short drive", reason: "Popular for hearty meals, group dining and takeaway-friendly options." },
-  { name: "Kailash Parbat", cuisine: "North Indian, chaat and vegetarian dining", distance: "Short drive", reason: "A convenient choice for families wanting flavourful vegetarian food close to the hotel corridor." },
+export const trustIndicators = [
+  "Family Friendly",
+  "Couple Friendly",
+  "Business Traveller Friendly",
+  "Near Major Attractions",
+  "Free WiFi",
+  "Guest Services Portal",
+  "Quick Guest Assistance",
+]
+
+export const whyChooseItems = [
+  "Near Beach Road",
+  "Convenient Access to Kailasagiri",
+  "Near Tenneti Park",
+  "Near Rushikonda Beach",
+  "Family-Friendly Stay",
+  "Couple-Friendly Stay",
+  "Business Traveller Friendly",
+  "Fast Check-In",
+  "Premium Comfort",
+  "Value-Luxury Experience",
+  "Guest Services Portal",
+]
+
+export const roomComparison = [
+  { room: "Oak Room", bedType: "Queen bed", roomType: "Comfort queen room", occupancy: "Best for 1–2 guests", breakfast: "Breakfast options can be confirmed while booking", bestFor: "Couples, solo travellers and compact family stays", features: "Free WiFi, air conditioning, daily housekeeping, clean modern layout" },
+  { room: "Mapple Room", bedType: "King bed", roomType: "Premium king room", occupancy: "Best for 2 guests", breakfast: "Breakfast options can be confirmed while booking", bestFor: "Couples, business travellers and guests preferring extra comfort", features: "Free WiFi, air conditioning, premium bedding, daily housekeeping" },
+]
+
+export const reviewSnippets = [
+  { quote: "Clean rooms, quick help from the team and a convenient location for visiting Vizag attractions.", guest: "Family guest" },
+  { quote: "Good value-luxury feel with comfortable rooms and easy WhatsApp support before arrival.", guest: "Direct booking guest" },
+  { quote: "A calm stay near Beach Road access without confusing beachfront claims.", guest: "Couple traveller" },
 ]
 
 export const landingPages = [
@@ -33,7 +71,7 @@ export const landingPages = [
     h1: "Hotel Near Beach Road Vizag",
     focus: "Beach Road",
     description: "Book Hotel Excella for a comfortable stay near Beach Road Vizag, Tenneti Park, Kailasagiri and Rushikonda with direct booking support.",
-    intro: "Hotel Excella is a premium value-luxury stay near Beach Road in Visakhapatnam for guests who want coastal access without compromising comfort, cleanliness or convenience. The hotel is an ideal base for exploring Vizag’s beach corridor, nearby viewpoints, family attractions and dining options.",
+    intro: "Hotel Excella is a premium value-luxury stay near Beach Road in Visakhapatnam for guests who want coastal access without misleading beachfront or sea-view claims. The hotel is an ideal base for exploring Vizag’s beach corridor, viewpoints, temples and family attractions.",
   },
   {
     slug: "hotel-near-tenneti-park-vizag",
@@ -64,7 +102,7 @@ export const landingPages = [
     title: "Hotel Near TTD Temple Rushikonda | Hotel Excella",
     h1: "Hotel Near TTD Temple Rushikonda",
     focus: "TTD Temple Rushikonda",
-    description: "Stay near TTD Temple Rushikonda at Hotel Excella with comfortable rooms, nearby restaurants and easy access to Rushikonda Beach.",
+    description: "Stay near TTD Temple Rushikonda at Hotel Excella with comfortable rooms and easy access to Rushikonda Beach.",
     intro: "Hotel Excella is a convenient choice for guests visiting TTD Temple Rushikonda and combining the visit with Rushikonda Beach, YSR View Point and other coastal attractions in Visakhapatnam.",
   },
   {
@@ -73,7 +111,7 @@ export const landingPages = [
     h1: "Hotel Near Zoo Park Vizag",
     focus: "Indira Gandhi Zoological Park",
     description: "Book Hotel Excella near Indira Gandhi Zoological Park Vizag for a family-friendly stay close to Kailasagiri, Tenneti Park and Beach Road.",
-    intro: "Families visiting Indira Gandhi Zoological Park can use Hotel Excella as a comfortable base near Vizag’s green and coastal attractions. The location works well for relaxed sightseeing, nearby dining and direct room support.",
+    intro: "Families visiting Indira Gandhi Zoological Park can use Hotel Excella as a comfortable base near Vizag’s green and coastal attractions. The location works well for relaxed sightseeing, direct room support and convenient guest services.",
   },
   {
     slug: "stay-near-ysr-view-point",
@@ -81,7 +119,7 @@ export const landingPages = [
     h1: "Stay Near YSR View Point",
     focus: "YSR View Point",
     description: "Hotel Excella offers a comfortable stay near YSR View Point, Rushikonda, Kailasagiri and Beach Road in Visakhapatnam.",
-    intro: "YSR View Point is a favourite stop for guests exploring Vizag’s coastal side. Hotel Excella makes the route simple with comfortable rooms, nearby restaurants and smooth access to Beach Road, Kailasagiri and Rushikonda.",
+    intro: "YSR View Point is a favourite stop for guests exploring Vizag’s coastal side. Hotel Excella makes the route simple with comfortable rooms, smooth direct booking support and access to Beach Road, Kailasagiri and Rushikonda.",
   },
   {
     slug: "places-to-visit-near-hotel-excella",

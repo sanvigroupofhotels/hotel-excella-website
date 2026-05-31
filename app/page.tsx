@@ -6,23 +6,19 @@ import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
 import { CtaRow } from "@/components/seo/cta-row"
 import { FaqJsonLd } from "@/components/seo/json-ld"
-import { attractions, coreFaqs, restaurants } from "@/lib/seo/content"
+import { attractions, coreFaqs, trustIndicators } from "@/lib/seo/content"
 import { heroImage, pageMetadata } from "@/lib/seo/site"
-import { Bed, Briefcase, CheckCircle, Clock, MapPin, ShieldCheck, Sparkles, Users, Wifi, Utensils } from "lucide-react"
+import { Bed, Briefcase, CheckCircle, Clock, MapPin, ShieldCheck, Sparkles, Users, Wifi, ConciergeBell } from "lucide-react"
+import { WhyChooseHotelExcella } from "@/components/seo/why-choose"
+import { RoomComparisonSection } from "@/components/seo/room-comparison"
+import { ReviewSnippets } from "@/components/seo/review-snippets"
 
 export const metadata: Metadata = pageMetadata({
   title: "Hotel Excella Vizag | Comfort Near the Coast",
   description: "Premium value-luxury hotel near Beach Road, Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Vizag Zoo. Book direct.",
 })
 
-const trust = [
-  { icon: Users, label: "Family Friendly" },
-  { icon: ShieldCheck, label: "Couple Friendly" },
-  { icon: Clock, label: "Fast Check-In" },
-  { icon: MapPin, label: "Near Major Attractions" },
-  { icon: Wifi, label: "Free WiFi" },
-  { icon: Utensils, label: "Breakfast Available" },
-]
+const trustIcons = [Users, ShieldCheck, Briefcase, MapPin, Wifi, ConciergeBell, Clock]
 
 export default function HomePage() {
   return (
@@ -35,10 +31,10 @@ export default function HomePage() {
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">Comfort Near the Coast</p>
               <h1 className="mt-5 font-serif text-4xl font-bold leading-tight text-foreground lg:text-6xl">Comfortable stay in Vizag near Beach Road, Tenneti Park and Kailasagiri.</h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">Hotel Excella is a premium value-luxury hotel in Visakhapatnam with convenient access to Beach Road, Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park.</p>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">Hotel Excella is a premium value-luxury hotel in Visakhapatnam with convenient access to Beach Road, Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park. We do not position the hotel as beachfront, sea-view or beach-view.</p>
               <div className="mt-8"><CtaRow /></div>
               <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {trust.map((item) => <div key={item.label} className="rounded-xl border border-border bg-card/80 p-4 text-sm font-semibold text-foreground"><item.icon className="mb-3 h-5 w-5 text-primary" />{item.label}</div>)}
+                {trustIndicators.map((label, index) => { const Icon = trustIcons[index] ?? CheckCircle; return <div key={label} className="rounded-xl border border-border bg-card/80 p-4 text-sm font-semibold text-foreground"><Icon className="mb-3 h-5 w-5 text-primary" />{label}</div> })}
               </div>
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-3xl border border-primary/20 shadow-2xl">
@@ -55,10 +51,12 @@ export default function HomePage() {
               <p className="mt-4 text-muted-foreground">Book directly for live availability, WhatsApp support, clear pricing conversations and smoother arrival coordination.</p>
             </div>
             <div className="mt-10 grid gap-5 md:grid-cols-3">
-              {["Clean rooms with boutique comfort", "Easy access to Vizag attractions", "Guest Portal for food, WiFi and requests"].map((item) => <div key={item} className="rounded-2xl border border-border bg-card p-6"><CheckCircle className="h-6 w-6 text-primary" /><h3 className="mt-4 text-xl font-semibold text-foreground">{item}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">Hotel Excella keeps the experience simple, modern and guest-first, from enquiry to check-out.</p></div>)}
+              {["Clean rooms with boutique comfort", "Convenient access to Vizag attractions", "Guest Services Portal for WiFi, assistance, checkout and in-room food ordering"].map((item) => <div key={item} className="rounded-2xl border border-border bg-card p-6"><CheckCircle className="h-6 w-6 text-primary" /><h3 className="mt-4 text-xl font-semibold text-foreground">{item}</h3><p className="mt-3 text-sm leading-6 text-muted-foreground">Hotel Excella keeps the experience simple, modern and guest-first, from enquiry to check-out.</p></div>)}
             </div>
           </div>
         </section>
+
+        <WhyChooseHotelExcella />
 
         <section className="border-y border-border bg-card/40 py-16 lg:py-24">
           <div className="mx-auto max-w-7xl px-4">
@@ -72,26 +70,28 @@ export default function HomePage() {
           </div>
         </section>
 
+        <RoomComparisonSection />
+
         <section className="py-16 lg:py-24">
           <div className="mx-auto max-w-7xl px-4">
-            <div className="text-center"><p className="text-sm font-semibold uppercase tracking-[0.25em] text-primary">Nearby attractions</p><h2 className="mt-3 font-serif text-3xl font-bold text-foreground lg:text-4xl">Explore Vizag from a convenient base.</h2></div>
+            <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div><p className="text-sm font-semibold uppercase tracking-[0.25em] text-primary">Local attraction access</p><h2 className="mt-3 font-serif text-3xl font-bold text-foreground lg:text-4xl">Approximate distances from Hotel Excella.</h2></div>
+              <Link href="/attractions" className="text-sm font-semibold text-primary">Explore attractions →</Link>
+            </div>
             <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {attractions.map((attraction) => <Link key={attraction.name} href={attraction.slug} className="rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60"><h3 className="text-xl font-semibold text-foreground">{attraction.name}</h3><p className="mt-2 text-sm text-primary">{attraction.distance} · {attraction.time}</p><p className="mt-3 text-sm leading-6 text-muted-foreground">{attraction.description}</p></Link>)}
+              {attractions.map((attraction) => <Link key={attraction.name} href={attraction.slug} className="rounded-2xl border border-border bg-card p-6 transition hover:border-primary/60"><MapPin className="h-6 w-6 text-primary" /><h3 className="mt-4 text-xl font-semibold text-foreground">{attraction.name}</h3><p className="mt-2 text-sm font-semibold text-primary">{attraction.distance} · {attraction.time} · {attraction.driveTime}</p><p className="mt-3 text-sm leading-6 text-muted-foreground">{attraction.description}</p></Link>)}
             </div>
           </div>
         </section>
 
-        <section className="border-y border-border bg-card/40 py-16">
-          <div className="mx-auto max-w-7xl px-4">
-            <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
-              <div><p className="text-sm font-semibold uppercase tracking-[0.25em] text-primary">Dining nearby</p><h2 className="mt-3 font-serif text-3xl font-bold text-foreground">Restaurants guests ask about.</h2><Link href="/restaurants" className="mt-5 inline-flex text-sm font-semibold text-primary">Open dining guide →</Link></div>
-              <div className="grid gap-4 md:grid-cols-3">{restaurants.map((restaurant) => <div key={restaurant.name} className="rounded-xl border border-border bg-background p-5"><h3 className="font-semibold text-foreground">{restaurant.name}</h3><p className="mt-1 text-sm text-primary">{restaurant.cuisine}</p><p className="mt-3 text-sm text-muted-foreground">{restaurant.reason}</p></div>)}</div>
-            </div>
-          </div>
-        </section>
+        <ReviewSnippets title="What guests value about Hotel Excella" />
 
-        <section className="py-16 text-center">
-          <div className="mx-auto max-w-4xl px-4"><Briefcase className="mx-auto h-8 w-8 text-primary" /><h2 className="mt-4 font-serif text-3xl font-bold text-foreground">Ready to book Hotel Excella?</h2><p className="mt-3 text-muted-foreground">Use direct booking, WhatsApp or call the team for availability and pricing.</p><div className="mt-7"><CtaRow center /></div></div>
+        <section className="py-16 lg:py-24">
+          <div className="mx-auto max-w-5xl px-4 text-center">
+            <h2 className="font-serif text-3xl font-bold text-foreground lg:text-4xl">Ready for a comfortable stay in Vizag?</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">Use Book Now for live booking or WhatsApp Us for quick availability and pricing support.</p>
+            <div className="mt-8"><CtaRow center /></div>
+          </div>
         </section>
       </main>
       <Footer />

@@ -11,7 +11,6 @@ const navigation = [
   { name: "Home", href: "/" },
   { name: "Rooms", href: "/rooms" },
   { name: "Attractions", href: "/attractions" },
-  { name: "Restaurants", href: "/restaurants" },
   { name: "Gallery", href: "/gallery" },
   { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" },
@@ -74,7 +73,7 @@ export function Header() {
           </div>
           <div className="mt-6 divide-y divide-border">
             <div className="space-y-2 py-6">
-              {[...navigation, { name: "Guest Portal", href: "/guest" }, { name: "Review Us", href: "/review" }].map((item) => (
+              {[...navigation, { name: "Guest Services", href: "/guest" }, { name: "Review Us", href: "/review" }].map((item) => (
                 <Link key={item.name} href={item.href} onClick={() => setMobileMenuOpen(false)} className="-mx-3 block rounded-lg px-3 py-2 text-base font-medium text-foreground transition hover:bg-secondary">
                   {item.name}
                 </Link>

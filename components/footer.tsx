@@ -7,8 +7,7 @@ const quickLinks = [
   { name: "Oak Room", href: "/rooms/oak-room" },
   { name: "Mapple Room", href: "/rooms/mapple-room" },
   { name: "Attractions", href: "/attractions" },
-  { name: "Restaurants", href: "/restaurants" },
-  { name: "Guest Portal", href: "/guest" },
+  { name: "Guest Services", href: "/guest" },
   { name: "FAQ", href: "/faq" },
   { name: "Contact", href: "/contact" },
 ]

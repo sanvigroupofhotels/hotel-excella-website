@@ -1,16 +1,25 @@
 import Link from "next/link"
-import { MapPin, ShieldCheck, Utensils, Wifi, Clock, Star } from "lucide-react"
-import { attractions, coreFaqs, restaurants } from "@/lib/seo/content"
+import { MapPin, ShieldCheck, Wifi, Clock, Star, ConciergeBell } from "lucide-react"
+import { attractions, coreFaqs } from "@/lib/seo/content"
 import { CtaRow } from "@/components/seo/cta-row"
 import { InternalLinks } from "@/components/seo/internal-links"
 import { BreadcrumbJsonLd, FaqJsonLd } from "@/components/seo/json-ld"
+import { WhyChooseHotelExcella } from "@/components/seo/why-choose"
+import { ReviewSnippets } from "@/components/seo/review-snippets"
+import { GoogleMapSection } from "@/components/seo/map-section"
+
+function attractionForFocus(focus: string) {
+  return attractions.find((attraction) => focus.includes(attraction.name) || attraction.name.includes(focus))
+}
 
 export function SeoLandingPage({ page }: { page: { slug: string; h1: string; focus: string; intro: string } }) {
+  const focusAttraction = attractionForFocus(page.focus)
   const relatedFaqs = [
-    { question: `Why choose Hotel Excella for ${page.focus}?`, answer: `Hotel Excella gives guests a premium value-luxury stay with clean rooms, direct booking support, WhatsApp assistance and convenient access to ${page.focus} and the wider Beach Road–Kailasagiri–Rushikonda corridor.` },
+    { question: `How far is ${page.focus} from Hotel Excella?`, answer: focusAttraction ? `${focusAttraction.name} is ${focusAttraction.distance} from Hotel Excella, with ${focusAttraction.driveTime.toLowerCase()} depending on traffic.` : `Hotel Excella is positioned for convenient access to ${page.focus} and the wider Beach Road–Kailasagiri–Rushikonda corridor.` },
+    { question: `How can guests reach ${page.focus}?`, answer: `Guests can use their own vehicle, local taxis or app-based cabs. The hotel team can help with route guidance, and Google Maps directions are available on this page.` },
     { question: `Is Hotel Excella suitable for families visiting ${page.focus}?`, answer: "Yes. The hotel is family friendly, close to major attractions, and works well for guests who want a calm base after sightseeing." },
-    { question: "Can I book directly with Hotel Excella?", answer: "Yes. Guests can book online, call the hotel or use WhatsApp for room availability and pricing support." },
-    ...coreFaqs.slice(0, 3),
+    { question: "Can I book directly with Hotel Excella?", answer: "Yes. Guests can use Book Now for live booking or WhatsApp Us for room availability and pricing support." },
+    ...coreFaqs.slice(0, 2),
   ]
 
   return (
@@ -30,21 +39,14 @@ export function SeoLandingPage({ page }: { page: { slug: string; h1: string; foc
         <div className="mx-auto grid max-w-7xl gap-10 px-4 lg:grid-cols-[1.2fr_0.8fr]">
           <article className="space-y-7 text-base leading-8 text-muted-foreground">
             <h2 className="font-serif text-3xl font-bold text-foreground">A premium base near {page.focus}</h2>
-            <p>Hotel Excella is designed for travellers who want a polished independent hotel experience in Visakhapatnam with the ease of direct booking. The property is positioned for convenient access to Beach Road, Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park. Instead of overpromising with beachfront claims, the hotel focuses on what matters to guests: comfortable rooms, responsive service, clean interiors, fast check-in and a location that makes Vizag simple to explore.</p>
-            <p>Guests choosing Hotel Excella for {page.focus} can plan relaxed days without being far from restaurants, local transport routes and popular sightseeing stops. Families appreciate the practical room comfort and nearby outing options. Couples value the boutique feel and easy coastal access. Business travellers benefit from WiFi, direct communication and a calm place to return to after meetings in the city.</p>
-            <p>The best stay plans often combine {page.focus} with Tenneti Park for a coastal pause, Kailasagiri for views, Rushikonda Beach for beach time and nearby restaurants for convenient meals. Hotel Excella works especially well for guests who prefer a neat, modern stay rather than a crowded template hotel experience.</p>
-            <h2 className="font-serif text-3xl font-bold text-foreground">Why guests book direct</h2>
-            <p>Direct booking helps guests confirm room availability, breakfast details, arrival timing and special requests with the hotel team. It also reduces dependency on third-party listings and gives travellers a clearer line of communication before check-in. Use Book Now for live booking, WhatsApp for quick availability and pricing, or Call Now if you prefer immediate assistance.</p>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {["Family Friendly", "Couple Friendly", "Fast Check-In", "Near Major Attractions", "Free WiFi", "Breakfast Available"].map((item) => (
-                <div key={item} className="rounded-xl border border-border bg-card p-4 text-foreground"><ShieldCheck className="mb-3 h-5 w-5 text-primary" />{item}</div>
-              ))}
-            </div>
-            <h2 className="font-serif text-3xl font-bold text-foreground">Nearby attractions from Hotel Excella</h2>
+            <p>Hotel Excella is designed for travellers who want a polished independent hotel experience in Visakhapatnam with clear, honest positioning. The property offers convenient access to Beach Road, Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park without claiming to be a beachfront, sea-view or beach-view hotel.</p>
+            <p>Guests choosing Hotel Excella for {page.focus} can plan relaxed days with comfortable rooms, free WiFi, fast check-in, responsive assistance and direct booking support. Families appreciate the practical room comfort and nearby outing options. Couples value the boutique feel and easy coastal access. Business travellers benefit from a calm base after work in the city.</p>
+            <p>Food ordering is presented as a guest convenience service only. In-house guests can use the Guest Services Portal for in-room food ordering, WiFi details, reception assistance, checkout support and reviews. Meals are delivered to rooms through trusted restaurant partners.</p>
+            <h2 className="font-serif text-3xl font-bold text-foreground">Approximate distances from Hotel Excella</h2>
             <div className="grid gap-4">
               {attractions.map((attraction) => (
                 <Link key={attraction.name} href={attraction.slug} className="rounded-xl border border-border bg-card p-5 transition hover:border-primary/60">
-                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><h3 className="text-xl font-semibold text-foreground">{attraction.name}</h3><span className="text-sm text-primary">{attraction.distance} · {attraction.time}</span></div>
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"><h3 className="text-xl font-semibold text-foreground">{attraction.name}</h3><span className="text-sm text-primary">{attraction.distance} · {attraction.time} · {attraction.driveTime}</span></div>
                   <p className="mt-2 text-muted-foreground">{attraction.description}</p>
                 </Link>
               ))}
@@ -55,32 +57,22 @@ export function SeoLandingPage({ page }: { page: { slug: string; h1: string; foc
             <div className="rounded-2xl border border-primary/25 bg-card p-6">
               <h2 className="font-serif text-2xl font-bold text-foreground">Stay highlights</h2>
               <ul className="mt-5 space-y-4 text-sm text-muted-foreground">
-                <li className="flex gap-3"><MapPin className="h-5 w-5 text-primary" /> Near Beach Road and Vizag attractions</li>
+                <li className="flex gap-3"><MapPin className="h-5 w-5 text-primary" /> Near Beach Road and major Vizag attractions</li>
                 <li className="flex gap-3"><Wifi className="h-5 w-5 text-primary" /> Free WiFi for guests</li>
                 <li className="flex gap-3"><Clock className="h-5 w-5 text-primary" /> Fast check-in support</li>
-                <li className="flex gap-3"><Utensils className="h-5 w-5 text-primary" /> Breakfast and nearby dining options</li>
-                <li className="flex gap-3"><Star className="h-5 w-5 text-primary" /> Premium value-luxury positioning</li>
+                <li className="flex gap-3"><ConciergeBell className="h-5 w-5 text-primary" /> Guest Services Portal</li>
+                <li className="flex gap-3"><Star className="h-5 w-5 text-primary" /> Premium value-luxury experience</li>
+                <li className="flex gap-3"><ShieldCheck className="h-5 w-5 text-primary" /> Family, couple and business traveller friendly</li>
               </ul>
               <div className="mt-6"><CtaRow /></div>
-            </div>
-            <div className="rounded-2xl border border-border bg-card p-6">
-              <h2 className="font-serif text-2xl font-bold text-foreground">Nearby restaurants</h2>
-              <div className="mt-4 space-y-4">
-                {restaurants.map((restaurant) => (
-                  <div key={restaurant.name} className="border-b border-border pb-4 last:border-0 last:pb-0">
-                    <h3 className="font-semibold text-foreground">{restaurant.name}</h3>
-                    <p className="text-sm text-primary">{restaurant.cuisine} · {restaurant.distance}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">{restaurant.reason}</p>
-                  </div>
-                ))}
-              </div>
-              <Link href="/restaurants" className="mt-5 inline-flex text-sm font-semibold text-primary">View dining guide →</Link>
             </div>
             <InternalLinks />
           </aside>
         </div>
       </section>
-
+      <WhyChooseHotelExcella />
+      <ReviewSnippets title="Guest confidence for direct bookings" />
+      <GoogleMapSection title={`Directions to Hotel Excella for ${page.focus}`} />
       <section className="border-t border-border bg-card/40 py-16">
         <div className="mx-auto max-w-5xl px-4">
           <h2 className="text-center font-serif text-3xl font-bold text-foreground">Frequently asked questions</h2>

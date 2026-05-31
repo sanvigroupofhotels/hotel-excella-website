@@ -5,45 +5,45 @@ export function JsonLd({ data }: { data: Record<string, unknown> | Record<string
   return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }} />
 }
 
+const postalAddress = {
+  "@type": "PostalAddress",
+  streetAddress: "386 Revenue Employees Co-operative Society Colony, Visalakshi Nagar",
+  addressLocality: "Visakhapatnam",
+  addressRegion: "Andhra Pradesh",
+  postalCode: "530043",
+  addressCountry: "IN",
+}
+
+const geo = {
+  "@type": "GeoCoordinates",
+  latitude: 17.7666,
+  longitude: 83.3515,
+}
+
 export function HotelJsonLd() {
+  const shared = {
+    name: "Hotel Excella",
+    slogan: "Comfort Near the Coast",
+    url: siteUrl,
+    image: heroImage,
+    telephone: phoneDisplay,
+    email: "hotelexcellavizag@gmail.com",
+    priceRange: "₹₹",
+    address: postalAddress,
+    geo,
+    areaServed: "Visakhapatnam",
+    amenityFeature: ["Free WiFi", "Fast Check-In", "Family Friendly", "Couple Friendly", "Business Traveller Friendly", "Guest Services Portal", "Air Conditioning"].map((name) => ({
+      "@type": "LocationFeatureSpecification",
+      name,
+      value: true,
+    })),
+  }
+
   return (
     <JsonLd
       data={[
-        {
-          "@context": "https://schema.org",
-          "@type": "Hotel",
-          "@id": `${siteUrl}/#hotel`,
-          name: "Hotel Excella",
-          slogan: "Comfort Near the Coast",
-          url: siteUrl,
-          image: heroImage,
-          telephone: phoneDisplay,
-          email: "hotelexcellavizag@gmail.com",
-          priceRange: "₹₹",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "386 Revenue Employees Co-operative Society Colony, Visalakshi Nagar",
-            addressLocality: "Visakhapatnam",
-            addressRegion: "Andhra Pradesh",
-            postalCode: "530043",
-            addressCountry: "IN",
-          },
-          amenityFeature: ["Free WiFi", "Breakfast Available", "Fast Check-In", "Family Friendly", "Couple Friendly", "Air Conditioning"].map((name) => ({
-            "@type": "LocationFeatureSpecification",
-            name,
-            value: true,
-          })),
-        },
-        {
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          "@id": `${siteUrl}/#localbusiness`,
-          name: "Hotel Excella",
-          url: siteUrl,
-          image: heroImage,
-          telephone: phoneDisplay,
-          address: hotelAddress,
-        },
+        { "@context": "https://schema.org", "@type": "Hotel", "@id": `${siteUrl}/#hotel`, ...shared },
+        { "@context": "https://schema.org", "@type": "LocalBusiness", "@id": `${siteUrl}/#localbusiness`, ...shared },
       ]}
     />
   )

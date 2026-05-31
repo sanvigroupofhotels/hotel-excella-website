@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
 import { ArrowRight } from "lucide-react"
 
-export const metadata: Metadata = pageMetadata({ title: "Gallery | Hotel Excella Vizag", description: "View Hotel Excella photos including exterior, rooms, dining and lobby spaces near Beach Road, Kailasagiri and Rushikonda Beach.", path: "/gallery" })
+export const metadata: Metadata = pageMetadata({ title: "Gallery | Hotel Excella Vizag", description: "View Hotel Excella photos including exterior, rooms, guest areas and lobby spaces near Beach Road, Kailasagiri and Rushikonda Beach.", path: "/gallery" })
 
 const galleryImages = [
   {
@@ -28,9 +28,9 @@ const galleryImages = [
     featured: false,
   },
   {
-    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dining-cjkV0vqP1I6CQ10QQEYvazUmhUKlTX.jpg",
-    alt: "Dining Area - Modern Setup",
-    category: "Dining",
+    src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lobby-nEEo9EQvawS3OCTf8VMen4Ct2sycAS.jpg",
+    alt: "Guest convenience area - modern setup",
+    category: "Guest Area",
     featured: false,
   },
   {

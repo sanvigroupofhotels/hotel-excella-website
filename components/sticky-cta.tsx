@@ -29,15 +29,17 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
               className="flex flex-col items-center justify-center py-3 text-white transition-colors hover:bg-[#141414]"
             >
               <UtensilsCrossed className="h-5 w-5" />
-              <span className="mt-1 text-xs font-medium">Order Food</span>
+              <span className="mt-1 text-xs font-medium">Food Order</span>
             </Link>
           ) : (
             <Link
-              href="/prebook"
+              href="https://wa.me/919985908131?text=Hello%20Hotel%20Excella%2C%20I%20would%20like%20to%20check%20room%20availability%20and%20pricing."
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex flex-col items-center justify-center py-3 text-white transition-colors hover:bg-[#141414]"
             >
               <ClipboardCheck className="h-5 w-5" />
-              <span className="mt-1 text-xs font-medium">Enquiry</span>
+              <span className="mt-1 text-xs font-medium">WhatsApp</span>
             </Link>
           )}
           {guestMode ? (

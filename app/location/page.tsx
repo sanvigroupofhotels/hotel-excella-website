@@ -20,12 +20,12 @@ const nearbyAttractions = [
   {
     icon: Waves,
     name: "Beach Road",
-    description: "Famous beach promenade with stunning sea views and coastal vibes.",
+    description: "Popular coastal road access for drives, walks and Vizag sightseeing.",
   },
   {
     icon: TreePine,
     name: "Tenneti Park",
-    description: "Beautiful hilltop park offering panoramic views of the city and sea.",
+    description: "Scenic park close to Beach Road access and suitable for relaxed outings.",
   },
   {
     icon: Mountain,
@@ -122,7 +122,7 @@ export default function LocationPage() {
                       <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 shrink-0">
                         <span className="text-xs font-bold text-primary">✓</span>
                       </div>
-                      <span className="text-muted-foreground">Nearby restaurants and shopping options</span>
+                      <span className="text-muted-foreground">Guest convenience services and nearby city access</span>
                     </li>
                   </ul>
                 </div>

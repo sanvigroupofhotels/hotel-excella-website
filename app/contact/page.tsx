@@ -3,6 +3,8 @@ import { pageMetadata } from "@/lib/seo/site"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
+import { GoogleMapSection } from "@/components/seo/map-section"
+import { CtaRow } from "@/components/seo/cta-row"
 import { 
   Phone,
   Mail,
@@ -11,7 +13,6 @@ import {
   Instagram,
   Linkedin,
   Clock,
-  ArrowRight,
   ExternalLink
 } from "lucide-react"
 
@@ -33,7 +34,7 @@ const contactMethods = [
     title: "WhatsApp",
     description: "Chat with us for quick responses",
     details: [
-      { label: "Send a Message", href: "https://wa.me/919985908131" },
+      { label: "Send a Message", href: "https://wa.me/919985908131?text=Hello%20Hotel%20Excella%2C%20I%20would%20like%20to%20check%20room%20availability%20and%20pricing." },
     ],
     primary: true,
     isExternal: true,
@@ -203,6 +204,8 @@ export default function ContactPage() {
           </div>
         </section>
 
+        <GoogleMapSection />
+
         {/* Quick Actions */}
         <section className="py-16 lg:py-24">
           <div className="mx-auto max-w-4xl px-4 text-center">
@@ -212,17 +215,7 @@ export default function ContactPage() {
             <p className="mt-4 text-lg text-muted-foreground text-pretty">
               Skip the hassle and book directly with us for the best rates.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="https://hotelexcella.bookmystay.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
-              >
-                Book Now
-                <ArrowRight className="h-5 w-5" />
-              </a>
-            </div>
+            <div className="mt-8"><CtaRow center /></div>
           </div>
         </section>
       </main>

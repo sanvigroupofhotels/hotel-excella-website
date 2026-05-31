@@ -49,9 +49,8 @@ export const publicLinks = [
   { href: "/", label: "Home" },
   { href: "/rooms", label: "Rooms" },
   { href: "/attractions", label: "Attractions" },
-  { href: "/restaurants", label: "Restaurants" },
   { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
-  { href: "/guest", label: "Guest Portal" },
+  { href: "/guest", label: "Guest Services" },
 ]
