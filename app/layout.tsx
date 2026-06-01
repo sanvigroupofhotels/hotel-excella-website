@@ -20,13 +20,17 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: 'Hotel Excella Vizag | Premium Smart Stay in Visakhapatnam',
-  description: 'Experience premium comfort at Hotel Excella, located in the heart of Vizag. Clean rooms, family-friendly, 24/7 reception. Book direct for best rates.',
-  keywords: 'Hotel in Visalakshinagar, Best hotel in Vizag, Hotel near Kailasagiri, Hotel near Tenneti Park, Family stay Vizag, Couple friendly hotel Vizag, Premium hotel Visakhapatnam',
+  metadataBase: new URL('https://hotelexcella.in'),
+  title: {
+    default: 'Hotel Excella Vizag | Premium Value-Luxury Stay in Visakhapatnam',
+    template: '%s',
+  },
+  description: 'Comfort near the coast at Hotel Excella, a premium value-luxury hotel in Vizag near Beach Road, Tenneti Park, Kailasagiri and Rushikonda attractions.',
+  keywords: 'Hotel near Beach Road Vizag, Hotel near Kailasagiri, Hotel near Tenneti Park, Hotel near Rushikonda Beach, Family hotel in Visakhapatnam, Couple friendly hotel Vizag, Comfortable stay in Vizag',
   openGraph: {
-    title: 'Hotel Excella Vizag | Premium Smart Stay in Visakhapatnam',
-    description: 'Experience premium comfort at Hotel Excella, located in the heart of Vizag. Clean rooms, family-friendly, 24/7 reception.',
-    url: 'https://hotelexcella.com',
+    title: 'Hotel Excella Vizag | Premium Value-Luxury Stay in Visakhapatnam',
+    description: 'Comfort near the coast at Hotel Excella with convenient access to Vizag attractions including Tenneti Park, Kailasagiri and Rushikonda.',
+    url: 'https://hotelexcella.in',
     siteName: 'Hotel Excella',
     images: [
       {
@@ -41,10 +45,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Hotel Excella Vizag | Premium Smart Stay',
-    description: 'Premium comfort in the heart of Vizag. Book direct for best rates.',
+    title: 'Hotel Excella Vizag | Premium Value-Luxury Stay',
+    description: 'Comfort near the coast with convenient access to Vizag attractions. Book direct for best rates.',
     images: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png'],
   },
+  alternates: { canonical: '/' },
   robots: {
     index: true,
     follow: true,
@@ -67,9 +72,9 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Hotel",
+              "@type": ["Hotel", "LocalBusiness"],
               "name": "Hotel Excella",
-              "description": "Premium Smart Stay in Vizag - Clean rooms, family-friendly atmosphere, and excellent service.",
+              "description": "Premium value-luxury hotel in Vizag offering comfort near the coast and convenient access to Beach Road, Tenneti Park, Kailasagiri and Rushikonda attractions.",
               "address": {
                 "@type": "PostalAddress",
                 "streetAddress": "386 Revenue Employees Co-operative Society Colony, VisalakshiNagar",
@@ -79,10 +84,15 @@ export default function RootLayout({
                 "addressCountry": "IN"
               },
               "telephone": "+91-9985908131",
+              "priceRange": "₹₹",
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 17.7609,
+                "longitude": 83.3429
+              },
               "email": "hotelexcellavizag@gmail.com",
-              "url": "https://hotelexcella.com",
+              "url": "https://hotelexcella.in",
               "image": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png",
-              "priceRange": "$$",
               "amenityFeature": [
                 { "@type": "LocationFeatureSpecification", "name": "Free WiFi" },
                 { "@type": "LocationFeatureSpecification", "name": "Air Conditioning" },

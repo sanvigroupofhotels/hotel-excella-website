@@ -3,10 +3,11 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Check Availability | Hotel Excella Vizag Direct Booking",
   description: "Check room availability and book directly at Hotel Excella Vizag. Best rates guaranteed with instant confirmation. Queen and King Executive rooms available.",
+  alternates: { canonical: "https://hotelexcella.in/prebook" },
   openGraph: {
     title: "Check Availability | Hotel Excella Vizag Direct Booking",
     description: "Check room availability and book directly at Hotel Excella Vizag. Best rates guaranteed with instant confirmation.",
-    url: "https://hotelexcella.com/prebook",
+    url: "https://hotelexcella.in/prebook",
     siteName: "Hotel Excella",
     images: [
       {

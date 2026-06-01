@@ -3,10 +3,11 @@ import type { Metadata } from "next"
 export const metadata: Metadata = {
   title: "Review Hotel Excella Vizag | Guest Feedback",
   description: "Share your experience at Hotel Excella Vizag. Your feedback helps us serve you better. Rate your stay and leave a review.",
+  alternates: { canonical: "https://hotelexcella.in/review" },
   openGraph: {
     title: "Review Hotel Excella Vizag | Guest Feedback",
     description: "Share your experience at Hotel Excella Vizag. Your feedback helps us serve you better.",
-    url: "https://hotelexcella.com/review",
+    url: "https://hotelexcella.in/review",
     siteName: "Hotel Excella",
     images: [
       {
