@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     description: "Plan your Vizag stay with local attraction guides from Hotel Excella.",
     url: `${site.url}/blog`,
     siteName: site.name,
-    images: [{ url: site.image, width: 1200, height: 630, alt: "Hotel Excella Vizag" }],
+    images: [{ url: site.image, width: 1200, height: 630, alt: "Hotel Excella, Visakhapatnam" }],
     locale: "en_IN",
     type: "website",
   },

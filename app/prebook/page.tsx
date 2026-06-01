@@ -454,11 +454,11 @@ export default function PrebookPage() {
                 className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors"
               >
                 <Phone className="h-5 w-5" />
-                +91 99859 08131
+                +91 9985908131
               </a>
               <span className="hidden sm:inline text-border">|</span>
               <a
-                href="https://wa.me/919985908131"
+                href="https://wa.me/919985908131?text=Hello%20Hotel%20Excella%2C%20I%20would%20like%20to%20enquire%20about%20room%20availability."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-green-500 hover:text-green-400 transition-colors"
@@ -512,7 +512,7 @@ export default function PrebookPage() {
             <button
               type="button"
               onClick={() => {
-                window.location.href = "https://hotelexcella.bookmystay.io/"
+                window.location.href = "/prebook"
               }}
               className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-3 font-semibold text-primary-foreground transition-all hover:bg-primary/90"
             >

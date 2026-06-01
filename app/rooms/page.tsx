@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { BookingCTA } from "@/components/booking-cta"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
@@ -18,8 +19,8 @@ import {
 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Rooms | Hotel Excella Vizag",
-  description: "Explore our comfortable and well-appointed rooms at Hotel Excella Vizag. Queen and King Executive rooms with modern amenities, free Wi-Fi, AC, and 24/7 service.",
+  title: "Rooms | Hotel Excella, Visakhapatnam",
+  description: "Explore our comfortable and well-appointed rooms at Hotel Excella, Visakhapatnam. Queen and King Executive rooms with modern amenities, free Wi-Fi, AC, and 24/7 service.",
 }
 
 const includedAmenities = [
@@ -31,7 +32,8 @@ const includedAmenities = [
 
 const rooms = [
   {
-    name: "Queen Executive Room",
+    name: "Oak Room",
+    slug: "oak-room",
     description: "Comfortable queen bed room with a clean modern layout designed for couples, solo guests and families seeking a premium stay experience.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/room1-gwtPWoLoADzaldmYrRdj4539Sv4Zli.jpg",
     highlights: [
@@ -43,7 +45,8 @@ const rooms = [
     ],
   },
   {
-    name: "King Executive Room",
+    name: "Mapple Room",
+    slug: "mapple-room",
     description: "Spacious king bed room offering elevated comfort, stylish interiors and a relaxing premium stay for couples, families and business travellers.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/room2-UfQMHpyryUBdNLST83IpWIvfh3PizR.jpg",
     highlights: [
@@ -109,7 +112,7 @@ export default function RoomsPage() {
                     <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
                       <Image
                         src={room.image}
-                        alt={room.name}
+                        alt={`${room.name} at Hotel Excella, Visakhapatnam`}
                         fill
                         className="object-cover"
                       />
@@ -153,15 +156,15 @@ export default function RoomsPage() {
                       </div>
                     </div>
 
-                    <a
-                      href="https://hotelexcella.bookmystay.io/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 text-base font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
-                    >
-                      Book Now
-                      <ArrowRight className="h-5 w-5" />
-                    </a>
+                    <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                      <Link
+                        href={`/rooms/${room.slug}`}
+                        className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary px-8 py-4 text-base font-semibold text-primary transition-all hover:bg-primary/10"
+                      >
+                        View {room.name}
+                        <ArrowRight className="h-5 w-5" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -178,24 +181,7 @@ export default function RoomsPage() {
             <p className="mt-4 text-lg text-muted-foreground text-pretty">
               Direct booking guarantees the best rates and instant confirmation.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="https://hotelexcella.bookmystay.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
-              >
-                Book Now
-                <ArrowRight className="h-5 w-5" />
-              </a>
-              <Link
-                href="/prebook"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg border border-primary px-8 py-4 text-lg font-semibold text-primary hover:bg-primary/10 transition-all duration-300"
-              >
-                Check Availability
-                <ArrowRight className="h-5 w-5" />
-              </Link>
-            </div>
+<div className="mt-8"><BookingCTA align="center" /></div>
           </div>
         </section>
       </main>

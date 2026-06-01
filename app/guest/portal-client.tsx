@@ -74,7 +74,7 @@ export default function GuestPortalClient() {
         icon: BedDouble,
         title: "Book / Extend Stay",
         description: "Extend your stay or book again at best direct rates",
-        href: "https://hotelexcella.bookmystay.io/",
+        href: "/prebook",
         external: true,
       },
       {
@@ -111,7 +111,7 @@ export default function GuestPortalClient() {
       <div className="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-4 py-3 sm:hidden">
         <Link href="/guest" className="-m-1.5 p-1.5">
           <span className="sr-only">Hotel Excella</span>
-          <Image src={logoImage} alt="Hotel Excella Logo" width={92} height={42} className="h-9 w-auto" priority />
+          <Image src={logoImage} alt="Hotel Excella, Visakhapatnam logo" width={92} height={42} className="h-9 w-auto" priority />
         </Link>
         <button
           type="button"
@@ -153,7 +153,7 @@ export default function GuestPortalClient() {
               Enquiry
             </Link>
             <a
-              href="https://hotelexcella.bookmystay.io/"
+              href="/prebook"
               target="_blank"
               rel="noopener noreferrer"
               className="block rounded-lg border border-[#d4ad5a]/40 px-3 py-2 text-sm font-semibold text-[#d4ad5a]"
@@ -320,7 +320,7 @@ export default function GuestPortalClient() {
 
             <div className="text-left">
               <Link href="/guest" className="inline-flex items-center justify-start">
-                <Image src={logoImage} alt="Hotel Excella Logo" width={88} height={40} className="h-8 w-auto" />
+                <Image src={logoImage} alt="Hotel Excella, Visakhapatnam logo" width={88} height={40} className="h-8 w-auto" />
               </Link>
               <p className="mt-3 text-sm text-white/75">Thank you for choosing us for your stay.</p>
 
@@ -334,14 +334,14 @@ export default function GuestPortalClient() {
                     <Link href="/orderfood" className="hover:text-[#d7b35f]">Food Menu</Link>
                   </li>
                   <li>
-                    <a href="https://hotelexcella.bookmystay.io/" target="_blank" rel="noopener noreferrer" className="hover:text-[#d7b35f]">
+                    <a href="/prebook" target="_blank" rel="noopener noreferrer" className="hover:text-[#d7b35f]">
                       Instant Booking
                     </a>
                   </li>
                 </ul>
               </div>
 
-              <p className="mt-5 text-center text-[11px] text-white/55">2022 Hotel Excella - All rights reserved.</p>
+              <p className="mt-5 text-center text-[11px] text-white/55">2026 Hotel Excella, Visakhapatnam - All rights reserved.</p>
             </div>
           </section>
         </div>

@@ -1,10 +1,12 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowRight, CalendarDays, Clock, MapPin, MessageCircle } from "lucide-react"
+import { CalendarDays, Clock, MapPin } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { StickyCTA } from "@/components/sticky-cta"
+import { BookingCTA } from "@/components/booking-cta"
 import { JsonLd } from "@/components/seo/json-ld"
 import { WhyChooseExcella } from "@/components/seo/why-choose-excella"
 import { attractions, site } from "@/lib/seo/constants"
@@ -72,24 +74,7 @@ export default async function SeoLandingPage({ params }: Props) {
                 {page.heroTitle}
               </h1>
               <p className="mt-6 max-w-3xl text-lg leading-8 text-muted-foreground">{page.heroIntro}</p>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a
-                  href={site.bookingUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground transition hover:bg-primary/90"
-                >
-                  Book Now <ArrowRight className="h-4 w-4" />
-                </a>
-                <a
-                  href={site.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-full border border-primary px-6 py-3 font-semibold text-primary transition hover:bg-primary/10"
-                >
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
-                </a>
-              </div>
+<div className="mt-8"><BookingCTA /></div>
             </div>
             <div className="rounded-3xl border border-primary/20 bg-card p-6 shadow-2xl shadow-black/30">
               <h2 className="font-serif text-2xl font-bold text-foreground">Quick travel facts</h2>
@@ -160,6 +145,28 @@ export default async function SeoLandingPage({ params }: Props) {
           </div>
         </section>
 
+
+        {page.slug === "places-to-visit-near-hotel-excella" && (
+          <section className="px-4 py-12 lg:px-8">
+            <div className="mx-auto max-w-7xl">
+              <h2 className="font-serif text-3xl font-bold">Attraction cards near Hotel Excella</h2>
+              <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {attractions.map((attraction) => (
+                  <Link key={attraction.slug} href={`/${attraction.slug}`} className="overflow-hidden rounded-3xl border border-border bg-card hover:border-primary/50">
+                    <div className="relative aspect-[4/3]">
+                      <Image src={attraction.image} alt={`${attraction.name} near Hotel Excella, Visakhapatnam`} fill className="object-cover" />
+                    </div>
+                    <div className="p-5">
+                      <h3 className="font-serif text-2xl font-bold">{attraction.name}</h3>
+                      <p className="mt-2 text-sm font-semibold text-primary">{attraction.distance} • {attraction.travelTime}</p>
+                      <p className="mt-3 text-sm leading-6 text-muted-foreground">{attraction.description}</p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
         <section className="px-4 py-8 lg:px-8">
           <div className="mx-auto max-w-7xl">
             <WhyChooseExcella />
@@ -189,24 +196,7 @@ export default async function SeoLandingPage({ params }: Props) {
             <p className="mx-auto mt-4 max-w-2xl text-primary-foreground/80">
               Book direct with Hotel Excella or message us on WhatsApp to check room availability and pricing.
             </p>
-            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <a
-                href={site.bookingUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full bg-background px-6 py-3 font-semibold text-foreground"
-              >
-                Book Now
-              </a>
-              <a
-                href={site.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-primary-foreground/40 px-6 py-3 font-semibold"
-              >
-                WhatsApp Us
-              </a>
-            </div>
+<div className="mt-8"><BookingCTA align="center" /></div>
           </div>
         </section>
       </main>

@@ -734,7 +734,7 @@ export default function OrderFoodPage() {
 
       {/* Footer */}
       <footer className="text-center text-xs text-white/30 pb-4">
-        2022 Hotel Excella - All rights reserved.
+        2026 Hotel Excella, Visakhapatnam - All rights reserved.
       </footer>
 
       <style jsx>{`

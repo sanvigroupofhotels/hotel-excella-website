@@ -2,10 +2,10 @@ import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowRight, MessageCircle } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { StickyCTA } from "@/components/sticky-cta"
+import { BookingCTA } from "@/components/booking-cta"
 import { JsonLd } from "@/components/seo/json-ld"
 import { WhyChooseExcella } from "@/components/seo/why-choose-excella"
 import { attractions, site } from "@/lib/seo/constants"
@@ -74,14 +74,7 @@ export default async function RoomSeoPage({ params }: Props) {
                   </span>
                 ))}
               </div>
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                <a className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground" href={site.bookingUrl} target="_blank" rel="noopener noreferrer">
-                  Book Now <ArrowRight className="h-4 w-4" />
-                </a>
-                <a className="inline-flex items-center justify-center gap-2 rounded-full border border-primary px-6 py-3 font-semibold text-primary" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
-                </a>
-              </div>
+<div className="mt-8"><BookingCTA /></div>
             </div>
             <div className="overflow-hidden rounded-3xl border border-primary/20 bg-card">
               <Image src={page.image} alt={`${page.roomName} at Hotel Excella`} width={900} height={650} className="h-full w-full object-cover" priority />

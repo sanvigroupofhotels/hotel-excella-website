@@ -17,13 +17,13 @@ import {
   ClipboardCheck,
 } from "lucide-react"
 
-const bookingUrl = "https://hotelexcella.bookmystay.io/"
+const bookingUrl = "/prebook"
 
 const valueCards = [
   {
     icon: MapPin,
     title: "Prime Vizag Location",
-    description: "Near beach and city hotspots",
+    description: "Near Beach Road and city hotspots",
   },
   {
     icon: Shield,
@@ -77,7 +77,7 @@ const rooms = [
 const galleryImages = [
   {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png",
-    alt: "Hotel Excella Exterior",
+    alt: "Hotel Excella, Visakhapatnam exterior",
     className: "lg:col-span-2 lg:row-span-2",
   },
   {
@@ -108,7 +108,7 @@ export default function HomePage() {
           <div className="absolute inset-0 z-0">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png"
-              alt="Hotel Excella Exterior - Premium Hotel in Vizag"
+              alt="Hotel Excella, Visakhapatnam exterior - Premium Hotel in Vizag"
               fill
               className="object-cover"
               priority
@@ -276,7 +276,7 @@ export default function HomePage() {
                 Instant Booking
               </a>
               <a
-                href="https://wa.me/919985908131"
+                href="https://wa.me/919985908131?text=Hello%20Hotel%20Excella%2C%20I%20would%20like%20to%20enquire%20about%20room%20availability."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-green-600 px-8 py-4 text-lg font-semibold text-white shadow-lg transition-all duration-300 hover:bg-green-700 sm:w-auto"

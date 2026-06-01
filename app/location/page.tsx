@@ -14,7 +14,7 @@ import {
 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Location | Hotel Excella Vizag",
+  title: "Location | Hotel Excella, Visakhapatnam",
   description: "Find Hotel Excella in Visalakshinagar, Visakhapatnam. Conveniently located near Beach Road, Tenneti Park, and Kailasagiri.",
 }
 
@@ -22,7 +22,7 @@ const nearbyAttractions = [
   {
     icon: Waves,
     name: "Beach Road",
-    description: "Famous beach promenade with stunning sea views and coastal vibes.",
+    description: "Famous beach promenade with coastal views and local walking routes.",
   },
   {
     icon: TreePine,
@@ -62,7 +62,7 @@ export default function LocationPage() {
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border">
                 <Image
                   src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png"
-                  alt="Hotel Excella Exterior"
+                  alt="Hotel Excella, Visakhapatnam exterior"
                   fill
                   className="object-cover"
                 />
@@ -186,9 +186,7 @@ export default function LocationPage() {
               Book your stay at Hotel Excella and explore the best of Visakhapatnam.
             </p>
             <a
-              href="https://hotelexcella.bookmystay.io/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/prebook"
               className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
             >
               Book Your Stay

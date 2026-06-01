@@ -61,11 +61,11 @@ Please follow up with the guest promptly.
     `.trim()
 
     // Format confirmation email for guest
-    const guestEmailSubject = "Booking Request Received - Hotel Excella Vizag"
+    const guestEmailSubject = "Booking Request Received - Hotel Excella, Visakhapatnam"
     const guestEmailBody = `
 Dear ${guestName},
 
-Thank you for your booking request at Hotel Excella Vizag!
+Thank you for your booking request at Hotel Excella, Visakhapatnam!
 
 Your Request Details:
 --------------------
@@ -80,8 +80,8 @@ Submitted At: ${submissionTimestamp}
 Our team will contact you shortly to confirm availability and complete your booking.
 
 For immediate assistance, please contact us:
-Phone: +91 99859 08131 / +91 89594 44555
-WhatsApp: +91 99859 08131
+Phone: +91 9985908131
+WhatsApp: +91 9985908131
 Email: sanvigroupofhotels@gmail.com
 
 We look forward to hosting you!
@@ -194,7 +194,7 @@ Visakhapatnam
     return NextResponse.json({ 
       success: true, 
       message: "Booking request submitted successfully",
-      redirectUrl: "https://hotelexcella.bookmystay.io/"
+      redirectUrl: "/prebook"
     })
   } catch (error) {
     console.error("Error processing booking request:", error)

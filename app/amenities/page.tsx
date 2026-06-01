@@ -17,8 +17,8 @@ import {
 } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Amenities | Hotel Excella Vizag",
-  description: "Discover the premium amenities at Hotel Excella Vizag. Free Wi-Fi, AC rooms, 24/7 reception, daily housekeeping, and more.",
+  title: "Amenities | Hotel Excella, Visakhapatnam",
+  description: "Discover the premium amenities at Hotel Excella, Visakhapatnam. Free Wi-Fi, AC rooms, 24/7 reception, daily housekeeping, and more.",
 }
 
 const amenities = [
@@ -174,9 +174,7 @@ export default function AmenitiesPage() {
               Book your stay today and enjoy all our amenities at the best direct rates.
             </p>
             <a
-              href="https://hotelexcella.bookmystay.io/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/prebook"
               className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
             >
               Book Your Stay

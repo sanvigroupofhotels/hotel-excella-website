@@ -25,7 +25,7 @@ function attractionPage(name: string, slug: string, keyword: string, heroIntro: 
   return {
     slug,
     title: `${keyword} | Hotel Excella`,
-    metaTitle: `${keyword} | Hotel Excella Vizag`,
+    metaTitle: `${keyword} | Hotel Excella, Visakhapatnam`,
     description: `Choose Hotel Excella for a comfortable stay in Vizag with convenient access to ${name}. Approximate distance ${attraction.distance}; typical drive time ${attraction.driveTime}.`,
     keyword,
     heroEyebrow: "Comfort Near the Coast",
@@ -182,8 +182,8 @@ export const seoLandingPages: SeoLandingPage[] = [
   ),
   {
     slug: "places-to-visit-near-hotel-excella",
-    title: "Places to Visit near Hotel Excella | Vizag Attractions Guide",
-    metaTitle: "Places to Visit near Hotel Excella | Vizag Attractions",
+    title: "Places to Visit near Hotel Excella, Visakhapatnam | Vizag Attractions Guide",
+    metaTitle: "Places to Visit near Hotel Excella, Visakhapatnam | Vizag Attractions",
     description:
       "Explore places to visit near Hotel Excella including Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park.",
     keyword: "Places to visit near Hotel Excella",

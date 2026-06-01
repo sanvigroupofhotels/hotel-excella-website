@@ -6,14 +6,14 @@ import { StickyCTA } from "@/components/sticky-cta"
 import { ArrowRight } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "Gallery | Hotel Excella Vizag",
-  description: "Browse through our gallery to see the beautiful interiors, rooms, and facilities at Hotel Excella Vizag.",
+  title: "Gallery | Hotel Excella, Visakhapatnam",
+  description: "Browse through our gallery to see the beautiful interiors, rooms, and facilities at Hotel Excella, Visakhapatnam.",
 }
 
 const galleryImages = [
   {
     src: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png",
-    alt: "Hotel Excella Exterior - Modern Architecture",
+    alt: "Hotel Excella, Visakhapatnam exterior - Modern Architecture",
     category: "Exterior",
     featured: true,
   },
@@ -103,9 +103,7 @@ export default function GalleryPage() {
               Pictures only tell half the story. Book your stay and experience the comfort of Hotel Excella.
             </p>
             <a
-              href="https://hotelexcella.bookmystay.io/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/prebook"
               className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
             >
               Book Your Stay

@@ -98,7 +98,7 @@ export default function ReviewPage() {
           <div className="mx-auto max-w-7xl px-4 text-center">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-qq8Cvn8rVABsuUvFcXt0Nc1n64vZlL.png"
-              alt="Hotel Excella Logo"
+              alt="Hotel Excella, Visakhapatnam logo"
               width={150}
               height={75}
               className="mx-auto h-16 w-auto lg:h-20"

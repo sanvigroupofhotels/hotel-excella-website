@@ -2,21 +2,23 @@ import type { Metadata } from "next"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
-import { 
+import {
   Phone,
   Mail,
   MapPin,
   MessageCircle,
   Instagram,
   Linkedin,
+  Facebook,
   Clock,
-  ArrowRight,
   ExternalLink
 } from "lucide-react"
+import { BookingCTA } from "@/components/booking-cta"
+import { site } from "@/lib/seo/constants"
 
 export const metadata: Metadata = {
-  title: "Contact | Hotel Excella Vizag",
-  description: "Get in touch with Hotel Excella Vizag. Call us, WhatsApp, or email for bookings and inquiries. 24/7 support available.",
+  title: "Contact | Hotel Excella, Visakhapatnam",
+  description: "Contact Hotel Excella, Visakhapatnam by phone, WhatsApp or email for room enquiries and direct assistance.",
 }
 
 const contactMethods = [
@@ -25,8 +27,7 @@ const contactMethods = [
     title: "Phone",
     description: "Call us directly for immediate assistance",
     details: [
-      { label: "+91 88594 44555", href: "tel:+918859444555" },
-      { label: "+91 99859 08131", href: "tel:+919985908131" },
+      { label: site.phonePrimary, href: site.phonePrimaryHref },
     ],
     primary: true,
   },
@@ -35,7 +36,7 @@ const contactMethods = [
     title: "WhatsApp",
     description: "Chat with us for quick responses",
     details: [
-      { label: "Send a Message", href: "https://wa.me/919985908131" },
+      { label: "Send a WhatsApp enquiry", href: site.whatsappUrl },
     ],
     primary: true,
     isExternal: true,
@@ -45,7 +46,7 @@ const contactMethods = [
     title: "Email",
     description: "Send us your queries anytime",
     details: [
-      { label: "hotelexcellavizag@gmail.com", href: "mailto:hotelexcellavizag@gmail.com" },
+      { label: site.email, href: `mailto:${site.email}` },
     ],
     primary: false,
   },
@@ -65,14 +66,20 @@ const socialLinks = [
   {
     icon: Instagram,
     name: "Instagram",
-    href: "https://www.instagram.com/hotelexcella_vizag",
+    href: site.social.instagram,
     handle: "@hotelexcella_vizag",
   },
   {
     icon: Linkedin,
     name: "LinkedIn",
-    href: "https://www.linkedin.com/company/sanvigroupofhotels-vizag/",
+    href: site.social.linkedin,
     handle: "Sanvi Group of Hotels",
+  },
+  {
+    icon: Facebook,
+    name: "Facebook",
+    href: site.social.facebook,
+    handle: "Hotel Excella",
   },
 ]
 
@@ -153,11 +160,11 @@ export default function ContactPage() {
                 <address className="mt-6 text-lg text-muted-foreground not-italic leading-relaxed">
                   <span className="font-semibold text-foreground">Hotel Excella</span>
                   <br />
-                  386 Revenue Employees Co-operative Society Colony,
+                  386 Revenue Employs Co-operative Society Colony,
                   <br />
-                  VisalakshiNagar,
+                  Vishalakshi Nagar,
                   <br />
-                  Visakhapatnam, Andhra Pradesh 530043
+                  Visakhapatnam, Andhra Pradesh 530043, India
                 </address>
                 <div className="mt-6 flex items-center gap-3 text-muted-foreground">
                   <Clock className="h-5 w-5 text-primary" />
@@ -212,19 +219,9 @@ export default function ContactPage() {
               Ready to <span className="text-primary">Book Your Stay</span>?
             </h2>
             <p className="mt-4 text-lg text-muted-foreground text-pretty">
-              Skip the hassle and book directly with us for the best rates.
+              Message Hotel Excella directly for room availability and flexible assistance.
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="https://hotelexcella.bookmystay.io/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
-              >
-                Book Now
-                <ArrowRight className="h-5 w-5" />
-              </a>
-            </div>
+<div className="mt-8"><BookingCTA align="center" /></div>
           </div>
         </section>
       </main>

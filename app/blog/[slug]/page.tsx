@@ -1,13 +1,13 @@
 import type { Metadata } from "next"
 import Link from "next/link"
 import { notFound } from "next/navigation"
-import { ArrowRight, MessageCircle } from "lucide-react"
 import { Footer } from "@/components/footer"
 import { Header } from "@/components/header"
 import { StickyCTA } from "@/components/sticky-cta"
+import { BookingCTA } from "@/components/booking-cta"
 import { JsonLd } from "@/components/seo/json-ld"
 import { site } from "@/lib/seo/constants"
-import { breadcrumbSchema, faqSchema, hotelSchema } from "@/lib/seo/schema"
+import { articleSchema, breadcrumbSchema, faqSchema, hotelSchema } from "@/lib/seo/schema"
 import { blogPostBySlug, blogPosts } from "@/lib/seo/blog-posts"
 
 type Props = { params: Promise<{ slug: string }> }
@@ -37,7 +37,7 @@ export default async function BlogPostPage({ params }: Props) {
   const url = `${site.url}/blog/${post.slug}`
   return (
     <>
-      <JsonLd data={[hotelSchema(), faqSchema(post.faqs), breadcrumbSchema([{ name: "Home", url: site.url }, { name: "Blog", url: `${site.url}/blog` }, { name: post.title, url }])]} />
+      <JsonLd data={[hotelSchema(), articleSchema(post), faqSchema(post.faqs), breadcrumbSchema([{ name: "Home", url: site.url }, { name: "Blog", url: `${site.url}/blog` }, { name: post.title, url }])]} />
       <Header />
       <main className="bg-background pb-24 text-foreground lg:pb-0">
         <article className="px-4 py-16 lg:px-8 lg:py-24">
@@ -47,10 +47,7 @@ export default async function BlogPostPage({ params }: Props) {
             <h1 className="mt-5 font-serif text-4xl font-bold md:text-6xl">{post.title}</h1>
             <p className="mt-5 text-sm text-muted-foreground">Updated {post.date}</p>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">{post.description}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a className="inline-flex items-center justify-center gap-2 rounded-full bg-primary px-6 py-3 font-semibold text-primary-foreground" href={site.bookingUrl} target="_blank" rel="noopener noreferrer">Book Now <ArrowRight className="h-4 w-4" /></a>
-              <a className="inline-flex items-center justify-center gap-2 rounded-full border border-primary px-6 py-3 font-semibold text-primary" href={site.whatsappUrl} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-4 w-4" /> WhatsApp Us</a>
-            </div>
+<div className="mt-8"><BookingCTA /></div>
             <div className="mt-12 space-y-8">
               {post.sections.map((section) => (
                 <section key={section.heading} className="rounded-3xl border border-border bg-card/70 p-6 md:p-8">
