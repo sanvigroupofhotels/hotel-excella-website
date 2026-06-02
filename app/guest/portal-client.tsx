@@ -282,7 +282,7 @@ export default function GuestPortalClient() {
               <p className="text-sm font-semibold text-white">11:00 AM</p>
             </div>
             <a
-              href="https://maps.app.goo.gl/C4MScoYMJLYnc3Gz6?g_st=ac"
+              href="https://maps.app.goo.gl/hmJC1JcheCR2pvaTA?g_st=ac"
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-xl border border-white/10 bg-[#0f0f0f] p-3 text-center transition hover:border-[#c8a45c]/45"

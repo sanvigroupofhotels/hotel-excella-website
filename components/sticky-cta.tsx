@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { AlertCircle, MessageCircle, Calendar, ClipboardCheck, Phone, Star, UtensilsCrossed } from "lucide-react"
+import { site } from "@/lib/seo/constants"
 
 type StickyCTAProps = {
   guestMode?: boolean
@@ -51,7 +52,7 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
             </button>
           ) : (
             <a
-              href="tel:+919985908131"
+              href={`tel:${site.phonePrimary.replace(/\s/g, "")}`}
               className="flex flex-col items-center justify-center py-3 text-white transition-colors hover:bg-[#141414]"
             >
               <Phone className="h-5 w-5" />
@@ -60,7 +61,7 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
           )}
           {!guestMode && (
             <a
-              href="https://wa.me/919985908131"
+              href={site.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="flex flex-col items-center justify-center py-3 text-white transition-colors hover:bg-[#141414]"
@@ -75,7 +76,7 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
       {/* Desktop Floating WhatsApp Button */}
       {!guestMode && (
         <a
-          href="https://wa.me/919985908131"
+          href={site.whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="hidden lg:flex fixed bottom-6 right-6 z-40 items-center gap-3 bg-green-500 hover:bg-green-600 text-white px-5 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105"

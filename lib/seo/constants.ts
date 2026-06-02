@@ -3,12 +3,11 @@ export const site = {
   url: "https://hotelexcella.in",
   bookingUrl: "https://hotelexcella.bookmystay.io/",
   whatsappUrl:
-    "https://wa.me/919985908131?text=Hello%20Hotel%20Excella%2C%20I%20would%20like%20to%20check%20room%20availability%20and%20pricing.",
-  phonePrimary: "+91 99859 08131",
-  phoneSecondary: "+91 88594 44555",
+    "https://wa.me/919985908131?text=Hello%20Hotel%20Excella%2C%20I%20would%20like%20to%20enquire%20about%20room%20availability.",
+  phonePrimary: "+91 9985908131",
   email: "hotelexcellavizag@gmail.com",
   address: {
-    street: "386 Revenue Employees Co-operative Society Colony, VisalakshiNagar",
+    street: "386 Revenue Employs Co-operative Society Colony, Vishalakshi Nagar",
     locality: "Visakhapatnam",
     region: "Andhra Pradesh",
     postalCode: "530043",
@@ -20,6 +19,12 @@ export const site = {
   },
   image:
     "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png",
+  mapsUrl: "https://maps.app.goo.gl/hmJC1JcheCR2pvaTA?g_st=ac",
+  sameAs: [
+    "https://www.instagram.com/hotelexcella_vizag",
+    "https://www.linkedin.com/company/sanvigroupofhotels-vizag/",
+    "https://www.facebook.com/profile.php?id=61565499310023",
+  ],
 }
 
 export const attractions = [

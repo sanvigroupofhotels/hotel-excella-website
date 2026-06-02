@@ -15,9 +15,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/amenities`, lastModified: today, changeFrequency: "monthly", priority: 0.8 },
     { url: `${site.url}/location`, lastModified: today, changeFrequency: "monthly", priority: 0.7 },
     { url: `${site.url}/contact`, lastModified: today, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${site.url}/orderfood`, lastModified: today, changeFrequency: "weekly", priority: 0.5 },
-    { url: `${site.url}/review`, lastModified: today, changeFrequency: "monthly", priority: 0.4 },
-    { url: `${site.url}/guest`, lastModified: today, changeFrequency: "monthly", priority: 0.4 },
+    { url: `${site.url}/about-hotel-excella`, lastModified: today, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${site.url}/why-book-direct`, lastModified: today, changeFrequency: "monthly", priority: 0.75 },
+    { url: `${site.url}/attractions`, lastModified: today, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${site.url}/dining-options-near-hotel-excella`, lastModified: today, changeFrequency: "monthly", priority: 0.65 },
     { url: `${site.url}/blog`, lastModified: today, changeFrequency: "weekly", priority: 0.75 },
   ]
 

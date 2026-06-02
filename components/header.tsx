@@ -12,8 +12,12 @@ const navigation = [
   { name: "Gallery", href: "/gallery" },
   { name: "Amenities", href: "/amenities" },
   { name: "Location", href: "/location" },
+  { name: "Attractions", href: "/attractions" },
+  { name: "About Hotel Excella", href: "/about-hotel-excella" },
+  { name: "Why Book Direct", href: "/why-book-direct" },
   { name: "Contact", href: "/contact" },
   { name: "Review Us", href: "/review" },
+  { name: "Guest Portal", href: "/guest" },
 ]
 
 export function Header() {
@@ -55,7 +59,7 @@ export function Header() {
           </button>
         </div>
 
-        <div className="hidden lg:flex lg:gap-x-8">
+        <div className="hidden lg:flex lg:gap-x-5">
           {navigation.map((item) => (
             <Link
               key={item.name}
@@ -120,13 +124,6 @@ export function Header() {
                       {item.name}
                     </Link>
                   ))}
-                  <Link
-                    href="/guest"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="-mx-3 block rounded-lg px-3 py-2 text-base font-medium text-foreground transition-colors hover:bg-secondary"
-                  >
-                    Guest Portal
-                  </Link>
                 </div>
 
                 <div className="space-y-4 py-6">
