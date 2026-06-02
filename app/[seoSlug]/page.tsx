@@ -94,7 +94,7 @@ export default async function SeoLandingPage({ params }: Props) {
             <div className="rounded-3xl border border-primary/20 bg-card p-6 shadow-2xl shadow-black/30">
               <h2 className="font-serif text-2xl font-bold text-foreground">Quick travel facts</h2>
               <div className="mt-6 grid gap-4">
-                <Fact icon={MapPin} label="Hotel location" value="VisalakshiNagar, near Beach Road side of Vizag" />
+                <Fact icon={MapPin} label="Hotel location" value="Vishalakshi Nagar, near Beach Road side of Vizag" />
                 {page.attractionName && <Fact icon={CalendarDays} label="Approx. distance" value={`${page.distance} to ${page.attractionName}`} />}
                 {page.driveTime && <Fact icon={Clock} label="Typical drive time" value={page.driveTime} />}
                 <Fact icon={MapPin} label="Nearby attractions" value="Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Zoo Park" />
@@ -148,11 +148,14 @@ export default async function SeoLandingPage({ params }: Props) {
                   <Link className="text-primary hover:underline" href="/rooms/mapple-room">
                     Mapple Room SEO guide
                   </Link>
-                  <Link className="text-primary hover:underline" href="/blog">
-                    Vizag travel blog
+                  <Link className="text-primary hover:underline" href="/about-hotel-excella">
+                    About Hotel Excella
                   </Link>
-                  <Link className="text-primary hover:underline" href="/orderfood">
-                    Guest food ordering convenience
+                  <Link className="text-primary hover:underline" href="/why-book-direct">
+                    Why book direct
+                  </Link>
+                  <Link className="text-primary hover:underline" href="/dining-options-near-hotel-excella">
+                    Dining options nearby
                   </Link>
                 </div>
               </div>
@@ -165,6 +168,27 @@ export default async function SeoLandingPage({ params }: Props) {
             <WhyChooseExcella />
           </div>
         </section>
+        <section className="px-4 py-10 lg:px-8">
+          <div className="mx-auto max-w-7xl rounded-3xl border border-border bg-card p-6 md:p-8">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">Essential Hotel Excella links</p>
+            <h2 className="mt-3 font-serif text-3xl font-bold">Plan your stay with confidence</h2>
+            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
+              {[
+                ["Home", "/"],
+                ["Rooms", "/rooms"],
+                ["Amenities", "/amenities"],
+                ["Gallery", "/gallery"],
+                ["Location", "/location"],
+                ["Contact", "/contact"],
+              ].map(([label, href]) => (
+                <Link key={href} href={href} className="rounded-2xl border border-border bg-background/70 px-4 py-3 text-center font-semibold text-foreground transition hover:border-primary/50 hover:text-primary">
+                  {label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+
 
         <section className="px-4 py-12 lg:px-8">
           <div className="mx-auto max-w-4xl rounded-3xl border border-border bg-card p-6 md:p-8">

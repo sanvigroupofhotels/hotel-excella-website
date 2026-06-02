@@ -80,8 +80,8 @@ Submitted At: ${submissionTimestamp}
 Our team will contact you shortly to confirm availability and complete your booking.
 
 For immediate assistance, please contact us:
-Phone: +91 99859 08131 / +91 89594 44555
-WhatsApp: +91 99859 08131
+Phone: +91 9985908131
+WhatsApp: +91 9985908131
 Email: sanvigroupofhotels@gmail.com
 
 We look forward to hosting you!

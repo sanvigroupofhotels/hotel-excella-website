@@ -115,6 +115,25 @@ export default async function RoomSeoPage({ params }: Props) {
                   ))}
                 </div>
               </div>
+              <div className="rounded-3xl border border-primary/20 bg-card p-6">
+                <h2 className="font-serif text-2xl font-bold">Plan your stay</h2>
+                <div className="mt-5 grid gap-3 text-sm">
+                  {[
+                    ["Rooms", "/rooms"],
+                    ["Amenities", "/amenities"],
+                    ["Gallery", "/gallery"],
+                    ["Location", "/location"],
+                    ["Contact", "/contact"],
+                    ["Why Book Direct", "/why-book-direct"],
+                    ["Dining Options", "/dining-options-near-hotel-excella"],
+                    ["Attractions Hub", "/attractions"],
+                  ].map(([label, href]) => (
+                    <Link key={href} href={href} className="rounded-2xl border border-border bg-background/70 px-4 py-3 font-semibold text-foreground transition hover:border-primary/50 hover:text-primary">
+                      {label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
             </aside>
           </div>
         </section>
@@ -135,6 +154,23 @@ export default async function RoomSeoPage({ params }: Props) {
             </div>
           </div>
         </section>
+        <section className="px-4 py-12 lg:px-8">
+          <div className="mx-auto max-w-5xl rounded-3xl bg-primary p-8 text-center text-primary-foreground md:p-12">
+            <h2 className="font-serif text-3xl font-bold md:text-4xl">Ready to book {page.roomName}?</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-primary-foreground/80">
+              Book direct or message Hotel Excella on WhatsApp to compare the Oak Room and Mapple Room before confirming your stay.
+            </p>
+            <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+              <a href={site.bookingUrl} target="_blank" rel="noopener noreferrer" className="rounded-full bg-background px-6 py-3 font-semibold text-foreground">
+                Book Now
+              </a>
+              <a href={site.whatsappUrl} target="_blank" rel="noopener noreferrer" className="rounded-full border border-primary-foreground/40 px-6 py-3 font-semibold">
+                WhatsApp Us
+              </a>
+            </div>
+          </div>
+        </section>
+
       </main>
       <Footer />
       <StickyCTA />

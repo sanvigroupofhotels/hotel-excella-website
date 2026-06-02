@@ -90,9 +90,9 @@ export default function LocationPage() {
                   <div>
                     <h2 className="text-xl font-semibold text-foreground">Hotel Excella</h2>
                     <address className="mt-2 text-muted-foreground not-italic leading-relaxed">
-                      386 Revenue Employees Co-operative Society Colony,
+                      386 Revenue Employs Co-operative Society Colony,
                       <br />
-                      VisalakshiNagar,
+                      Vishalakshi Nagar,
                       <br />
                       Visakhapatnam, Andhra Pradesh 530043
                     </address>
