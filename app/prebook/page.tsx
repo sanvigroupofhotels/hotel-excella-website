@@ -454,7 +454,7 @@ export default function PrebookPage() {
                 className="inline-flex items-center gap-2 text-foreground hover:text-primary transition-colors"
               >
                 <Phone className="h-5 w-5" />
-                +91 99859 08131
+                +91 9985908131
               </a>
               <span className="hidden sm:inline text-border">|</span>
               <a

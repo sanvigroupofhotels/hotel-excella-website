@@ -88,218 +88,112 @@ export default function ReviewPage() {
   const googleReviewUrl = "https://search.google.com/local/writereview?placeid=ChIJH-C8eTZbOToRDi7ckoJipcQ"
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,#3a2a12_0%,#111_45%,#070707_100%)] text-white">
       <Header />
 
       <main className="pt-20">
-        {/* Hero Section */}
-        <section className="bg-card border-b border-border py-16 lg:py-24">
-          <div className="mx-auto max-w-7xl px-4 text-center">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-qq8Cvn8rVABsuUvFcXt0Nc1n64vZlL.png"
-              alt="Hotel Excella Logo"
-              width={150}
-              height={75}
-              className="mx-auto h-16 w-auto lg:h-20"
-            />
-            <h1 className="mt-8 font-serif text-3xl font-bold text-foreground lg:text-5xl text-balance">
-              How was your stay at{" "}
-              <span className="text-primary">Hotel Excella</span>?
+        <section className="px-4 py-10 lg:py-14">
+          <div className="mx-auto max-w-3xl overflow-hidden rounded-[2rem] border border-primary/30 bg-black/70 p-6 text-center shadow-2xl shadow-black/50 backdrop-blur md:p-10">
+            <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-primary/30 bg-white/5">
+              <Image
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-qq8Cvn8rVABsuUvFcXt0Nc1n64vZlL.png"
+                alt="Hotel Excella Logo"
+                width={140}
+                height={70}
+                className="h-14 w-auto"
+                priority
+              />
+            </div>
+            <p className="mt-8 text-xs font-semibold uppercase tracking-[0.35em] text-primary">Guest Review</p>
+            <h1 className="mt-4 font-serif text-4xl font-bold leading-tight text-white md:text-6xl">
+              How was your stay?
             </h1>
-            <p className="mt-4 text-xl font-medium text-foreground">
-              Enjoying your stay with us?
-            </p>
-            <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto text-pretty">
-              Your feedback means a lot to our team 💛
+            <p className="mx-auto mt-4 max-w-xl text-base leading-7 text-zinc-300 md:text-lg">
+              Tap a star below. 4–5 stars opens Google Review, while 1–3 stars lets our team fix things privately.
             </p>
           </div>
         </section>
 
-        {/* Rating Section */}
-        <section className="py-16 lg:py-24">
-          <div className="mx-auto max-w-2xl px-4">
+        <section className="px-4 pb-16">
+          <div className="mx-auto max-w-3xl">
             {showReminderCard && !rating && (
-              <div className="mb-8 rounded-xl border border-primary/35 bg-primary/10 p-4 text-center">
-                <p className="text-sm font-medium text-foreground">Review Reminder</p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  If you enjoyed your stay, a quick rating helps our team grow.
-                </p>
+              <div className="mb-5 rounded-2xl border border-primary/35 bg-primary/10 p-4 text-center text-sm text-zinc-200">
+                Enjoyed your stay? A quick rating helps guests find Hotel Excella.
               </div>
             )}
             {!rating ? (
-              <div className="text-center">
-                <p className="text-lg font-medium text-foreground mb-8">
-                  Please rate your experience
-                </p>
-                <div className="flex items-center justify-center gap-4">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      onClick={() => {
-                        if (star >= 4) {
-                          window.location.href = googleReviewUrl
-                          return
-                        }
-                        setRating(star)
-                      }}
-                      onMouseEnter={() => setHoveredRating(star)}
-                      onMouseLeave={() => setHoveredRating(null)}
-                      className="group flex flex-col items-center gap-2 transition-transform hover:scale-110"
-                    >
-                      <Star
-                        className={`h-12 w-12 lg:h-16 lg:w-16 transition-colors ${
-                          (hoveredRating !== null ? star <= hoveredRating : false)
-                            ? "fill-primary text-primary"
-                            : "text-muted-foreground"
-                        }`}
-                      />
-                      <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground">
-                        {star}
-                      </span>
-                    </button>
-                  ))}
+              <div className="rounded-[2rem] border border-primary/25 bg-black/75 p-6 text-center shadow-xl shadow-black/40 md:p-10">
+                <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">Rate in 5 seconds</p>
+                <h2 className="mt-4 font-serif text-3xl font-bold text-white">Select your rating</h2>
+                <div className="mt-8 grid grid-cols-5 gap-2 sm:gap-4" role="radiogroup" aria-label="Rate your stay">
+                  {[1, 2, 3, 4, 5].map((star) => {
+                    const isActive = hoveredRating !== null ? star <= hoveredRating : false
+                    return (
+                      <button
+                        key={star}
+                        type="button"
+                        aria-label={`${star} star rating`}
+                        onClick={() => {
+                          if (star >= 4) {
+                            window.location.href = googleReviewUrl
+                            return
+                          }
+                          setRating(star)
+                        }}
+                        onMouseEnter={() => setHoveredRating(star)}
+                        onMouseLeave={() => setHoveredRating(null)}
+                        className="group rounded-3xl border border-white/10 bg-white/[0.04] px-2 py-5 transition duration-150 hover:-translate-y-1 hover:border-primary/60 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary sm:py-7"
+                      >
+                        <Star
+                          className={`mx-auto h-12 w-12 transition duration-150 sm:h-16 sm:w-16 md:h-20 md:w-20 ${
+                            isActive ? "fill-primary text-primary drop-shadow-[0_0_18px_rgba(215,179,95,0.55)]" : "text-zinc-500 group-hover:text-primary"
+                          }`}
+                        />
+                        <span className="mt-3 block text-sm font-semibold text-zinc-300 group-hover:text-white">{star}</span>
+                      </button>
+                    )
+                  })}
                 </div>
+                <p className="mt-6 text-sm text-zinc-400">No typing needed for happy guests — just tap 4 or 5 stars.</p>
               </div>
             ) : (
-              /* Private Feedback Form */
-              <div>
-                <div className="text-center mb-8">
-                  <h2 className="font-serif text-2xl font-bold text-foreground lg:text-3xl">
-                    We&apos;re sorry to hear that
-                  </h2>
-                  <p className="mt-4 text-muted-foreground">
-                    Please share your feedback privately with us. We take all
-                    concerns seriously and will work to make it right.
+              <div className="rounded-[2rem] border border-primary/25 bg-black/75 p-6 shadow-xl shadow-black/40 md:p-10">
+                <div className="text-center">
+                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">Private Feedback</p>
+                  <h2 className="mt-4 font-serif text-3xl font-bold text-white">Tell us what to improve</h2>
+                  <p className="mx-auto mt-3 max-w-xl text-zinc-300">
+                    Thank you for being honest. This goes directly to the Hotel Excella team so we can respond faster.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div>
-                    <label
-                      htmlFor="name"
-                      className="block text-sm font-medium text-foreground mb-2"
-                    >
-                      Name <span className="text-destructive">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      required
-                      value={formData.name}
-                      onChange={(e) =>
-                        setFormData({ ...formData, name: e.target.value })
-                      }
-                      className="w-full rounded-lg border border-border bg-secondary px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                      placeholder="Your name"
-                    />
+                <form onSubmit={handleSubmit} className="mt-8 grid gap-5">
+                  <div className="grid gap-5 md:grid-cols-2">
+                    <div>
+                      <label htmlFor="name" className="mb-2 block text-sm font-medium text-zinc-200">Name <span className="text-zinc-500">(optional)</span></label>
+                      <input id="name" type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="w-full rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-4 text-white placeholder:text-zinc-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Your name" />
+                    </div>
+                    <div>
+                      <label htmlFor="phone" className="mb-2 block text-sm font-medium text-zinc-200">Phone <span className="text-zinc-500">(optional)</span></label>
+                      <input id="phone" type="tel" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-4 text-white placeholder:text-zinc-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="+91 XXXXX XXXXX" />
+                    </div>
                   </div>
-
                   <div>
-                    <label
-                      htmlFor="phone"
-                      className="block text-sm font-medium text-foreground mb-2"
-                    >
-                      Phone Number <span className="text-destructive">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      required
-                      value={formData.phone}
-                      onChange={(e) =>
-                        setFormData({ ...formData, phone: e.target.value })
-                      }
-                      className="w-full rounded-lg border border-border bg-secondary px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                      placeholder="+91 XXXXX XXXXX"
-                    />
+                    <label htmlFor="roomNumber" className="mb-2 block text-sm font-medium text-zinc-200">Room Number <span className="text-zinc-500">(optional)</span></label>
+                    <input id="roomNumber" type="text" value={formData.roomNumber} onChange={(e) => setFormData({ ...formData, roomNumber: e.target.value })} className="w-full rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-4 text-white placeholder:text-zinc-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="e.g., 101" />
                   </div>
-
                   <div>
-                    <label
-                      htmlFor="roomNumber"
-                      className="block text-sm font-medium text-foreground mb-2"
-                    >
-                      Room Number{" "}
-                      <span className="text-muted-foreground">(optional)</span>
-                    </label>
-                    <input
-                      type="text"
-                      id="roomNumber"
-                      value={formData.roomNumber}
-                      onChange={(e) =>
-                        setFormData({ ...formData, roomNumber: e.target.value })
-                      }
-                      className="w-full rounded-lg border border-border bg-secondary px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                      placeholder="e.g., 101"
-                    />
+                    <label htmlFor="issue" className="mb-2 block text-sm font-medium text-zinc-200">What went wrong? <span className="text-primary">*</span></label>
+                    <textarea id="issue" required rows={3} value={formData.issue} onChange={(e) => setFormData({ ...formData, issue: e.target.value })} className="w-full resize-none rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-4 text-white placeholder:text-zinc-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Please describe the issue..." />
                   </div>
-
                   <div>
-                    <label
-                      htmlFor="issue"
-                      className="block text-sm font-medium text-foreground mb-2"
-                    >
-                      What went wrong? <span className="text-destructive">*</span>
-                    </label>
-                    <textarea
-                      id="issue"
-                      required
-                      rows={4}
-                      value={formData.issue}
-                      onChange={(e) =>
-                        setFormData({ ...formData, issue: e.target.value })
-                      }
-                      className="w-full rounded-lg border border-border bg-secondary px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-none"
-                      placeholder="Please describe the issue you experienced..."
-                    />
+                    <label htmlFor="improvement" className="mb-2 block text-sm font-medium text-zinc-200">How can we improve? <span className="text-primary">*</span></label>
+                    <textarea id="improvement" required rows={3} value={formData.improvement} onChange={(e) => setFormData({ ...formData, improvement: e.target.value })} className="w-full resize-none rounded-2xl border border-white/10 bg-white/[0.06] px-4 py-4 text-white placeholder:text-zinc-500 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary" placeholder="Your suggestions..." />
                   </div>
-
-                  <div>
-                    <label
-                      htmlFor="improvement"
-                      className="block text-sm font-medium text-foreground mb-2"
-                    >
-                      How can we improve?{" "}
-                      <span className="text-destructive">*</span>
-                    </label>
-                    <textarea
-                      id="improvement"
-                      required
-                      rows={4}
-                      value={formData.improvement}
-                      onChange={(e) =>
-                        setFormData({ ...formData, improvement: e.target.value })
-                      }
-                      className="w-full rounded-lg border border-border bg-secondary px-4 py-3 text-foreground placeholder:text-muted-foreground focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary resize-none"
-                      placeholder="Your suggestions for improvement..."
-                    />
-                  </div>
-
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-8 py-4 text-base font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <Loader2 className="h-5 w-5 animate-spin" />
-                          Sending Inquiry...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="h-5 w-5" />
-                          Submit Feedback
-                        </>
-                      )}
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <button type="submit" disabled={isSubmitting} className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-primary px-8 py-4 font-semibold text-primary-foreground transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:opacity-50">
+                      {isSubmitting ? <><Loader2 className="h-5 w-5 animate-spin" /> Sending...</> : <><Send className="h-5 w-5" /> Submit Feedback</>}
                     </button>
-                    <button
-                      type="button"
-                      onClick={() => setRating(null)}
-                      className="px-6 py-4 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                    >
-                      Change rating
-                    </button>
+                    <button type="button" onClick={() => setRating(null)} className="rounded-full border border-white/15 px-6 py-4 font-semibold text-zinc-300 transition hover:border-primary/50 hover:text-primary">Change rating</button>
                   </div>
                 </form>
               </div>
@@ -311,41 +205,18 @@ export default function ReviewPage() {
       <Footer />
       <StickyCTA />
 
-      <Dialog
-        open={isFeedbackSuccessModalOpen}
-        onOpenChange={(open) => {
-          if (!open) {
-            handleCloseFeedbackSuccessModal()
-          }
-        }}
-      >
+      <Dialog open={isFeedbackSuccessModalOpen} onOpenChange={(open) => { if (!open) handleCloseFeedbackSuccessModal() }}>
         <DialogContent className="border-primary/40 bg-black text-white sm:max-w-lg">
-          <button
-            type="button"
-            onClick={handleCloseFeedbackSuccessModal}
-            className="absolute right-4 top-4 rounded-full border border-primary/40 p-1 text-primary transition-colors hover:bg-primary/10"
-            aria-label="Close"
-          >
+          <button type="button" onClick={handleCloseFeedbackSuccessModal} className="absolute right-4 top-4 rounded-full border border-primary/40 p-1 text-primary transition-colors hover:bg-primary/10" aria-label="Close">
             <X className="h-4 w-4" />
           </button>
           <DialogHeader className="space-y-4">
-            <DialogTitle className="text-center font-serif text-2xl text-primary">
-              Thank You
-            </DialogTitle>
-            <DialogDescription className="text-center text-base text-zinc-300">
-              We appreciate your feedback and will use it to improve your next stay.
-            </DialogDescription>
+            <DialogTitle className="text-center font-serif text-2xl text-primary">Thank You</DialogTitle>
+            <DialogDescription className="text-center text-base text-zinc-300">We appreciate your feedback and will use it to improve your next stay.</DialogDescription>
           </DialogHeader>
-          <button
-            type="button"
-            onClick={handleCloseFeedbackSuccessModal}
-            className="mt-2 inline-flex w-full items-center justify-center rounded-lg border border-primary/40 px-4 py-3 font-medium text-primary transition-colors hover:bg-primary/10"
-          >
-            Close
-          </button>
+          <button type="button" onClick={handleCloseFeedbackSuccessModal} className="mt-2 inline-flex w-full items-center justify-center rounded-lg border border-primary/40 px-4 py-3 font-medium text-primary transition-colors hover:bg-primary/10">Close</button>
         </DialogContent>
       </Dialog>
-
 
       <div className="h-16 lg:hidden" />
     </div>

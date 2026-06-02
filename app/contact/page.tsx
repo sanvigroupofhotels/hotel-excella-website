@@ -26,7 +26,7 @@ const contactMethods = [
     title: "Phone",
     description: "Call us directly for immediate assistance",
     details: [
-      { label: "+91 99859 08131", href: "tel:+919985908131" },
+      { label: "+91 9985908131", href: "tel:+919985908131" },
     ],
     primary: true,
   },

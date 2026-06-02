@@ -1,4 +1,4 @@
-import { attractions } from "@/lib/seo/constants"
+import { amenities, attractions, site } from "@/lib/seo/constants"
 
 export type Faq = { question: string; answer: string }
 export type SeoLandingPage = {
@@ -19,222 +19,284 @@ export type SeoLandingPage = {
 }
 
 const byName = Object.fromEntries(attractions.map((item) => [item.name, item]))
+const attractionSummary = attractions.map((item) => `${item.name} (${item.distance}, ${item.driveTime})`).join(", ")
+const roomLinks = "Choose the Oak Room for a queen-room style stay or the Mapple Room for a king-room style stay. Both room pages connect guests back to booking, WhatsApp, amenities, gallery, location and the attractions hub."
+const brandAddress = `${site.address.street}, ${site.address.locality}, ${site.address.region} ${site.address.postalCode}`
+
+function baseFaqs(keyword: string, audience: string): Faq[] {
+  return [
+    {
+      question: `Is Hotel Excella suitable for guests searching for ${keyword}?`,
+      answer: `Yes. Hotel Excella is a practical ${audience} stay in Visakhapatnam with clean rooms, Free WiFi, fast check-in, nearby attractions and direct booking support.`,
+    },
+    {
+      question: "Can I book Hotel Excella directly?",
+      answer: `Yes. Guests can book direct through the Book Now button or message Hotel Excella on WhatsApp at ${site.phonePrimary} for room availability and pricing.`,
+    },
+    {
+      question: "What rooms can I compare before booking?",
+      answer: "Guests can compare the Oak Room and Mapple Room. The Oak Room suits compact queen-room comfort, while the Mapple Room is positioned for guests who prefer a more spacious king-room style stay.",
+    },
+    {
+      question: "What amenities are available at Hotel Excella?",
+      answer: `Useful amenities include ${amenities.slice(0, 7).join(", ")}. The focus is comfortable accommodation and practical guest support.`,
+    },
+    {
+      question: "Which attractions are close to Hotel Excella?",
+      answer: `Nearby attractions include ${attractions.map((item) => item.name).join(", ")}. Distances are approximate and depend on traffic.`,
+    },
+    {
+      question: "Where is Hotel Excella located?",
+      answer: `Hotel Excella is located at ${brandAddress}. The hotel is positioned near the Beach Road side of Vizag and local attraction corridors.`,
+    },
+  ]
+}
+
+function coreSections(keyword: string, audience: string, localAngle: string, locationAdvantages: string[]): SeoLandingPage["sections"] {
+  return [
+    {
+      heading: `Introduction: a comfortable choice for ${keyword}`,
+      body: [
+        `Hotel Excella, Visakhapatnam is designed for guests who want a calm, polished and practical hotel experience without losing access to Vizag's most useful local routes. For travellers searching for ${keyword}, the hotel offers the right balance of comfortable rooms, quick guest support and convenient movement toward the Beach Road side of the city. The experience is not built around exaggerated claims; it is built around clean accommodation, friendly support, sensible pricing and direct booking clarity.`,
+        `${localAngle} This makes the stay useful for families, couples, business travellers, tourists and guests visiting nearby neighborhoods or institutions. Instead of choosing a noisy high-traffic pocket only for one landmark, guests can use Hotel Excella as a restful base and still keep sightseeing, dining, work meetings and local errands easy to manage.`,
+      ],
+    },
+    {
+      heading: "Why choose Hotel Excella",
+      body: [
+        `Guests choose Hotel Excella because the stay feels personal and independent. The hotel keeps the brand identity simple: Hotel Excella, Visakhapatnam, a value-luxury stay focused on cleanliness, comfort and convenience. The team supports direct communication through phone, WhatsApp and email, so guests can ask about room availability, arrival timing, nearby travel and booking details before they reach the property.`,
+        `The hotel's strongest advantage is consistency. Rooms are designed for rest after a coastal drive, a family outing, a workday or a local visit. Fast check-in, Free WiFi, air-conditioned rooms, daily housekeeping and approachable reception support help guests spend less time solving logistics and more time on the purpose of their trip.`,
+      ],
+    },
+    {
+      heading: "Room features and room comparison",
+      body: [
+        `Hotel Excella currently highlights two guest-focused room options for local SEO travellers. The Oak Room is positioned as a comfortable queen-room style option for solo travellers, couples and small families who want a clean, practical room near Kailasagiri, Tenneti Park and the Beach Road side of Vizag. It is a good fit when your priority is a relaxed base with essential comfort.`,
+        `The Mapple Room is positioned for guests who prefer a king-room style or deluxe-room feel in Visakhapatnam. It works well for couples, families and business travellers who want a more spacious experience while staying close to major attraction corridors. ${roomLinks}`,
+      ],
+    },
+    {
+      heading: "Amenities that support a smooth stay",
+      body: [
+        `Important amenities include ${amenities.join(", ")}. These features support the most common guest needs: stable connectivity, comfortable sleep, helpful local movement and a safe, family-friendly environment. The amenities are intentionally practical because many guests are in Vizag for a mix of work, family travel, temple visits, beach outings or short leisure breaks.`,
+        `Hotel Excella does not position itself as a restaurant. Dining is treated as guest convenience, with nearby dining options and in-house ordering support helping guests plan meals more easily. Guests who want to explore food nearby can also review the dining options page, which lists restaurants such as Kamat, Pista House, Kailash Parbat and Sivakoto's Food Magic Restaurant with cuisine notes and map links.`,
+      ],
+    },
+    {
+      heading: "Location advantages and nearby attractions",
+      body: [
+        `Location matters when choosing a hotel in Vizag because traffic, sightseeing plans and arrival timings can change quickly. Hotel Excella is located at ${brandAddress}, with useful access toward Vishalakshi Nagar, Beach Road side routes and northern Vizag attractions. Key local advantages include ${locationAdvantages.join(", ")}.`,
+        `Nearby attractions include ${attractionSummary}. Guests can plan a simple itinerary around Kailasagiri and Tenneti Park, add Indira Gandhi Zoological Park for families, or continue toward Rushikonda Beach and TTD Temple Rushikonda for a half-day coastal plan. The attractions hub and individual attraction pages help guests compare distances before booking.`,
+      ],
+    },
+    {
+      heading: "Direct booking benefits and CTA",
+      body: [
+        `Booking direct helps guests keep communication clear. You can confirm room availability, ask whether the Oak Room or Mapple Room better matches your stay, discuss arrival timing and avoid confusion before check-in. Direct booking also keeps the hotel team involved early, which is helpful for families, couples, business guests and visitors with a tight local schedule.`,
+        `To plan your stay, use the Book Now CTA, contact Hotel Excella at ${site.phonePrimary}, email ${site.email}, or send a WhatsApp enquiry. Before booking, explore the rooms page, amenities, gallery, location, contact page, about page, why book direct guide, dining options and attractions hub for a complete picture of the Hotel Excella experience.`,
+      ],
+    },
+  ]
+}
+
+function localPage(args: {
+  slug: string
+  keyword: string
+  metaTitle: string
+  description: string
+  heroEyebrow: string
+  heroTitle: string
+  heroIntro: string
+  audience: string
+  localAngle: string
+  advantages: string[]
+}): SeoLandingPage {
+  return {
+    slug: args.slug,
+    title: `${args.keyword} | Hotel Excella`,
+    metaTitle: args.metaTitle,
+    description: args.description,
+    keyword: args.keyword,
+    heroEyebrow: args.heroEyebrow,
+    heroTitle: args.heroTitle,
+    heroIntro: args.heroIntro,
+    sections: coreSections(args.keyword, args.audience, args.localAngle, args.advantages),
+    faqs: baseFaqs(args.keyword, args.audience),
+  }
+}
 
 function attractionPage(name: string, slug: string, keyword: string, heroIntro: string): SeoLandingPage {
   const attraction = byName[name]
   return {
-    slug,
-    title: `${keyword} | Hotel Excella`,
-    metaTitle: `${keyword} | Hotel Excella Vizag`,
-    description: `Choose Hotel Excella for a comfortable stay in Vizag with convenient access to ${name}. Approximate distance ${attraction.distance}; typical drive time ${attraction.driveTime}.`,
-    keyword,
-    heroEyebrow: "Comfort Near the Coast",
-    heroTitle: `${keyword} with Premium Value-Luxury Comfort`,
-    heroIntro,
+    ...localPage({
+      slug,
+      keyword,
+      metaTitle: `${keyword} | Hotel Excella Vizag`,
+      description: `Choose Hotel Excella for a comfortable stay in Vizag with convenient access to ${name}. Approximate distance ${attraction.distance}; typical drive time ${attraction.driveTime}.`,
+      heroEyebrow: "Comfort Near the Coast",
+      heroTitle: `${keyword} with Premium Value-Luxury Comfort`,
+      heroIntro,
+      audience: `hotel near ${name}`,
+      localAngle: `${name} is approximately ${attraction.distance} from Hotel Excella, with a typical drive time of ${attraction.driveTime}.`,
+      advantages: [`short local drive to ${name}`, "near Beach Road side routes", "easy access to attractions", "comfortable return base after sightseeing"],
+    }),
     attractionName: name,
     distance: attraction.distance,
     driveTime: attraction.driveTime,
     travelTime: attraction.travelTime,
-    sections: [
-      {
-        heading: `A convenient hotel choice near ${name}`,
-        body: [
-          `Hotel Excella is designed for travellers who want a calm, polished and practical base in Visakhapatnam without changing the purpose of their trip around long commutes. If you are searching for ${keyword}, the hotel places you within a short local drive of ${name} while still keeping you close to the broader Beach Road side of the city. The positioning is especially useful for families, couples, business travellers and guests who prefer clean rooms, quick check-in, dependable WiFi and a value-luxury experience over unnecessary complexity.`,
-          `The advantage is comfort near the coast: you can plan your day around Vizag attractions, return to a restful room, and keep your itinerary flexible. Guests often combine ${name} with Kailasagiri, Tenneti Park, Rushikonda Beach, YSR View Point and the Indira Gandhi Zoological Park depending on how much time they have in the city.`,
-        ],
-      },
-      {
-        heading: "Distance, drive time and local travel planning",
-        body: [
-          `${name} is approximately ${attraction.distance} from Hotel Excella, with a typical local drive time of ${attraction.driveTime}. Actual travel time can vary with Beach Road traffic, weekends, public holidays and weather. For the smoothest experience, plan early mornings for sightseeing, keep extra time during sunset hours, and confirm cab or auto availability before leaving during peak tourist seasons.`,
-          `The location works well for guests who want to see more than one attraction in a single outing. A relaxed route can include a short visit to ${name}, a coastal drive along Beach Road, and a second stop at Kailasagiri or Tenneti Park. If you are travelling with children or senior family members, keeping Hotel Excella as your base helps reduce tiring cross-city movement and lets you return for rest between plans.`,
-        ],
-      },
-      {
-        heading: "Who this stay works best for",
-        body: [
-          `Families appreciate the straightforward access to popular attractions, comfortable rooms and practical amenities. Couples can plan an easy Vizag break with coastal sightseeing and relaxed evenings. Business travellers get a quieter stay with WiFi and quick access to important city routes. Leisure guests can use the hotel as a central base for beaches, viewpoints, temples and nature stops without choosing a crowded attraction-only location.`,
-          `Hotel Excella's preferred messaging is simple: comfortable stay in Vizag, convenient access to Vizag attractions, and a premium value-luxury experience near Beach Road. This makes it suitable for guests who care about cleanliness, location, service and sensible pricing rather than exaggerated claims.`,
-        ],
-      },
-      {
-        heading: "Suggested nearby attractions itinerary",
-        body: [
-          `Start with ${name} when it is the main reason for your visit, then add nearby attractions based on your travel pace. Tenneti Park is approximately ${byName["Tenneti Park"].distance}, Kailasagiri is approximately ${byName["Kailasagiri"].distance}, Rushikonda Beach is approximately ${byName["Rushikonda Beach"].distance}, TTD Temple Rushikonda is approximately ${byName["TTD Temple Rushikonda"].distance}, YSR View Point is approximately ${byName["YSR View Point"].distance}, and Indira Gandhi Zoological Park is approximately ${byName["Indira Gandhi Zoological Park"].distance} from the hotel.`,
-          `For short stays, choose two or three places and avoid rushing. For a weekend trip, reserve one morning for viewpoints and parks, one afternoon for Rushikonda side attractions, and one evening for a relaxed coastal drive. Hotel Excella keeps the plan manageable because the hotel is close enough to major northern Vizag attractions while still offering a restful stay experience.`,
-        ],
-      },
-    ],
     faqs: [
       {
         question: `How far is ${name} from Hotel Excella?`,
-        answer: `${name} is approximately ${attraction.distance} from Hotel Excella. The typical local drive time is around ${attraction.driveTime}, depending on traffic and the time of day.`,
+        answer: `${name} is approximately ${attraction.distance} from Hotel Excella. The typical local drive time is around ${attraction.driveTime}, depending on traffic and time of day.`,
       },
       {
         question: `Is Hotel Excella a good choice for visiting ${name}?`,
-        answer: `Yes. Hotel Excella is a practical choice for guests who want comfortable rooms and convenient access to ${name} while keeping the stay focused on comfortable accommodation and local access.`,
+        answer: `Yes. Hotel Excella is a practical choice for guests who want comfortable rooms and convenient access to ${name} while keeping the stay focused on accommodation quality and local access.`,
       },
-      {
-        question: "Is Hotel Excella suitable for families?",
-        answer: "Yes. Hotel Excella is family-friendly, with comfortable rooms, WiFi, quick check-in and easy access to attractions such as Kailasagiri, Tenneti Park and the zoo park.",
-      },
-      {
-        question: "What other attractions are near Hotel Excella?",
-        answer: "Nearby attractions include Beach Road, Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park.",
-      },
+      ...baseFaqs(keyword, `hotel near ${name}`).slice(1),
     ],
   }
 }
 
 export const seoLandingPages: SeoLandingPage[] = [
-  {
+  localPage({
     slug: "hotel-near-beach-road-vizag",
-    title: "Hotel near Beach Road Vizag | Hotel Excella",
-    metaTitle: "Hotel near Beach Road Vizag | Comfortable Stay at Hotel Excella",
-    description:
-      "Hotel Excella offers a premium value-luxury stay near Beach Road in Vizag with convenient access to Tenneti Park, Kailasagiri and Rushikonda attractions.",
     keyword: "Hotel near Beach Road Vizag",
+    metaTitle: "Hotel near Beach Road Vizag | Comfortable Stay at Hotel Excella",
+    description: "Hotel Excella offers a premium value-luxury stay near Beach Road in Vizag with convenient access to Tenneti Park, Kailasagiri and Rushikonda attractions.",
     heroEyebrow: "Near Beach Road",
     heroTitle: "Comfortable Stay Near Beach Road Vizag",
-    heroIntro:
-      "Choose Hotel Excella when you want premium comfort near the coast, quick access to Beach Road side attractions, and a calm stay experience in Visakhapatnam.",
-    sections: [
-      {
-        heading: "A premium value-luxury stay near Beach Road",
-        body: [
-          "Hotel Excella is a smart choice for travellers searching for a hotel near Beach Road Vizag without relying on exaggerated location claims. The hotel focuses on comfort near the coast: clean rooms, reliable amenities, warm service and convenient movement to Vizag's well-known coastal attractions. This positioning is ideal for guests who want the Beach Road side of the city within easy reach while still enjoying a restful hotel environment.",
-          "The location is especially helpful for short city breaks, family visits, couple trips and business travel that includes leisure time. Guests can plan mornings around Tenneti Park or Kailasagiri, spend an afternoon toward Rushikonda Beach or TTD Temple Rushikonda, and return to Hotel Excella for a comfortable evening. Food ordering is mentioned only as an in-house guest convenience through the guest food ordering flow.",
-        ],
-      },
-      {
-        heading: "Distances from Hotel Excella to popular Vizag attractions",
-        body: [
-          "Approximate local distances help guests plan realistic itineraries. Tenneti Park is about 1.2 km away with a 4–6 minute drive. Kailasagiri is about 1.8 km away with a 6–9 minute drive. Indira Gandhi Zoological Park is about 2.4 km away with a 7–10 minute drive. YSR View Point is about 3.0 km away with an 8–12 minute drive. Rushikonda Beach is about 6.5 km away with a 14–20 minute drive, while TTD Temple Rushikonda is about 7.2 km away with a 16–22 minute drive.",
-          "These travel times are approximate and can change with traffic, weekends, weather and local events. Still, Hotel Excella works well as a base because several attractions sit within a manageable local radius. Guests who prefer a relaxed pace can visit one major attraction in the morning and another in the evening instead of packing the day too tightly.",
-        ],
-      },
-      {
-        heading: "Who should book this location",
-        body: [
-          "Families benefit from a stay that is close to parks, viewpoints and the zoo without being in an overly crowded tourist pocket. Couples can enjoy coastal drives and scenic stops while keeping accommodation practical and comfortable. Business travellers can stay connected with WiFi and use the location for quick city movement. Guests visiting Vizag for temple visits, beach outings or sightseeing can use Hotel Excella as a dependable base.",
-          "The preferred experience is value-luxury: premium comfort, sensible access and straightforward hospitality. If your goal is a clean, comfortable stay in Vizag near Beach Road attractions, Hotel Excella is designed around that need.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: "Is Hotel Excella near Beach Road Vizag?",
-        answer:
-          "Yes. Hotel Excella is positioned for convenient access to the Beach Road side of Vizag and nearby attractions such as Tenneti Park and Kailasagiri.",
-      },
-      {
-        question: "What is Hotel Excella's location advantage?",
-        answer:
-          "Hotel Excella offers comfort near the coast with convenient access to Beach Road side attractions in Vizag.",
-      },
-      {
-        question: "What attractions are close to Hotel Excella?",
-        answer:
-          "Nearby attractions include Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park.",
-      },
-      {
-        question: "Does Hotel Excella suit family trips?",
-        answer:
-          "Yes. The hotel is suitable for families looking for comfortable rooms and convenient access to parks, viewpoints, beaches and other tourist places in Vizag.",
-      },
-    ],
-  },
-  attractionPage(
-    "Tenneti Park",
-    "hotel-near-tenneti-park-vizag",
-    "Hotel near Tenneti Park Vizag",
-    "Stay close to one of Vizag's favourite coastal parks while enjoying a calm, comfortable room at Hotel Excella."
-  ),
-  attractionPage(
-    "Kailasagiri",
-    "hotel-near-kailasagiri",
-    "Hotel near Kailasagiri",
-    "Plan an easy Kailasagiri visit from Hotel Excella, a premium value-luxury base with practical access to major Vizag attractions."
-  ),
-  attractionPage(
-    "Rushikonda Beach",
-    "hotel-near-rushikonda-beach",
-    "Hotel near Rushikonda Beach",
-    "Enjoy convenient access to Rushikonda Beach while staying at Hotel Excella, a comfortable hotel near Vizag's coastal routes."
-  ),
-  attractionPage(
-    "TTD Temple Rushikonda",
-    "hotel-near-ttd-temple-rushikonda",
-    "Hotel near TTD Temple Rushikonda",
-    "Keep your temple visit simple with a comfortable stay at Hotel Excella and a manageable drive toward TTD Temple Rushikonda."
-  ),
-  attractionPage(
-    "Indira Gandhi Zoological Park",
-    "hotel-near-zoo-park-vizag",
-    "Hotel near Zoo Park Vizag",
-    "Choose Hotel Excella for a family-friendly stay with easy local access to Indira Gandhi Zoological Park and nearby attractions."
-  ),
-  attractionPage(
-    "YSR View Point",
-    "stay-near-ysr-view-point",
-    "Stay near YSR View Point",
-    "Stay at Hotel Excella for convenient access to YSR View Point, Beach Road side drives and comfortable rooms in Vizag."
-  ),
-  {
+    heroIntro: "Choose Hotel Excella when you want premium comfort near the coast, quick access to Beach Road side attractions, and a calm stay experience in Visakhapatnam.",
+    audience: "near-Beach-Road",
+    localAngle: "The hotel is not presented as a beachfront or sea-view property; instead, it gives guests convenient access to Beach Road side routes and nearby attractions while preserving a quieter stay environment.",
+    advantages: ["Beach Road side movement", "Tenneti Park nearby", "Kailasagiri nearby", "Rushikonda route access"],
+  }),
+  attractionPage("Tenneti Park", "hotel-near-tenneti-park-vizag", "Hotel near Tenneti Park Vizag", "Stay close to one of Vizag's favourite coastal parks while enjoying a calm, comfortable room at Hotel Excella."),
+  attractionPage("Kailasagiri", "hotel-near-kailasagiri", "Hotel near Kailasagiri", "Plan an easy Kailasagiri visit from Hotel Excella, a premium value-luxury base with practical access to major Vizag attractions."),
+  attractionPage("Rushikonda Beach", "hotel-near-rushikonda-beach", "Hotel near Rushikonda Beach", "Enjoy convenient access to Rushikonda Beach while staying at Hotel Excella, a comfortable hotel near Vizag's coastal routes."),
+  attractionPage("TTD Temple Rushikonda", "hotel-near-ttd-temple-rushikonda", "Hotel near TTD Temple Rushikonda", "Keep your temple visit simple with a comfortable stay at Hotel Excella and a manageable drive toward TTD Temple Rushikonda."),
+  attractionPage("Indira Gandhi Zoological Park", "hotel-near-zoo-park-vizag", "Hotel near Zoo Park Vizag", "Choose Hotel Excella for a family-friendly stay with easy local access to Indira Gandhi Zoological Park and nearby attractions."),
+  attractionPage("YSR View Point", "stay-near-ysr-view-point", "Stay near YSR View Point", "Stay at Hotel Excella for convenient access to YSR View Point, Beach Road side drives and comfortable rooms in Vizag."),
+  localPage({
     slug: "places-to-visit-near-hotel-excella",
-    title: "Places to Visit near Hotel Excella | Vizag Attractions Guide",
-    metaTitle: "Places to Visit near Hotel Excella | Vizag Attractions",
-    description:
-      "Explore places to visit near Hotel Excella including Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park.",
     keyword: "Places to visit near Hotel Excella",
+    metaTitle: "Places to Visit near Hotel Excella | Vizag Attractions",
+    description: "Explore places to visit near Hotel Excella including Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park.",
     heroEyebrow: "Vizag Attractions Hub",
     heroTitle: "Places to Visit Near Hotel Excella",
-    heroIntro:
-      "Use Hotel Excella as a comfortable base for Vizag attractions near Beach Road, Kailasagiri, Tenneti Park, Rushikonda and the zoo park.",
-    sections: [
-      {
-        heading: "Plan a practical Vizag sightseeing stay",
-        body: [
-          "Hotel Excella is well suited for guests who want to explore Vizag without turning every outing into a long commute. The hotel offers a comfortable stay near the coast and convenient access to a cluster of popular attractions: Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park. This makes it a strong choice for family trips, couple-friendly stays, short leisure breaks and business travel with sightseeing time.",
-          "The hotel's strength is the ability to combine premium comfort with a sensible location near the attractions travellers actually want to visit. You can start early for viewpoints, return for rest, and step out again for a relaxed evening drive along the Beach Road side of Vizag.",
-        ],
-      },
-      {
-        heading: "Attractions, distances and travel times",
-        body: [
-          "Tenneti Park is approximately 1.2 km away and usually takes 4–6 minutes by car. Kailasagiri is approximately 1.8 km away and usually takes 6–9 minutes by car. Indira Gandhi Zoological Park is approximately 2.4 km away and usually takes 7–10 minutes by car. YSR View Point is approximately 3.0 km away and usually takes 8–12 minutes by car. Rushikonda Beach is approximately 6.5 km away and usually takes 14–20 minutes by car. TTD Temple Rushikonda is approximately 7.2 km away and usually takes 16–22 minutes by car.",
-          "These figures are approximate, but they are useful for building a day plan. Guests with children may prefer the zoo park and Kailasagiri route. Couples may prefer Tenneti Park, YSR View Point and a coastal drive. Devotional travellers can combine TTD Temple Rushikonda with Rushikonda Beach and return to Hotel Excella for rest.",
-        ],
-      },
-      {
-        heading: "Suggested itinerary from Hotel Excella",
-        body: [
-          "For a one-day plan, begin with Kailasagiri in the morning, continue to Tenneti Park for a short break, return to the hotel, and then visit YSR View Point or Rushikonda Beach later in the day. For a two-day trip, keep the first day for Kailasagiri, Tenneti Park and the zoo park, then reserve the second day for Rushikonda Beach and TTD Temple Rushikonda. This pacing keeps travel comfortable rather than rushed.",
-          "Hotel Excella's value-luxury experience supports this style of travel: comfortable rooms, Free WiFi, fast check-in, family-friendly and couple-friendly stays, and easy access to local points of interest. Guests can also use the Order Food page as a convenience during their stay, with food ordering treated only as a guest convenience.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        question: "What are the best places to visit near Hotel Excella?",
-        answer:
-          "Popular nearby places include Tenneti Park, Kailasagiri, Rushikonda Beach, TTD Temple Rushikonda, YSR View Point and Indira Gandhi Zoological Park.",
-      },
-      {
-        question: "How far is Kailasagiri from Hotel Excella?",
-        answer: "Kailasagiri is approximately 1.8 km from Hotel Excella, with a typical drive time of 6–9 minutes.",
-      },
-      {
-        question: "How far is Rushikonda Beach from Hotel Excella?",
-        answer: "Rushikonda Beach is approximately 6.5 km from Hotel Excella, with a typical drive time of 14–20 minutes.",
-      },
-      {
-        question: "Is Hotel Excella suitable for tourist attraction visits in Vizag?",
-        answer:
-          "Yes. Hotel Excella is a practical base for guests who want comfortable accommodation and convenient access to major Vizag attractions.",
-      },
-    ],
-  },
+    heroIntro: "Use Hotel Excella as a comfortable base for Vizag attractions near Beach Road, Kailasagiri, Tenneti Park, Rushikonda and the zoo park.",
+    audience: "attractions-focused",
+    localAngle: "Guests can combine viewpoints, beaches, parks and temple visits from one practical base instead of moving between multiple accommodation points during a short trip.",
+    advantages: ["attraction cluster access", "family sightseeing", "coastal drives", "temple and beach routes"],
+  }),
+  localPage({
+    slug: "hotel-in-visalakshinagar-vizag",
+    keyword: "Hotel in Visalakshinagar Vizag",
+    metaTitle: "Hotel in Visalakshinagar Vizag | Hotel Excella, Visakhapatnam",
+    description: "Stay at Hotel Excella in Visalakshinagar, Vizag with clean rooms, direct booking, nearby attractions and convenient access to Beach Road side routes.",
+    heroEyebrow: "Visalakshinagar Stay",
+    heroTitle: "Hotel in Visalakshinagar Vizag for Comfortable Local Access",
+    heroIntro: "Hotel Excella gives guests a calm value-luxury stay in Visalakshinagar with practical movement to Beach Road, Kailasagiri, Tenneti Park and nearby neighborhoods.",
+    audience: "Visalakshinagar",
+    localAngle: "The Visalakshinagar location is useful for guests who want a neighborhood stay near city routes, local errands, family visits and attraction plans.",
+    advantages: ["Visalakshinagar neighborhood access", "near Beach Road side routes", "close to parks and viewpoints", "direct booking support"],
+  }),
+  localPage({
+    slug: "couple-friendly-hotel-in-vizag",
+    keyword: "Couple friendly hotel in Vizag",
+    metaTitle: "Couple Friendly Hotel in Vizag | Hotel Excella",
+    description: "Choose Hotel Excella for a couple-friendly stay in Vizag with comfortable rooms, privacy-focused service, nearby attractions and direct booking support.",
+    heroEyebrow: "Couple-Friendly Stay",
+    heroTitle: "Couple Friendly Hotel in Vizag with Calm, Comfortable Rooms",
+    heroIntro: "Plan a relaxed Vizag stay with clean rooms, easy local movement, nearby coastal attractions and a discreet direct booking experience at Hotel Excella.",
+    audience: "couple-friendly",
+    localAngle: "Couples can plan coastal drives, viewpoints, temple visits and quiet evenings without choosing accommodation that is too far from the attractions they want to see.",
+    advantages: ["calm room environment", "near coastal drives", "privacy-conscious support", "easy WhatsApp enquiry"],
+  }),
+  localPage({
+    slug: "family-friendly-hotel-in-vizag",
+    keyword: "Family friendly hotel in Vizag",
+    metaTitle: "Family Friendly Hotel in Vizag | Hotel Excella",
+    description: "Hotel Excella is a family-friendly hotel in Vizag with comfortable rooms, nearby zoo park, Kailasagiri, Tenneti Park and direct booking support.",
+    heroEyebrow: "Family-Friendly Stay",
+    heroTitle: "Family Friendly Hotel in Vizag Near Parks, Viewpoints and Beaches",
+    heroIntro: "Keep your Vizag family trip practical with comfortable rooms, helpful amenities and nearby access to Kailasagiri, Tenneti Park and Indira Gandhi Zoological Park.",
+    audience: "family-friendly",
+    localAngle: "Families often need flexible plans, clean rooms and manageable travel times more than a single attraction-only location, and Hotel Excella supports that style of travel.",
+    advantages: ["near zoo park", "near Kailasagiri", "family-friendly amenities", "comfortable rest between outings"],
+  }),
+  localPage({
+    slug: "budget-hotel-in-vizag",
+    keyword: "Budget hotel in Vizag",
+    metaTitle: "Budget Hotel in Vizag | Value-Luxury Stay at Hotel Excella",
+    description: "Hotel Excella offers a value-luxury budget hotel choice in Vizag with clean rooms, practical amenities, direct booking and nearby attraction access.",
+    heroEyebrow: "Value-Luxury Stay",
+    heroTitle: "Budget Hotel in Vizag with Practical Premium Comfort",
+    heroIntro: "Book a sensible stay at Hotel Excella when you want clean rooms, useful amenities and convenient local access without overpaying for unsupported claims.",
+    audience: "budget-conscious",
+    localAngle: "Budget-focused guests can prioritize cleanliness, WiFi, quick check-in and local convenience while still enjoying a polished hotel experience.",
+    advantages: ["value-luxury pricing", "essential amenities", "direct booking clarity", "near attractions"],
+  }),
+  localPage({
+    slug: "business-hotel-in-vizag",
+    keyword: "Business hotel in Vizag",
+    metaTitle: "Business Hotel in Vizag | Hotel Excella, Visakhapatnam",
+    description: "Hotel Excella is a business traveller friendly hotel in Vizag with Free WiFi, fast check-in, comfortable rooms and direct booking support.",
+    heroEyebrow: "Business Traveller Friendly",
+    heroTitle: "Business Hotel in Vizag for Work Trips and Restful Evenings",
+    heroIntro: "Stay connected and comfortable at Hotel Excella with Free WiFi, quick support, direct booking and practical access to city routes in Visakhapatnam.",
+    audience: "business-traveller friendly",
+    localAngle: "Business travellers can complete work, move through the city and still keep popular attractions within reach for a short break after meetings.",
+    advantages: ["Free WiFi", "fast check-in", "quiet rest base", "city route access"],
+  }),
+  localPage({
+    slug: "hotel-near-jodugullapalem-beach",
+    keyword: "Hotel near Jodugullapalem Beach",
+    metaTitle: "Hotel near Jodugullapalem Beach | Hotel Excella Vizag",
+    description: "Stay at Hotel Excella for comfortable rooms and convenient access to Jodugullapalem Beach, Beach Road side attractions and northern Vizag routes.",
+    heroEyebrow: "Near Jodugullapalem Beach",
+    heroTitle: "Hotel near Jodugullapalem Beach with Comfortable Vizag Access",
+    heroIntro: "Use Hotel Excella as a restful base for Jodugullapalem Beach plans, coastal drives, Kailasagiri, Tenneti Park and Rushikonda side sightseeing.",
+    audience: "Jodugullapalem Beach",
+    localAngle: "Jodugullapalem Beach visitors can keep a comfortable room nearby while also staying connected to other Beach Road side attractions and dining options.",
+    advantages: ["Jodugullapalem Beach access", "coastal route planning", "near Kailasagiri", "near Tenneti Park"],
+  }),
+  localPage({
+    slug: "hotel-near-health-city-vizag",
+    keyword: "Hotel near Health City Vizag",
+    metaTitle: "Hotel near Health City Vizag | Hotel Excella, Visakhapatnam",
+    description: "Hotel Excella offers comfortable accommodation for guests looking for a hotel near Health City Vizag with direct booking and practical local access.",
+    heroEyebrow: "Near Health City Routes",
+    heroTitle: "Hotel near Health City Vizag for Practical, Comfortable Stays",
+    heroIntro: "Choose a calm room base at Hotel Excella when your Vizag visit includes Health City routes, local appointments, family support and nearby attraction time.",
+    audience: "Health City visitor",
+    localAngle: "Guests visiting Health City often need dependable accommodation, easy communication and a restful base for family members or support travellers.",
+    advantages: ["Health City route access", "family support stays", "direct WhatsApp support", "clean comfortable rooms"],
+  }),
+  localPage({
+    slug: "hotel-near-mvp-colony",
+    keyword: "Hotel near MVP Colony",
+    metaTitle: "Hotel near MVP Colony Vizag | Hotel Excella",
+    description: "Stay at Hotel Excella for a comfortable hotel near MVP Colony with nearby attractions, clean rooms, direct booking and practical city access.",
+    heroEyebrow: "Near MVP Colony",
+    heroTitle: "Hotel near MVP Colony for Comfortable Vizag Stays",
+    heroIntro: "Hotel Excella helps guests stay close to MVP Colony side movement while keeping Beach Road attractions and family-friendly sightseeing within reach.",
+    audience: "MVP Colony",
+    localAngle: "MVP Colony visitors may be in Vizag for family visits, work, events, local errands or sightseeing, so a flexible hotel base is useful.",
+    advantages: ["MVP Colony side movement", "near Visalakshinagar", "near attractions", "business and family friendly"],
+  }),
+  localPage({
+    slug: "hotel-near-gitam-university",
+    keyword: "Hotel near GITAM University",
+    metaTitle: "Hotel near GITAM University Vizag | Hotel Excella",
+    description: "Hotel Excella is a comfortable hotel choice for guests visiting GITAM University in Vizag, with clean rooms, direct booking and nearby attractions.",
+    heroEyebrow: "Near GITAM Routes",
+    heroTitle: "Hotel near GITAM University for Families, Visitors and Work Trips",
+    heroIntro: "Plan a comfortable stay at Hotel Excella when visiting GITAM University, Rushikonda routes, family appointments or northern Vizag attractions.",
+    audience: "GITAM University visitor",
+    localAngle: "University visitors often need clear booking communication, reliable rooms and practical access for campus visits, family travel, interviews or academic events.",
+    advantages: ["GITAM University route access", "Rushikonda side movement", "family visitor support", "direct booking clarity"],
+  }),
 ]
 
 export const landingPageBySlug = new Map(seoLandingPages.map((page) => [page.slug, page]))
