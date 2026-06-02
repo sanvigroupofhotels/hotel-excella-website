@@ -1,17 +1,20 @@
 import Link from "next/link"
 import Image from "next/image"
-import { MapPin, Phone, Mail, Instagram, Linkedin } from "lucide-react"
+import { MapPin, Phone, Mail, Instagram, Linkedin, Facebook } from "lucide-react"
+import { site } from "@/lib/seo/constants"
 
 const navigation = [
   { name: "Home", href: "/" },
   { name: "Rooms", href: "/rooms" },
-  { name: "Guest Portal", href: "/guest" },
-  { name: "Check Availability", href: "/prebook" },
   { name: "Gallery", href: "/gallery" },
   { name: "Amenities", href: "/amenities" },
   { name: "Location", href: "/location" },
+  { name: "Attractions", href: "/attractions" },
+  { name: "About Hotel Excella", href: "/about-hotel-excella" },
+  { name: "Why Book Direct", href: "/why-book-direct" },
   { name: "Contact", href: "/contact" },
   { name: "Review Us", href: "/review" },
+  { name: "Guest Portal", href: "/guest" },
 ]
 
 export function Footer() {
@@ -35,7 +38,7 @@ export function Footer() {
             </p>
             <div className="mt-6 flex gap-4">
               <a
-                href="https://www.instagram.com/hotelexcella_vizag"
+                href={site.sameAs[0]}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -44,13 +47,22 @@ export function Footer() {
                 <Instagram className="h-5 w-5" />
               </a>
               <a
-                href="https://www.linkedin.com/company/sanvigroupofhotels-vizag/"
+                href={site.sameAs[1]}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
+              </a>
+              <a
+                href={site.sameAs[2]}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-muted-foreground hover:text-primary transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -78,20 +90,11 @@ export function Footer() {
             <ul className="mt-4 space-y-3">
               <li>
                 <a
-                  href="tel:+918859444555"
-                  className="flex items-start gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Phone className="h-4 w-4 mt-0.5 shrink-0" />
-                  <span>+91 88594 44555</span>
-                </a>
-              </li>
-              <li>
-                <a
                   href="tel:+919985908131"
                   className="flex items-start gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   <Phone className="h-4 w-4 mt-0.5 shrink-0" />
-                  <span>+91 99859 08131</span>
+                  <span>{site.phonePrimary}</span>
                 </a>
               </li>
               <li>
@@ -111,16 +114,16 @@ export function Footer() {
             <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">Address</h3>
             <div className="mt-4">
               <a
-                href="https://maps.app.goo.gl/C4MScoYMJLYnc3Gz6?g_st=ac"
+                href={site.mapsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-start gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 <MapPin className="h-4 w-4 mt-0.5 shrink-0" />
                 <span>
-                  386 Revenue Employees Co-operative Society Colony,
+                  386 Revenue Employs Co-operative Society Colony,
                   <br />
-                  VisalakshiNagar,
+                  Vishalakshi Nagar,
                   <br />
                   Visakhapatnam, Andhra Pradesh 530043
                 </span>

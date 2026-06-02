@@ -69,7 +69,7 @@ export default function LocationPage() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <a
-                    href="https://maps.app.goo.gl/C4MScoYMJLYnc3Gz6?g_st=ac"
+                    href="https://maps.app.goo.gl/hmJC1JcheCR2pvaTA?g_st=ac"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-all duration-300"
@@ -130,7 +130,7 @@ export default function LocationPage() {
                 </div>
 
                 <a
-                  href="https://maps.app.goo.gl/C4MScoYMJLYnc3Gz6?g_st=ac"
+                  href="https://maps.app.goo.gl/hmJC1JcheCR2pvaTA?g_st=ac"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-8 inline-flex items-center gap-2 rounded-lg bg-secondary px-6 py-3 text-base font-semibold text-secondary-foreground border border-border hover:bg-secondary/80 transition-all duration-300"

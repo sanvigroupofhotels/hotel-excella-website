@@ -9,6 +9,7 @@ import {
   MessageCircle,
   Instagram,
   Linkedin,
+  Facebook,
   Clock,
   ArrowRight,
   ExternalLink
@@ -25,7 +26,6 @@ const contactMethods = [
     title: "Phone",
     description: "Call us directly for immediate assistance",
     details: [
-      { label: "+91 88594 44555", href: "tel:+918859444555" },
       { label: "+91 99859 08131", href: "tel:+919985908131" },
     ],
     primary: true,
@@ -35,7 +35,7 @@ const contactMethods = [
     title: "WhatsApp",
     description: "Chat with us for quick responses",
     details: [
-      { label: "Send a Message", href: "https://wa.me/919985908131" },
+      { label: "Send a Message", href: "https://wa.me/919985908131?text=Hello%20Hotel%20Excella%2C%20I%20would%20like%20to%20enquire%20about%20room%20availability." },
     ],
     primary: true,
     isExternal: true,
@@ -54,7 +54,7 @@ const contactMethods = [
     title: "Visit Us",
     description: "Come see our hotel in person",
     details: [
-      { label: "Open in Maps", href: "https://maps.app.goo.gl/C4MScoYMJLYnc3Gz6?g_st=ac" },
+      { label: "Open in Maps", href: "https://maps.app.goo.gl/hmJC1JcheCR2pvaTA?g_st=ac" },
     ],
     primary: false,
     isExternal: true,
@@ -73,6 +73,12 @@ const socialLinks = [
     name: "LinkedIn",
     href: "https://www.linkedin.com/company/sanvigroupofhotels-vizag/",
     handle: "Sanvi Group of Hotels",
+  },
+  {
+    icon: Facebook,
+    name: "Facebook",
+    href: "https://www.facebook.com/profile.php?id=61565499310023",
+    handle: "Hotel Excella",
   },
 ]
 
@@ -153,9 +159,9 @@ export default function ContactPage() {
                 <address className="mt-6 text-lg text-muted-foreground not-italic leading-relaxed">
                   <span className="font-semibold text-foreground">Hotel Excella</span>
                   <br />
-                  386 Revenue Employees Co-operative Society Colony,
+                  386 Revenue Employs Co-operative Society Colony,
                   <br />
-                  VisalakshiNagar,
+                  Vishalakshi Nagar,
                   <br />
                   Visakhapatnam, Andhra Pradesh 530043
                 </address>
@@ -164,7 +170,7 @@ export default function ContactPage() {
                   <span>24/7 Reception Available</span>
                 </div>
                 <a
-                  href="https://maps.app.goo.gl/C4MScoYMJLYnc3Gz6?g_st=ac"
+                  href="https://maps.app.goo.gl/hmJC1JcheCR2pvaTA?g_st=ac"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-base font-semibold text-primary-foreground hover:bg-primary/90 transition-all duration-300"
@@ -212,7 +218,7 @@ export default function ContactPage() {
               Ready to <span className="text-primary">Book Your Stay</span>?
             </h2>
             <p className="mt-4 text-lg text-muted-foreground text-pretty">
-              Skip the hassle and book directly with us for the best rates.
+              Message or book directly with us for faster support and clear stay assistance.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <a

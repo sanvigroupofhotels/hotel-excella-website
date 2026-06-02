@@ -3,6 +3,8 @@ import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
+import { JsonLd } from "@/components/seo/json-ld"
+import { hotelSchema, localBusinessSchema, organizationSchema } from "@/lib/seo/schema"
 import {
   MapPin,
   Shield,
@@ -58,6 +60,7 @@ const valueCards = [
 const rooms = [
   {
     name: "Queen Executive Room",
+    slug: "oak-room",
     description:
       "Comfortable queen bed room with a clean modern layout designed for couples, solo guests and families seeking a premium stay experience.",
     image:
@@ -66,6 +69,7 @@ const rooms = [
   },
   {
     name: "King Executive Room",
+    slug: "mapple-room",
     description:
       "Spacious king bed room offering elevated comfort, stylish interiors and a relaxing premium stay for couples, families and business travellers.",
     image:
@@ -101,6 +105,7 @@ const galleryImages = [
 export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
+      <JsonLd data={[organizationSchema(), hotelSchema(), localBusinessSchema()]} />
       <Header />
 
       <main>
@@ -202,13 +207,22 @@ export default function HomePage() {
                         </span>
                       ))}
                     </div>
-                    <Link
-                      href="/prebook"
-                      className="mt-6 inline-flex items-center gap-2 rounded-lg border border-primary bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition-all duration-300 hover:bg-primary/10"
-                    >
-                      <ClipboardCheck className="h-4 w-4" />
-                      Enquiry
-                    </Link>
+                    <div className="mt-6 flex flex-wrap gap-3">
+                      <Link
+                        href={`/rooms/${room.slug}`}
+                        className="inline-flex items-center gap-2 rounded-lg border border-primary px-6 py-3 text-sm font-semibold text-primary transition-all duration-300 hover:bg-primary/10"
+                      >
+                        View Room
+                        <ArrowRight className="h-4 w-4" />
+                      </Link>
+                      <Link
+                        href="/prebook"
+                        className="inline-flex items-center gap-2 rounded-lg border border-primary bg-secondary px-6 py-3 text-sm font-semibold text-secondary-foreground transition-all duration-300 hover:bg-primary/10"
+                      >
+                        <ClipboardCheck className="h-4 w-4" />
+                        Enquiry
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -256,7 +270,7 @@ export default function HomePage() {
               Ready for a <span className="text-primary">Premium Stay</span> in Vizag?
             </h2>
             <p className="mt-4 text-pretty text-lg text-muted-foreground">
-              Book directly with us for the best rates, faster confirmation, and trusted support.
+              Book directly with us for the direct communication, faster confirmation support, and trusted assistance.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link

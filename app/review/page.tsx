@@ -5,7 +5,7 @@ import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
-import { Star, CheckCircle, Send, Loader2, X } from "lucide-react"
+import { Star, Send, Loader2, X } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -26,7 +26,6 @@ export default function ReviewPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isFeedbackSuccessModalOpen, setIsFeedbackSuccessModalOpen] = useState(false)
-  const [isHighRatingModalOpen, setIsHighRatingModalOpen] = useState(false)
   const [showReminderCard, setShowReminderCard] = useState(false)
 
   const handleCloseFeedbackSuccessModal = () => {
@@ -137,10 +136,11 @@ export default function ReviewPage() {
                     <button
                       key={star}
                       onClick={() => {
-                        setRating(star)
                         if (star >= 4) {
-                          setIsHighRatingModalOpen(true)
+                          window.location.href = googleReviewUrl
+                          return
                         }
+                        setRating(star)
                       }}
                       onMouseEnter={() => setHoveredRating(star)}
                       onMouseLeave={() => setHoveredRating(null)}
@@ -159,33 +159,6 @@ export default function ReviewPage() {
                     </button>
                   ))}
                 </div>
-              </div>
-            ) : rating >= 4 ? (
-              /* Happy Guest - Google Review CTA */
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-6">
-                  <CheckCircle className="h-10 w-10 text-primary" />
-                </div>
-                <h2 className="font-serif text-2xl font-bold text-foreground lg:text-3xl">
-                  We&apos;re delighted you enjoyed your stay!
-                </h2>
-                <p className="mt-4 text-lg text-muted-foreground">
-                  Please use the popup to continue and share your experience on Google.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => setIsHighRatingModalOpen(true)}
-                  className="mt-8 inline-flex items-center gap-3 rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
-                >
-                  <Star className="h-5 w-5 fill-current" />
-                  Open Review Popup
-                </button>
-                <button
-                  onClick={() => setRating(null)}
-                  className="mt-4 block mx-auto text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Change rating
-                </button>
               </div>
             ) : (
               /* Private Feedback Form */
@@ -373,35 +346,6 @@ export default function ReviewPage() {
         </DialogContent>
       </Dialog>
 
-      <Dialog open={isHighRatingModalOpen} onOpenChange={setIsHighRatingModalOpen}>
-        <DialogContent className="border-primary/40 bg-black text-white sm:max-w-lg">
-          <button
-            type="button"
-            onClick={() => setIsHighRatingModalOpen(false)}
-            className="absolute right-4 top-4 rounded-full border border-primary/40 p-1 text-primary transition-colors hover:bg-primary/10"
-            aria-label="Close"
-          >
-            <X className="h-4 w-4" />
-          </button>
-          <DialogHeader className="space-y-4">
-            <DialogTitle className="text-center font-serif text-2xl text-primary">
-              We&apos;re glad you had a great stay!
-            </DialogTitle>
-            <DialogDescription className="text-center text-base text-zinc-300">
-              It would really help us if you could share your experience on Google.
-            </DialogDescription>
-          </DialogHeader>
-          <button
-            type="button"
-            onClick={() => {
-              window.location.href = googleReviewUrl
-            }}
-            className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-primary px-4 py-3 font-semibold text-primary-foreground transition-all hover:bg-primary/90"
-          >
-            Leave Review
-          </button>
-        </DialogContent>
-      </Dialog>
 
       <div className="h-16 lg:hidden" />
     </div>
