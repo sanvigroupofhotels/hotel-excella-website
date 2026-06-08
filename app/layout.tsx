@@ -1,6 +1,8 @@
+
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
+import { GoogleAnalytics } from '@next/third-parties/google'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -9,11 +11,14 @@ export const metadata: Metadata = {
     default: 'Hotel Excella Vizag | Premium Value-Luxury Stay in Visakhapatnam',
     template: '%s',
   },
-  description: 'Comfort near the coast at Hotel Excella, a premium value-luxury hotel in Vizag near Beach Road, Tenneti Park, Kailasagiri and Rushikonda attractions.',
-  keywords: 'Hotel near Beach Road Vizag, Hotel near Kailasagiri, Hotel near Tenneti Park, Hotel near Rushikonda Beach, Family hotel in Visakhapatnam, Couple friendly hotel Vizag, Comfortable stay in Vizag',
+  description:
+    'Comfort near the coast at Hotel Excella, a premium value-luxury hotel in Vizag near Beach Road, Tenneti Park, Kailasagiri and Rushikonda attractions.',
+  keywords:
+    'Hotel near Beach Road Vizag, Hotel near Kailasagiri, Hotel near Tenneti Park, Hotel near Rushikonda Beach, Family hotel in Visakhapatnam, Couple friendly hotel Vizag, Comfortable stay in Vizag',
   openGraph: {
     title: 'Hotel Excella Vizag | Premium Value-Luxury Stay in Visakhapatnam',
-    description: 'Comfort near the coast at Hotel Excella with convenient access to Vizag attractions including Tenneti Park, Kailasagiri and Rushikonda.',
+    description:
+      'Comfort near the coast at Hotel Excella with convenient access to Vizag attractions including Tenneti Park, Kailasagiri and Rushikonda.',
     url: 'https://hotelexcella.in',
     siteName: 'Hotel Excella',
     images: [
@@ -30,8 +35,11 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Hotel Excella Vizag | Premium Value-Luxury Stay',
-    description: 'Comfort near the coast with convenient access to Vizag attractions. Book direct for faster support.',
-    images: ['https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png'],
+    description:
+      'Comfort near the coast with convenient access to Vizag attractions. Book direct for faster support.',
+    images: [
+      'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png',
+    ],
   },
   alternates: { canonical: '/' },
   robots: {
@@ -52,6 +60,9 @@ export default function RootLayout({
     <html lang="en" className="bg-background">
       <body className="font-sans antialiased">
         {children}
+
+        <GoogleAnalytics gaId="G-D4JVDMJVBH" />
+
         {process.env.NODE_ENV === 'production' && <Analytics />}
         {process.env.NODE_ENV === 'production' && <SpeedInsights />}
       </body>
