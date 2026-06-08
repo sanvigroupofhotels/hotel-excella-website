@@ -1,8 +1,7 @@
-
 import type { Metadata } from 'next'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
-import { GoogleAnalytics } from '@next/third-parties/google'
+import Script from 'next/script'
 import './globals.css'
 
 export const metadata: Metadata = {
@@ -59,9 +58,21 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-background">
       <body className="font-sans antialiased">
-        {children}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-D4JVDMJVBH"
+          strategy="afterInteractive"
+        />
 
-        <GoogleAnalytics gaId="G-D4JVDMJVBH" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-D4JVDMJVBH');
+          `}
+        </Script>
+
+        {children}
 
         {process.env.NODE_ENV === 'production' && <Analytics />}
         {process.env.NODE_ENV === 'production' && <SpeedInsights />}
