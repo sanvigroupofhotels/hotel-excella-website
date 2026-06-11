@@ -1,25 +1,33 @@
 import type { Metadata } from "next"
+import { site } from "@/lib/seo/constants"
 
 export const metadata: Metadata = {
-  title: "Review Hotel Excella Vizag | Guest Feedback",
-  description: "Share your experience at Hotel Excella Vizag. Your feedback helps us serve you better. Rate your stay and leave a review.",
-  alternates: { canonical: "https://hotelexcella.in/review" },
-  robots: { index: false, follow: false },
+  title: "Leave a Hotel Review | Hotel Excella Vizag Guest Feedback",
+  description: "Rate your stay at Hotel Excella Vizag. Share guest feedback that helps us improve. 4–5 stars posts to Google, 1–3 stars goes to our team privately.",
+  keywords: "hotel review, guest feedback, Vizag hotel reviews, Hotel Excella ratings",
+  alternates: { canonical: `${site.url}/review` },
+  robots: { index: true, follow: true },
   openGraph: {
-    title: "Review Hotel Excella Vizag | Guest Feedback",
-    description: "Share your experience at Hotel Excella Vizag. Your feedback helps us serve you better.",
-    url: "https://hotelexcella.in/review",
-    siteName: "Hotel Excella",
+    title: "Leave a Hotel Review | Hotel Excella Vizag",
+    description: "Share your stay experience at Hotel Excella Vizag. Positive reviews posted to Google, improvement feedback handled privately by our team.",
+    url: `${site.url}/review`,
+    siteName: site.name,
     images: [
       {
-        url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo-qq8Cvn8rVABsuUvFcXt0Nc1n64vZlL.png",
+        url: site.image,
         width: 1200,
         height: 630,
-        alt: "Hotel Excella Vizag - Guest Review",
+        alt: "Hotel Excella Vizag - Leave a Guest Review",
       },
     ],
     locale: "en_IN",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Leave a Review - Hotel Excella Vizag",
+    description: "Share your feedback from your stay at Hotel Excella. Help us improve and help future guests.",
+    images: [site.image],
   },
 }
 

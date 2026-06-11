@@ -15,10 +15,36 @@ import {
   CheckCircle,
   ArrowRight
 } from "lucide-react"
+import { JsonLd } from "@/components/seo/json-ld"
+import { site } from "@/lib/seo/constants"
 
 export const metadata: Metadata = {
-  title: "Amenities | Hotel Excella Vizag",
-  description: "Discover the premium amenities at Hotel Excella Vizag. Free Wi-Fi, AC rooms, 24/7 reception, daily housekeeping, and more.",
+  title: "Hotel Amenities | Hotel Excella Vizag - Free Wi-Fi, AC Rooms & More",
+  description: "Explore Hotel Excella&apos;s amenities including Free Wi-Fi, AC rooms, 24/7 reception, daily housekeeping, family-friendly facilities and business-friendly services in Vizag.",
+  keywords: "hotel amenities Vizag, free wifi hotel, AC rooms Vizag, hotel facilities, 24/7 reception, family-friendly hotel amenities",
+  alternates: { canonical: `${site.url}/amenities` },
+  openGraph: {
+    title: "Hotel Amenities | Hotel Excella Vizag",
+    description: "Premium amenities including Free Wi-Fi, AC rooms, 24/7 reception, daily housekeeping and family-friendly facilities.",
+    url: `${site.url}/amenities`,
+    siteName: site.name,
+    images: [
+      {
+        url: site.image,
+        width: 1200,
+        height: 630,
+        alt: "Hotel Excella Vizag - Hotel Amenities",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hotel Amenities - Hotel Excella Vizag",
+    description: "Discover premium amenities and facilities at Hotel Excella. Free Wi-Fi, AC rooms, 24/7 support, and more.",
+    images: [site.image],
+  },
 }
 
 const amenities = [
@@ -75,8 +101,21 @@ const amenities = [
 ]
 
 export default function AmenitiesPage() {
+  const amenitiesSchema = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: "Hotel Excella",
+    url: site.url,
+    amenityFeature: amenities.map(amenity => ({
+      "@type": "LocationFeatureSpecification",
+      name: amenity.name,
+      description: amenity.description,
+    })),
+  }
+
   return (
     <div className="min-h-screen bg-background">
+      <JsonLd data={amenitiesSchema} />
       <Header />
       
       <main className="pt-20">

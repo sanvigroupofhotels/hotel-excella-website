@@ -10,19 +10,25 @@ import { breadcrumbSchema, hotelSchema } from "@/lib/seo/schema"
 import { blogPosts } from "@/lib/seo/blog-posts"
 
 export const metadata: Metadata = {
-  title: "Vizag Travel Blog | Hotel Excella",
-  description: "Travel guides from Hotel Excella covering places to visit in Vizag, family trips, Kailasagiri, Rushikonda Beach and nearby attractions.",
+  title: "Vizag Travel Blog | Local Guides & Attraction Tips from Hotel Excella",
+  description: "Travel guides from Hotel Excella covering places to visit in Vizag, family trips, Kailasagiri, Rushikonda Beach, Tenneti Park and nearby attractions. Plan your perfect stay.",
+  keywords: "Vizag travel guide, things to do in Vizag, Vizag attractions, Beach Road Vizag, Kailasagiri travel guide, Rushikonda Beach guide",
   alternates: { canonical: `${site.url}/blog` },
   openGraph: {
-    title: "Vizag Travel Blog | Hotel Excella",
-    description: "Plan your Vizag stay with local attraction guides from Hotel Excella.",
+    title: "Vizag Travel Blog | Local Guides & Tips",
+    description: "Explore travel guides from Hotel Excella for planning your perfect Vizag stay with family or friends.",
     url: `${site.url}/blog`,
     siteName: site.name,
-    images: [{ url: site.image, width: 1200, height: 630, alt: "Hotel Excella Vizag" }],
+    images: [{ url: site.image, width: 1200, height: 630, alt: "Hotel Excella Vizag Travel Blog" }],
     locale: "en_IN",
     type: "website",
   },
-  twitter: { card: "summary_large_image", title: "Vizag Travel Blog | Hotel Excella", description: "Plan your Vizag stay with local attraction guides.", images: [site.image] },
+  twitter: { 
+    card: "summary_large_image", 
+    title: "Vizag Travel Blog | Hotel Excella", 
+    description: "Local travel guides for Vizag attractions and travel tips.", 
+    images: [site.image] 
+  },
 }
 
 export default function BlogIndexPage() {
