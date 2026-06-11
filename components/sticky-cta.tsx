@@ -22,7 +22,7 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
             className="flex flex-col items-center justify-center py-3 text-[#d8af5a] transition-colors hover:bg-[#141414]"
           >
             {guestMode ? <Star className="h-5 w-5" /> : <Calendar className="h-5 w-5" />}
-            <span className="mt-1 text-xs font-medium">{guestMode ? "Review" : "Availability"}</span>
+            <span className="mt-1 text-xs font-medium">{guestMode ? "Review" : "Book"}</span>
           </a>
           {guestMode ? (
             <Link
@@ -33,13 +33,13 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
               <span className="mt-1 text-xs font-medium">Order Food</span>
             </Link>
           ) : (
-            <Link
-              href="/prebook"
+            <a
+              href={`tel:${site.phonePrimary.replace(/\s/g, "")}`}
               className="flex flex-col items-center justify-center py-3 text-white transition-colors hover:bg-[#141414]"
             >
-              <ClipboardCheck className="h-5 w-5" />
-              <span className="mt-1 text-xs font-medium">Enquiry</span>
-            </Link>
+              <Phone className="h-5 w-5" />
+              <span className="mt-1 text-xs font-medium">Call</span>
+            </a>
           )}
           {guestMode ? (
             <button
@@ -52,23 +52,23 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
             </button>
           ) : (
             <a
-              href={`tel:${site.phonePrimary.replace(/\s/g, "")}`}
-              className="flex flex-col items-center justify-center py-3 text-white transition-colors hover:bg-[#141414]"
-            >
-              <Phone className="h-5 w-5" />
-              <span className="mt-1 text-xs font-medium">Call</span>
-            </a>
-          )}
-          {!guestMode && (
-            <a
               href={site.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex flex-col items-center justify-center py-3 text-white transition-colors hover:bg-[#141414]"
+              className="flex flex-col items-center justify-center py-3 text-green-400 transition-colors hover:bg-[#141414]"
             >
               <MessageCircle className="h-5 w-5" />
-              <span className="mt-1 text-xs font-medium">WhatsApp</span>
+              <span className="mt-1 text-xs font-medium">Chat</span>
             </a>
+          )}
+          {!guestMode && (
+            <Link
+              href="/prebook"
+              className="flex flex-col items-center justify-center py-3 text-[#d8af5a] transition-colors hover:bg-[#141414]"
+            >
+              <ClipboardCheck className="h-5 w-5" />
+              <span className="mt-1 text-xs font-medium">Enquiry</span>
+            </Link>
           )}
         </div>
       </div>

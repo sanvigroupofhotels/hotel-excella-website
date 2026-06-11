@@ -1,6 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
-import { MapPin, Phone, Mail, Instagram, Linkedin, Facebook } from "lucide-react"
+import { MapPin, Phone, Mail, Instagram, Linkedin, Facebook, MessageCircle } from "lucide-react"
 import { site } from "@/lib/seo/constants"
 
 
@@ -57,6 +57,35 @@ export function Footer() {
   return (
     <footer className="bg-card border-t border-border">
       <div className="mx-auto max-w-7xl px-4 py-12 lg:px-8 lg:py-16">
+        {/* Primary CTA Section */}
+        <div className="mb-12 rounded-3xl border border-primary/30 bg-gradient-to-r from-primary/10 to-transparent p-8">
+          <div className="grid gap-6 md:grid-cols-2">
+            <div>
+              <h3 className="font-serif text-2xl font-bold text-foreground">Ready to Book?</h3>
+              <p className="mt-2 text-muted-foreground">Contact us directly for instant booking, special offers, and personalized support.</p>
+            </div>
+            <div className="flex flex-col gap-3 md:justify-center">
+              <a
+                href={site.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-all hover:bg-green-700"
+              >
+                <MessageCircle className="h-5 w-5" />
+                WhatsApp Us
+              </a>
+              <a
+                href={`tel:${site.phonePrimary.replace(/\s/g, "")}`}
+                className="flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-foreground transition-all hover:bg-primary/90"
+              >
+                <Phone className="h-5 w-5" />
+                Call Now
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Footer Content */}
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -107,7 +136,7 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">Quick Links</h3>
             <ul className="mt-4 space-y-3">
-              {navigation.map((item) => (
+              {navigation.slice(0, 6).map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
