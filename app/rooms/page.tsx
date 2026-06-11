@@ -16,10 +16,36 @@ import {
   ArrowRight,
   CheckCircle
 } from "lucide-react"
+import { JsonLd } from "@/components/seo/json-ld"
+import { site } from "@/lib/seo/constants"
 
 export const metadata: Metadata = {
-  title: "Rooms | Hotel Excella Vizag",
-  description: "Explore our comfortable and well-appointed rooms at Hotel Excella Vizag. Queen and King Executive rooms with modern amenities, free Wi-Fi, AC, and 24/7 service.",
+  title: "Hotel Rooms | Hotel Excella Vizag - Queen & King Rooms with AC & Wi-Fi",
+  description: "Explore our comfortable rooms at Hotel Excella Vizag. Queen Executive and King rooms with AC, Free Wi-Fi, 24/7 reception, daily housekeeping and modern amenities.",
+  keywords: "hotel rooms Vizag, queen room, king room, AC rooms, hotel rooms near Beach Road, comfortable rooms Vizag, budget rooms Vizag",
+  alternates: { canonical: `${site.url}/rooms` },
+  openGraph: {
+    title: "Hotel Rooms | Hotel Excella Vizag",
+    description: "Well-appointed queen and king rooms with all modern amenities. Clean, comfortable, and designed for your perfect stay.",
+    url: `${site.url}/rooms`,
+    siteName: site.name,
+    images: [
+      {
+        url: site.image,
+        width: 1200,
+        height: 630,
+        alt: "Hotel Excella Vizag Rooms",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hotel Rooms - Hotel Excella Vizag",
+    description: "Comfortable, well-appointed rooms with AC, Free Wi-Fi and 24/7 service.",
+    images: [site.image],
+  },
 }
 
 const includedAmenities = [
@@ -59,8 +85,42 @@ const rooms = [
 ]
 
 export default function RoomsPage() {
+  const roomsSchema = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: "Hotel Excella",
+    url: site.url,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.locality,
+      addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
+      addressCountry: "IN",
+    },
+    offers: {
+      "@type": "AggregateOffer",
+      offerCount: "2",
+      offers: [
+        {
+          "@type": "Offer",
+          name: "Queen Executive Room",
+          description: "Comfortable queen bed room with modern layout",
+          availability: "https://schema.org/InStock",
+        },
+        {
+          "@type": "Offer",
+          name: "King Executive Room",
+          description: "Spacious king bed room for maximum comfort",
+          availability: "https://schema.org/InStock",
+        },
+      ],
+    },
+  }
+
   return (
     <div className="min-h-screen bg-background">
+      <JsonLd data={roomsSchema} />
       <Header />
       
       <main className="pt-20">

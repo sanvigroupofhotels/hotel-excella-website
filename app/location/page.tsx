@@ -12,10 +12,36 @@ import {
   ArrowRight,
   ExternalLink
 } from "lucide-react"
+import { JsonLd } from "@/components/seo/json-ld"
+import { site } from "@/lib/seo/constants"
 
 export const metadata: Metadata = {
-  title: "Location | Hotel Excella Vizag",
-  description: "Find Hotel Excella in Visalakshinagar, Visakhapatnam. Conveniently located near Beach Road, Tenneti Park, and Kailasagiri.",
+  title: "Hotel Location | Hotel Excella Vizag - Near Beach Road & Attractions",
+  description: "Hotel Excella is located in Visalakshinagar, Visakhapatnam, near Beach Road, Tenneti Park, Kailasagiri and other major Vizag attractions. Easy access to sightseeing and city center.",
+  keywords: "hotel location Vizag, Hotel Excella address, Visalakshinagar hotel, near Beach Road Vizag, hotel near Tenneti Park, hotel near Kailasagiri",
+  alternates: { canonical: `${site.url}/location` },
+  openGraph: {
+    title: "Hotel Location | Hotel Excella Vizag",
+    description: "Located in Visalakshinagar with convenient access to Beach Road, Tenneti Park, Kailasagiri and other Vizag attractions.",
+    url: `${site.url}/location`,
+    siteName: site.name,
+    images: [
+      {
+        url: site.image,
+        width: 1200,
+        height: 630,
+        alt: "Hotel Excella Vizag Location",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hotel Location - Hotel Excella Vizag",
+    description: "Conveniently located near Beach Road, Tenneti Park and Kailasagiri in Visakhapatnam.",
+    images: [site.image],
+  },
 }
 
 const nearbyAttractions = [
@@ -37,8 +63,26 @@ const nearbyAttractions = [
 ]
 
 export default function LocationPage() {
+  const locationSchema = {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    name: "Hotel Excella",
+    url: site.url,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.locality,
+      addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
+      addressCountry: "IN",
+    },
+    telephone: site.phonePrimary,
+    email: site.email,
+  }
+
   return (
     <div className="min-h-screen bg-background">
+      <JsonLd data={locationSchema} />
       <Header />
       
       <main className="pt-20">

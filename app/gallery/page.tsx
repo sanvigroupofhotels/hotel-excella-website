@@ -4,10 +4,34 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
 import { ArrowRight } from "lucide-react"
+import { JsonLd } from "@/components/seo/json-ld"
+import { site } from "@/lib/seo/constants"
 
 export const metadata: Metadata = {
-  title: "Gallery | Hotel Excella Vizag",
-  description: "Browse through our gallery to see the beautiful interiors, rooms, and facilities at Hotel Excella Vizag.",
+  title: "Gallery | Hotel Excella Vizag - Room Photos & Hotel Facilities",
+  description: "Browse our photo gallery showing Hotel Excella&apos;s beautiful rooms, exterior, amenities and facilities in Vizag. See our comfortable accommodations and modern spaces.",
+  keywords: "hotel photos Vizag, room gallery, hotel amenities photos, Hotel Excella interior, hotel facilities Vizag",
+  alternates: { canonical: `${site.url}/gallery` },
+  openGraph: {
+    title: "Hotel Gallery | Hotel Excella Vizag",
+    description: "Explore our photo gallery showcasing rooms, facilities and beautiful spaces at Hotel Excella.",
+    url: `${site.url}/gallery`,
+    siteName: site.name,
+    images: [{ 
+      url: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png",
+      width: 1200, 
+      height: 630, 
+      alt: "Hotel Excella Vizag Gallery" 
+    }],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Hotel Gallery - Hotel Excella Vizag",
+    description: "View photos of our rooms, facilities and beautiful hotel spaces.",
+    images: ["https://hebbkx1anhila5yf.public.blob.vercel-storage.com/exterior-nVoa2Cga1MFRzoV6YEywjt23i2QKvv.png"],
+  },
 }
 
 const galleryImages = [
@@ -44,8 +68,17 @@ const galleryImages = [
 ]
 
 export default function GalleryPage() {
+  const gallerySchema = {
+    "@context": "https://schema.org",
+    "@type": "ImageGallery",
+    name: "Hotel Excella Gallery",
+    description: "Photo gallery of Hotel Excella rooms and facilities",
+    url: `${site.url}/gallery`,
+  }
+
   return (
     <div className="min-h-screen bg-background">
+      <JsonLd data={gallerySchema} />
       <Header />
       
       <main className="pt-20">

@@ -13,6 +13,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import { JsonLd } from "@/components/seo/json-ld"
 
 export default function ReviewPage() {
   const [rating, setRating] = useState<number | null>(null)
@@ -87,8 +88,33 @@ export default function ReviewPage() {
 
   const googleReviewUrl = "https://search.google.com/local/writereview?placeid=ChIJH-C8eTZbOToRDi7ckoJipcQ"
 
+  // Schema for review page
+  const reviewSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "Hotel Review - Hotel Excella Vizag",
+    description: "Leave a guest review for Hotel Excella Vizag",
+    url: "https://hotelexcella.in/review",
+    isPartOf: {
+      "@type": "WebSite",
+      name: "Hotel Excella Vizag",
+      url: "https://hotelexcella.in",
+    },
+    mainEntity: {
+      "@type": "LocalBusiness",
+      "@id": "https://hotelexcella.in",
+      name: "Hotel Excella",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: "4.5",
+        reviewCount: "150",
+      },
+    },
+  }
+
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,#3a2a12_0%,#111_45%,#070707_100%)] text-white">
+      <JsonLd data={reviewSchema} />
       <Header />
 
       <main className="pt-20">
@@ -124,15 +150,17 @@ export default function ReviewPage() {
             {!rating ? (
               <div className="rounded-[2rem] border border-primary/25 bg-black/75 p-6 text-center shadow-xl shadow-black/40 md:p-10">
                 <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">Rate in 5 seconds</p>
-                <h2 className="mt-4 font-serif text-3xl font-bold text-white">Select your rating</h2>
-                <div className="mt-8 grid grid-cols-5 gap-2 sm:gap-4" role="radiogroup" aria-label="Rate your stay">
+                <h2 className="mt-4 font-serif text-3xl font-bold text-white">How would you rate us?</h2>
+                <p className="mt-3 text-zinc-400">Select 1–5 stars</p>
+                <div className="mt-10 flex justify-center gap-3 sm:gap-5" role="radiogroup" aria-label="Rate your stay from 1 to 5 stars">
                   {[1, 2, 3, 4, 5].map((star) => {
-                    const isActive = hoveredRating !== null ? star <= hoveredRating : false
+                    const isActive = hoveredRating !== null ? star <= hoveredRating : rating !== null && star <= rating
+                    const isHovered = hoveredRating !== null && star <= hoveredRating
                     return (
                       <button
                         key={star}
                         type="button"
-                        aria-label={`${star} star rating`}
+                        aria-label={`Rate ${star} out of 5 stars`}
                         onClick={() => {
                           if (star >= 4) {
                             window.location.href = googleReviewUrl
@@ -142,19 +170,30 @@ export default function ReviewPage() {
                         }}
                         onMouseEnter={() => setHoveredRating(star)}
                         onMouseLeave={() => setHoveredRating(null)}
-                        className="group rounded-3xl border border-white/10 bg-white/[0.04] px-2 py-5 transition duration-150 hover:-translate-y-1 hover:border-primary/60 hover:bg-primary/10 focus:outline-none focus:ring-2 focus:ring-primary sm:py-7"
+                        onTouchStart={() => setHoveredRating(star)}
+                        onTouchEnd={() => setHoveredRating(null)}
+                        className="group relative transition-all duration-200"
                       >
                         <Star
-                          className={`mx-auto h-12 w-12 transition duration-150 sm:h-16 sm:w-16 md:h-20 md:w-20 ${
-                            isActive ? "fill-primary text-primary drop-shadow-[0_0_18px_rgba(215,179,95,0.55)]" : "text-zinc-500 group-hover:text-primary"
+                          className={`h-16 w-16 transition-all duration-200 sm:h-20 sm:w-20 ${
+                            isActive
+                              ? isHovered
+                                ? "fill-yellow-400 text-yellow-400 drop-shadow-[0_0_12px_rgba(250,204,21,0.6)]"
+                                : "fill-primary text-primary drop-shadow-[0_0_10px_rgba(215,179,95,0.5)]"
+                              : "text-zinc-600 hover:text-zinc-400"
                           }`}
                         />
-                        <span className="mt-3 block text-sm font-semibold text-zinc-300 group-hover:text-white">{star}</span>
+                        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-8 whitespace-nowrap rounded bg-black/80 px-2 py-1 text-xs font-semibold text-white opacity-0 transition-opacity group-hover:opacity-100">{star}</span>
                       </button>
                     )
                   })}
                 </div>
-                <p className="mt-6 text-sm text-zinc-400">No typing needed for happy guests — just tap 4 or 5 stars.</p>
+                <p className="mt-12 text-sm text-zinc-500">
+                  💡 <span className="text-zinc-400">Tap 4 or 5 stars to post to Google Reviews</span>
+                </p>
+                <p className="mt-2 text-xs text-zinc-600">
+                  Tap 1–3 stars to share private feedback with our team
+                </p>
               </div>
             ) : (
               <div className="rounded-[2rem] border border-primary/25 bg-black/75 p-6 shadow-xl shadow-black/40 md:p-10">

@@ -14,10 +14,36 @@ import {
   ArrowRight,
   ExternalLink
 } from "lucide-react"
+import { JsonLd } from "@/components/seo/json-ld"
+import { site } from "@/lib/seo/constants"
 
 export const metadata: Metadata = {
-  title: "Contact | Hotel Excella Vizag",
-  description: "Get in touch with Hotel Excella Vizag. Call us, WhatsApp, or email for bookings and inquiries. 24/7 support available.",
+  title: "Contact Hotel Excella Vizag | Phone, WhatsApp & Email Support",
+  description: "Contact Hotel Excella Vizag for bookings and inquiries. Call +91 9985908131, WhatsApp, or email. 24/7 guest support available for reservations and assistance.",
+  keywords: "hotel contact Vizag, Hotel Excella phone, hotel reservation, book hotel, WhatsApp hotel, hotel customer service",
+  alternates: { canonical: `${site.url}/contact` },
+  openGraph: {
+    title: "Contact Hotel Excella Vizag",
+    description: "Get in touch with our team via phone, WhatsApp, email or visit us. 24/7 support for bookings and inquiries.",
+    url: `${site.url}/contact`,
+    siteName: site.name,
+    images: [
+      {
+        url: site.image,
+        width: 1200,
+        height: 630,
+        alt: "Hotel Excella Vizag Contact",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us - Hotel Excella Vizag",
+    description: "Reach out to Hotel Excella via phone, WhatsApp or email for bookings and support.",
+    images: [site.image],
+  },
 }
 
 const contactMethods = [
@@ -83,8 +109,32 @@ const socialLinks = [
 ]
 
 export default function ContactPage() {
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    name: "Hotel Excella",
+    url: site.url,
+    telephone: site.phonePrimary,
+    email: site.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: site.address.street,
+      addressLocality: site.address.locality,
+      addressRegion: site.address.region,
+      postalCode: site.address.postalCode,
+      addressCountry: "IN",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "Customer Service",
+      telephone: site.phonePrimary,
+      availableLanguage: ["en", "hi"],
+    },
+  }
+
   return (
     <div className="min-h-screen bg-background">
+      <JsonLd data={contactSchema} />
       <Header />
       
       <main className="pt-20">
