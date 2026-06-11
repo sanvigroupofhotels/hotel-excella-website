@@ -5,6 +5,10 @@ import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
 import { JsonLd } from "@/components/seo/json-ld"
 import { hotelSchema, localBusinessSchema, organizationSchema } from "@/lib/seo/schema"
+import { TestimonialsCarousel } from "@/components/testimonials"
+import { LocationAdvantageSection } from "@/components/location-advantage"
+import { WhyBookDirectSection } from "@/components/why-book-direct"
+import { FAQSection } from "@/components/faq"
 import {
   MapPin,
   Shield,
@@ -123,15 +127,28 @@ export default function HomePage() {
 
           <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:py-20 lg:py-24">
             <div className="max-w-3xl text-left">
+              {/* Trust Badges */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="inline-flex items-center rounded-full bg-primary/20 px-3 py-1 text-xs font-semibold text-primary border border-primary/30">
+                  ★ Independent Hotel
+                </span>
+                <span className="inline-flex items-center rounded-full bg-green-500/20 px-3 py-1 text-xs font-semibold text-green-300 border border-green-500/30">
+                  ✓ Family Friendly
+                </span>
+                <span className="inline-flex items-center rounded-full bg-blue-500/20 px-3 py-1 text-xs font-semibold text-blue-300 border border-blue-500/30">
+                  ⚡ Direct Booking
+                </span>
+              </div>
+
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#f2d28f]">Premium Boutique Stay</p>
               <h1 className="mt-3 font-serif text-[2.15rem] leading-[1.08] font-semibold tracking-tight text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.65)] sm:text-[2.7rem] lg:text-[3.35rem]">
                 Welcome to <span className="text-[#f2d28f]">Hotel Excella</span>
               </h1>
               <p className="mt-4 max-w-2xl text-[1.02rem] leading-relaxed text-white/90 sm:text-[1.13rem]">
-                Premium comfort in the heart of Vizag with elegant rooms, warm service, and a seamless booking experience.
+                Premium comfort in the heart of Vizag with elegant rooms, warm service, and a seamless booking experience. Experience the perfect blend of luxury and value.
               </p>
 
-              <div className="mt-8 flex items-center">
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
                 <Link
                   href="/prebook"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border border-primary bg-secondary px-6 py-3 text-base font-semibold text-secondary-foreground shadow-lg shadow-black/20 transition-all duration-300 hover:bg-primary/10"
@@ -139,6 +156,21 @@ export default function HomePage() {
                   <ClipboardCheck className="h-4 w-4" />
                   Enquiry
                 </Link>
+                <a
+                  href="https://wa.me/919985908131"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-green-600 px-6 py-3 text-base font-semibold text-white shadow-lg shadow-green-600/30 transition-all duration-300 hover:bg-green-700"
+                >
+                  <MessageCircle className="h-4 w-4" />
+                  WhatsApp
+                </a>
+                <a
+                  href="tel:+919985908131"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary/20 px-6 py-3 text-base font-semibold text-primary border border-primary/30 transition-all duration-300 hover:bg-primary/30"
+                >
+                  Call Now
+                </a>
               </div>
             </div>
           </div>
@@ -176,7 +208,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="bg-card pt-8 pb-12 lg:pt-10 lg:pb-14">
+        <section className="bg-card pt-8 pb-12 lg:pt-10 lg:pb-16">
           <div className="mx-auto max-w-7xl px-4">
             <div className="text-center">
               <h2 className="font-serif text-3xl font-bold text-foreground lg:text-4xl">
@@ -227,9 +259,26 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
+
+            <div className="mt-8 text-center">
+              <Link
+                href="/rooms"
+                className="inline-flex items-center gap-2 text-lg font-medium text-primary transition-colors hover:text-primary/80"
+              >
+                View All Rooms
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+            </div>
           </div>
         </section>
 
+        {/* Testimonials Section */}
+        <TestimonialsCarousel />
+
+        {/* Location Advantage Section */}
+        <LocationAdvantageSection />
+
+        {/* Gallery Section */}
         <section className="pt-8 pb-10 lg:pt-10 lg:pb-12">
           <div className="mx-auto max-w-7xl px-4 text-center">
             <h2 className="font-serif text-3xl font-bold text-foreground lg:text-4xl">
@@ -264,13 +313,19 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* Why Book Direct Section */}
+        <WhyBookDirectSection />
+
+        {/* FAQ Section */}
+        <FAQSection />
+
         <section className="bg-card pt-8 pb-12 lg:pt-10 lg:pb-16">
           <div className="mx-auto max-w-4xl px-4 text-center">
             <h2 className="text-balance font-serif text-3xl font-bold text-foreground lg:text-4xl">
               Ready for a <span className="text-primary">Premium Stay</span> in Vizag?
             </h2>
             <p className="mt-4 text-pretty text-lg text-muted-foreground">
-              Book directly with us for the direct communication, faster confirmation support, and trusted assistance.
+              Book directly with us for direct communication, faster confirmation support, and trusted assistance.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
               <Link
