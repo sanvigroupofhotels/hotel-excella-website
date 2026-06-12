@@ -114,7 +114,7 @@ export default function ReviewPage() {
 
   return (
     <div className="min-h-screen bg-[radial-gradient(circle_at_top,#3a2a12_0%,#111_45%,#070707_100%)] text-white">
-      <JsonLd data={reviewSchema} />
+      <JsonLd data={[reviewSchema]} />
       <Header />
 
       <main className="pt-20">

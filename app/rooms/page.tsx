@@ -120,7 +120,7 @@ export default function RoomsPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <JsonLd data={roomsSchema} />
+      <JsonLd data={[roomsSchema]} />
       <Header />
       
       <main className="pt-20">
