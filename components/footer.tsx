@@ -39,18 +39,23 @@ const hotelGuideLinks = [
   { name: "Location", href: "/location" },
 ]
 
-const navigation = [
+const mainNavigation = [
   { name: "Home", href: "/" },
   { name: "Rooms", href: "/rooms" },
   { name: "Gallery", href: "/gallery" },
   { name: "Amenities", href: "/amenities" },
   { name: "Location", href: "/location" },
   { name: "Attractions", href: "/attractions" },
-  { name: "About Hotel Excella", href: "/about-hotel-excella" },
-  { name: "Why Book Direct", href: "/why-book-direct" },
   { name: "Contact", href: "/contact" },
   { name: "Review Us", href: "/review" },
   { name: "Guest Portal", href: "/guest" },
+]
+
+const moreNavigation = [
+  { name: "About Hotel Excella", href: "/about-hotel-excella" },
+  { name: "Why Book Direct", href: "/why-book-direct" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
+  { name: "Terms & Conditions", href: "/terms-conditions" },
 ]
 
 export function Footer() {
@@ -107,7 +112,17 @@ export function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-primary uppercase tracking-wider">Quick Links</h3>
             <ul className="mt-4 space-y-3">
-              {navigation.map((item) => (
+              {mainNavigation.map((item) => (
+                <li key={item.name}>
+                  <Link
+                    href={item.href}
+                    className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+              {moreNavigation.map((item) => (
                 <li key={item.name}>
                   <Link
                     href={item.href}
