@@ -134,7 +134,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <JsonLd data={contactSchema} />
+      <JsonLd data={[contactSchema]} />
       <Header />
       
       <main className="pt-20">

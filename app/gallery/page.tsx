@@ -78,7 +78,7 @@ export default function GalleryPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <JsonLd data={gallerySchema} />
+      <JsonLd data={[gallerySchema]} />
       <Header />
       
       <main className="pt-20">

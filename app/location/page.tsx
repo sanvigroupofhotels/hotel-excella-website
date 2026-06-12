@@ -82,7 +82,7 @@ export default function LocationPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <JsonLd data={locationSchema} />
+      <JsonLd data={[locationSchema]} />
       <Header />
       
       <main className="pt-20">

@@ -115,7 +115,7 @@ export default function AmenitiesPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <JsonLd data={amenitiesSchema} />
+      <JsonLd data={[amenitiesSchema]} />
       <Header />
       
       <main className="pt-20">
