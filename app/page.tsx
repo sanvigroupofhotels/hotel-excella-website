@@ -3,8 +3,10 @@ import Link from "next/link"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
+import { ReviewCarousel } from "@/components/reviews/review-carousel"
 import { JsonLd } from "@/components/seo/json-ld"
 import { hotelSchema, localBusinessSchema, organizationSchema } from "@/lib/seo/schema"
+import { featuredReviews, getRandomReviews } from "@/lib/reviews"
 import {
   MapPin,
   Shield,
@@ -263,6 +265,11 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        <ReviewCarousel 
+          reviews={getRandomReviews(3)} 
+          showCTA={true}
+        />
 
         <section className="bg-card pt-8 pb-12 lg:pt-10 lg:pb-16">
           <div className="mx-auto max-w-4xl px-4 text-center">

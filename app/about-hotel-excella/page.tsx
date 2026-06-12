@@ -4,9 +4,11 @@ import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
 import { ConversionCTA } from "@/components/conversion-cta"
+import { ReviewCarousel } from "@/components/reviews/review-carousel"
 import { JsonLd } from "@/components/seo/json-ld"
 import { attractions, site } from "@/lib/seo/constants"
 import { breadcrumbSchema, faqSchema, hotelSchema, organizationSchema } from "@/lib/seo/schema"
+import { featuredReviews } from "@/lib/reviews"
 
 export const metadata: Metadata = {
   title: "About Hotel Excella, Visakhapatnam | Independent Hotel in Vizag",
@@ -159,28 +161,16 @@ export default function AboutHotelExcellaPage() {
           </div>
         </section>
 
-        <section className="px-4 py-12 lg:px-8">
-          <div className="mx-auto max-w-7xl rounded-3xl border border-border bg-card p-6 md:p-8">
-            <h2 className="font-serif text-3xl font-bold">Explore Hotel Excella before booking</h2>
-            <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-6">
-              {[
-                ["Rooms", "/rooms"],
-                ["Amenities", "/amenities"],
-                ["Gallery", "/gallery"],
-                ["Location", "/location"],
-                ["Contact", "/contact"],
-                ["Why Book Direct", "/why-book-direct"],
-              ].map(([label, href]) => (
-                <Link key={href} href={href} className="rounded-2xl border border-border bg-background/70 px-4 py-3 text-center font-semibold hover:border-primary hover:text-primary">
-                  {label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+        <ReviewCarousel 
+          reviews={featuredReviews} 
+          title="Guest Experiences at Hotel Excella"
+          subtitle="Real guest reviews shared on Google reflecting their stays with us."
+          showCTA={true}
+          itemsPerPage={3}
+        />
 
         <section className="px-4 py-12 lg:px-8">
-          <div className="mx-auto max-w-4xl rounded-3xl border border-border bg-card p-6 md:p-8">
+          <div className="mx-auto max-w-7xl rounded-3xl border border-border bg-card p-6 md:p-8">
             <p className="text-sm font-semibold uppercase tracking-[0.3em] text-primary">About FAQ</p>
             <h2 className="mt-3 font-serif text-3xl font-bold">Questions about Hotel Excella</h2>
             <div className="mt-6 divide-y divide-border">
