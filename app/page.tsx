@@ -7,6 +7,7 @@ import { ReviewCarousel } from "@/components/reviews/review-carousel"
 import { JsonLd } from "@/components/seo/json-ld"
 import { hotelSchema, localBusinessSchema, organizationSchema } from "@/lib/seo/schema"
 import { featuredReviews, getRandomReviews } from "@/lib/reviews"
+import { motion } from "framer-motion"
 import {
   MapPin,
   Shield,

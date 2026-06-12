@@ -218,10 +218,10 @@ export default function OrderFoodPage() {
       })
   }, [])
 
-  // Load saved order from localStorage
+  // Load saved order from sessionStorage
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("hotel_excella_order")
+      const stored = sessionStorage.getItem("hotel_excella_order")
       if (stored) {
         const parsed = JSON.parse(stored)
         if (parsed && typeof parsed === "object") {
@@ -233,9 +233,9 @@ export default function OrderFoodPage() {
     }
   }, [])
 
-  // Save order to localStorage
+  // Save order to sessionStorage
   useEffect(() => {
-    localStorage.setItem("hotel_excella_order", JSON.stringify(currentOrder))
+    sessionStorage.setItem("hotel_excella_order", JSON.stringify(currentOrder))
   }, [currentOrder])
 
   // Set initial category
