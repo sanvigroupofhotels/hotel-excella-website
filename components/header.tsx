@@ -3,21 +3,26 @@
 import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
-import { Menu, X } from "lucide-react"
+import { Menu, X, ChevronDown } from "lucide-react"
 import logoImage from "@/app/orderfood/images/logotransparent.png"
 
-const navigation = [
+const mainNavigation = [
   { name: "Home", href: "/" },
   { name: "Rooms", href: "/rooms" },
   { name: "Gallery", href: "/gallery" },
   { name: "Amenities", href: "/amenities" },
   { name: "Location", href: "/location" },
   { name: "Attractions", href: "/attractions" },
-  { name: "About Hotel Excella", href: "/about-hotel-excella" },
-  { name: "Why Book Direct", href: "/why-book-direct" },
   { name: "Contact", href: "/contact" },
   { name: "Review Us", href: "/review" },
   { name: "Guest Portal", href: "/guest" },
+]
+
+const moreNavigation = [
+  { name: "About Hotel Excella", href: "/about-hotel-excella" },
+  { name: "Why Book Direct", href: "/why-book-direct" },
+  { name: "Privacy Policy", href: "/privacy-policy" },
+  { name: "Terms & Conditions", href: "/terms-conditions" },
 ]
 
 export function Header() {
@@ -60,7 +65,7 @@ export function Header() {
         </div>
 
         <div className="hidden lg:flex lg:gap-x-5">
-          {navigation.map((item) => (
+          {mainNavigation.map((item) => (
             <Link
               key={item.name}
               href={item.href}
@@ -69,6 +74,27 @@ export function Header() {
               {item.name}
             </Link>
           ))}
+
+          {/* More Dropdown */}
+          <div className="group relative">
+            <button className="flex items-center gap-1 text-sm font-medium text-muted-foreground transition-colors duration-200 hover:text-primary">
+              More
+              <ChevronDown className="h-4 w-4 transition-transform group-hover:rotate-180" />
+            </button>
+            <div className="absolute right-0 top-full hidden pt-2 group-hover:block z-50">
+              <div className="rounded-lg bg-background border border-border shadow-lg overflow-hidden min-w-max">
+                {moreNavigation.map((item) => (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className="block px-4 py-2.5 text-sm text-muted-foreground hover:text-primary hover:bg-secondary transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
@@ -114,12 +140,27 @@ export function Header() {
             <div className="mt-6 flow-root">
               <div className="-my-6 divide-y divide-border">
                 <div className="space-y-2 py-6">
-                  {navigation.map((item) => (
+                  {mainNavigation.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
                       onClick={() => setMobileMenuOpen(false)}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base font-medium text-foreground transition-colors hover:bg-secondary"
+                    >
+                      {item.name}
+                    </Link>
+                  ))}
+                </div>
+
+                {/* More Section on Mobile */}
+                <div className="space-y-2 py-6">
+                  <p className="text-sm font-semibold text-primary uppercase tracking-wider px-3">More</p>
+                  {moreNavigation.map((item) => (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
                     >
                       {item.name}
                     </Link>
