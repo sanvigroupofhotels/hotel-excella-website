@@ -3,14 +3,16 @@ import Image from "next/image"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
 import { StickyCTA } from "@/components/sticky-cta"
-import { 
+import {
   MapPin,
   Navigation,
   Waves,
   TreePine,
   Mountain,
   ArrowRight,
-  ExternalLink
+  ExternalLink,
+  MessageCircle,
+  Phone,
 } from "lucide-react"
 import { JsonLd } from "@/components/seo/json-ld"
 import { site } from "@/lib/seo/constants"
@@ -182,6 +184,25 @@ export default function LocationPage() {
                   <Navigation className="h-5 w-5" />
                   Get Directions
                 </a>
+
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <a
+                    href="https://wa.me/919985908131"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-lg bg-green-600 px-6 py-3 text-base font-semibold text-white hover:bg-green-700 transition-all duration-300"
+                  >
+                    <MessageCircle className="h-5 w-5" />
+                    WhatsApp
+                  </a>
+                  <a
+                    href="tel:+919985908131"
+                    className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-base font-semibold text-white hover:bg-blue-700 transition-all duration-300"
+                  >
+                    <Phone className="h-5 w-5" />
+                    Call Hotel
+                  </a>
+                </div>
               </div>
             </div>
           </div>
