@@ -512,7 +512,7 @@ export default function PrebookPage() {
             <button
               type="button"
               onClick={() => {
-                window.location.href = "https://hotelexcella.bookmystay.io/"
+                window.location.href = "https://book.hotelexcella.in/whatsapp-booking"
               }}
               className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-3 font-semibold text-primary-foreground transition-all hover:bg-primary/90"
             >
