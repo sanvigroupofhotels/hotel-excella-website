@@ -213,7 +213,7 @@ export default function AmenitiesPage() {
               Book your stay today and enjoy all our amenities at the best direct rates.
             </p>
             <a
-              href="https://hotelexcella.bookmystay.io/"
+              href="https://book.hotelexcella.in/whatsapp-booking"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
