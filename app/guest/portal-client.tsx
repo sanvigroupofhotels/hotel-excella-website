@@ -74,7 +74,7 @@ export default function GuestPortalClient() {
         icon: BedDouble,
         title: "Book / Extend Stay",
         description: "Extend your stay or book again at best direct rates",
-        href: "https://hotelexcella.bookmystay.io/",
+        href: "https://book.hotelexcella.in/whatsapp-booking",
         external: true,
       },
       {
@@ -153,7 +153,7 @@ export default function GuestPortalClient() {
               Enquiry
             </Link>
             <a
-              href="https://hotelexcella.bookmystay.io/"
+              href="https://book.hotelexcella.in/whatsapp-booking"
               target="_blank"
               rel="noopener noreferrer"
               className="block rounded-lg border border-[#d4ad5a]/40 px-3 py-2 text-sm font-semibold text-[#d4ad5a]"
@@ -334,7 +334,7 @@ export default function GuestPortalClient() {
                     <Link href="/orderfood" className="hover:text-[#d7b35f]">Food Menu</Link>
                   </li>
                   <li>
-                    <a href="https://hotelexcella.bookmystay.io/" target="_blank" rel="noopener noreferrer" className="hover:text-[#d7b35f]">
+                    <a href="https://book.hotelexcella.in/whatsapp-booking" target="_blank" rel="noopener noreferrer" className="hover:text-[#d7b35f]">
                       Instant Booking
                     </a>
                   </li>
