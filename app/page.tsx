@@ -22,7 +22,7 @@ import {
   ClipboardCheck,
 } from "lucide-react"
 
-const bookingUrl = "https://hotelexcella.bookmystay.io/"
+const bookingUrl = "https://book.hotelexcella.in/whatsapp-booking"
 
 const valueCards = [
   {
