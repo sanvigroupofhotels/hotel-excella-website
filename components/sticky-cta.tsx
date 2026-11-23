@@ -16,7 +16,7 @@ export function StickyCTA({ guestMode = false, onAlertClick }: StickyCTAProps) {
       <div className="fixed bottom-0 left-0 right-0 z-40 lg:hidden border-t border-[#d1a24d]/45 bg-black/95 backdrop-blur-md">
         <div className={`grid ${guestMode ? "grid-cols-3" : "grid-cols-4"} divide-x divide-[#d1a24d]/35`}>
           <a
-            href={guestMode ? "/review" : "https://hotelexcella.bookmystay.io/"}
+            href={guestMode ? "/review" : "https://book.hotelexcella.in/whatsapp-booking"}
             target={guestMode ? undefined : "_blank"}
             rel={guestMode ? undefined : "noopener noreferrer"}
             className="flex flex-col items-center justify-center py-3 text-[#d8af5a] transition-colors hover:bg-[#141414]"
