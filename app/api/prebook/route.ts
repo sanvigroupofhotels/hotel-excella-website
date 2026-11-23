@@ -194,7 +194,7 @@ Visakhapatnam
     return NextResponse.json({ 
       success: true, 
       message: "Booking request submitted successfully",
-      redirectUrl: "https://hotelexcella.bookmystay.io/"
+      redirectUrl: "https://book.hotelexcella.in/whatsapp-booking"
     })
   } catch (error) {
     console.error("Error processing booking request:", error)
