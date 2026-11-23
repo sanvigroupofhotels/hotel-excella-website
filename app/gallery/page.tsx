@@ -136,7 +136,7 @@ export default function GalleryPage() {
               Pictures only tell half the story. Book your stay and experience the comfort of Hotel Excella.
             </p>
             <a
-              href="https://hotelexcella.bookmystay.io/"
+              href="https://book.hotelexcella.in/whatsapp-booking"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8 inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-4 text-lg font-semibold text-primary-foreground shadow-lg hover:bg-primary/90 transition-all duration-300 hover:scale-105"
