@@ -1,7 +1,7 @@
 export const site = {
   name: "Hotel Excella",
   url: "https://hotelexcella.in",
-  bookingUrl: "https://hotelexcella.bookmystay.io/",
+  bookingUrl: "https://book.hotelexcella.in/whatsapp-booking",
   whatsappUrl:
     "https://wa.me/919985908131?text=Hello%20Hotel%20Excella%2C%20I%20would%20like%20to%20enquire%20about%20room%20availability.",
   phonePrimary: "+91 9985908131",
