@@ -99,7 +99,7 @@ export function Header() {
 
         <div className="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4">
           <a
-            href="https://hotelexcella.bookmystay.io/"
+            href="https://book.hotelexcella.in/whatsapp-booking"
             target="_blank"
             rel="noopener noreferrer"
             className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground shadow-sm transition-all duration-200 hover:bg-primary/90"
@@ -176,7 +176,7 @@ export function Header() {
                     Enquiry
                   </Link>
                   <a
-                    href="https://hotelexcella.bookmystay.io/"
+                    href="https://book.hotelexcella.in/whatsapp-booking"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block w-full rounded-lg bg-primary px-4 py-3 text-center text-base font-semibold text-primary-foreground shadow-sm"
